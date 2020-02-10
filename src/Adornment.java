@@ -17,6 +17,9 @@ public class Adornment {
         this.earring = earring;
     }
 
+    public Adornment() {
+    }
+
     public Adornment(RingBase ring, ArrayList<Stone> usedStones) {
         this.ring = ring;
         this.usedStones = usedStones;

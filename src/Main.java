@@ -15,42 +15,12 @@ public class Main {
         i = scanner.nextInt();
         switch (i) {
             case 1:
-                System.out.println("Введите название камня: ");
-                title = scanner.nextLine();
-                System.out.println("Камень является: 1.Драгоценным 2.Полудрагоценным");
-                int q=0;
-                q = scanner.nextInt();
-                if(q == 2){
-                    type = false;
-                } else type = true;
-                System.out.println("Какого цвета камень?");
-                color = scanner.nextLine();
-                System.out.println("Каково значение светопропускания у камня?");
-                transparence = scanner.nextDouble();//определиться в чем указывать значение светопропускания
-                System.out.println("Сколько весит камень? (указать знаечние в каратах)");
-                weight = scanner.nextDouble();
-                System.out.println("Какова стоимость$ камня?");
-                price = scanner.nextDouble();
-                System.out.println("Камень успешно добавлен!");
-
-                Stone stone = new Stone(title, weight, price, color, type, transparence);
+                Logic.createNewStone();
                 break;
             case 2:
-                System.out.println("ведите название металла: ");
-                title = scanner.nextLine();
-                System.out.println("Сколько весит камень? (указать знаечние в каратах)");
-                weight = scanner.nextDouble();
-                System.out.println("Какова стоимость$ камня?");
-                price = scanner.nextDouble();
-                System.out.println("Проба добавляемого металла составляет:");
-                sample = scanner.nextDouble();
-                System.out.println("Объем добавляемого металла(см^3):");
-                volume = scanner.nextDouble();
-
-                Metal metal = new Metal(title, price, weight, sample, volume);
+                Logic.createNewMetal();
                 break;
             case 3:
-                System.out.println("Как будет называться создаваемое украшение?");
 
 
                 break;

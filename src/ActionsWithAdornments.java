@@ -5,14 +5,7 @@
 //
 //
 //
-//    void ShowInfo (Adornment a){
-//        System.out.println("Название украшения: " + adornmentTitle);
-//        System.out.println("Тип бижютерии: " + adorsmentType);
-//        printStonesUsed(stonesList);
-//        System.out.println("Использованый метал: " + metalTitle);
-//        System.out.println("Вес украшения: "+ sumVeight);
-//        System.out.println("Итоговая цена украшения: " + price);
-//    }
+//
 //
 //
 //    double calculatePrice (ArrayList<Stone> stones, Metal metal){
