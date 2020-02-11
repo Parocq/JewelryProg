@@ -1,3 +1,5 @@
+package by.bsuir.german;
+
 public class Metal extends Material {
 
     private double volume;

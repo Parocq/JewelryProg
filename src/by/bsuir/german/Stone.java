@@ -1,3 +1,5 @@
+package by.bsuir.german;
+
 public class Stone extends Material {
 
     private String color;
@@ -10,6 +12,7 @@ public class Stone extends Material {
         this.stoneType = stoneType;
         this.transparence = transparence;
     }
+
 
     public String getColor() {
         return color;

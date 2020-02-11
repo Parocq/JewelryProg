@@ -1,3 +1,5 @@
+package by.bsuir.german;
+
 import java.util.Scanner;
 
 
@@ -15,10 +17,10 @@ public class Main {
         i = scanner.nextInt();
         switch (i) {
             case 1:
-                Logic.createNewStone();
+//                Logic.createNewStone();
                 break;
             case 2:
-                Logic.createNewMetal();
+//                Logic.createNewMetal();
                 break;
             case 3:
 

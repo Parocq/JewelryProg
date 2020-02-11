@@ -1,3 +1,5 @@
+package by.bsuir.german;
+
 public class RingBase extends Product {
     double diametr;
 

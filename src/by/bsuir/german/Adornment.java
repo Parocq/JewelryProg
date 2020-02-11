@@ -1,3 +1,5 @@
+package by.bsuir.german;
+
 import java.util.ArrayList;
 
 public class Adornment {

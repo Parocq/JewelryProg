@@ -1,3 +1,5 @@
+package by.bsuir.german;
+
 public class NecklaceBase extends Product{
     double length;
 
