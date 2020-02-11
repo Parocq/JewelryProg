@@ -6,10 +6,11 @@ import java.util.Scanner;
 
 public class Logic {
 
-    private  Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
     private String title;
     private double price, weight;
     private Storage storage;
+    private ArrayList<Stone> stonesToUse;
 
 //    void ShowInfo (Adornment a){
 //        System.out.println("Название украшения: " + adornmentTitle);
@@ -20,7 +21,7 @@ public class Logic {
 //        System.out.println("Итоговая цена украшения: " + price);
 //    }
 
-     void createNewStone() {
+    void createNewStone() {
         boolean type;
         System.out.println("Введите название камня: ");
         title = scanner.nextLine();
@@ -45,26 +46,51 @@ public class Logic {
     }
 
     void createNewMetal() {
-        System.out.println("ведите название металла: ");
+        System.out.println("Ведите название металла: ");
         title = scanner.nextLine();
-        System.out.println("Сколько весит камень? (указать знаечние в каратах)");
+        System.out.println("Сколько весит металл?");
         weight = scanner.nextDouble();
-        System.out.println("Какова стоимость$ камня?");
+        System.out.println("Какова стоимость$ металла?");
         price = scanner.nextDouble();
         System.out.println("Проба добавляемого металла составляет:");
         double sample = scanner.nextDouble();
-        System.out.println("Объем добавляемого металла(см^3):");
-        double volume = scanner.nextDouble();
 
-        Metal metal = new Metal(title, price, weight, sample, volume);
+        Metal metal = new Metal(title, price, weight, sample);
         storage.addMetalOnStock(metal);
+    }
+
+    void createNewAdorment() {
+        Object object;
+        RingBase ringBase;
+        EarringBase earringBase;
+        NecklaceBase necklaceBase;
+        System.out.println("Как будет называться создаваемое украшение?");
+        title = scanner.nextLine();
+        System.out.println("Какой тип украшения создаем?");
+        System.out.println("1.Кольцо  2.Ожерелье  3.Серьги");
+        int type = scanner.nextInt();
+        object = chooseBase(type);
+        stonesToUse = chooseStones();
+        switch (type){
+            case 1:
+                ringBase = (RingBase) object;
+                Adornment adornment1 = new Adornment(title, 1, ringBase, stonesToUse);
+                storage.addAdornmentOnStock(adornment1);
+            case 2:
+                necklaceBase = (NecklaceBase) object;
+                Adornment adornment2 = new Adornment(title, 2, necklaceBase, stonesToUse);
+                storage.addAdornmentOnStock(adornment2);
+            case 3:
+                earringBase = (EarringBase) object;
+                Adornment adornment3 = new Adornment(title, 3, earringBase, stonesToUse);
+                storage.addAdornmentOnStock(adornment3);
+        }
     }
 
     Object chooseBase (int type){
         RingBase usedRingBase;
         EarringBase usedEarringBase;
         NecklaceBase usedNecklaceBase;
-
         System.out.println("Какую основу использовать?(Нажмите 0 для выхода)");
         int numberOfBase = scanner.nextInt();
         switch (type) {
@@ -78,28 +104,17 @@ public class Logic {
                 usedNecklaceBase = storage.getNecklaceBases().get(numberOfBase-1);
                 storage.getNecklaceBases().remove(numberOfBase - 1);
                 return usedNecklaceBase;
-                break;
             case 3:
                 storage.selectEarringTitles(storage.getEarringBases());
                 usedEarringBase = storage.getEarringBases().get(numberOfBase-1);
                 storage.getEarringBases().remove(numberOfBase - 1);
                 return usedEarringBase;
-                break;
             default: return null;
-            //break;///////////////////////как организовать выход подумай
             //https://www.geeksforgeeks.org/g-fact-64/
         }
     }
 
-    void createNewAdorment() {
-        System.out.println("Как будет называться создаваемое украшение?");
-        title = scanner.nextLine();
-        System.out.println("Какой тип украшения создаем?");
-        System.out.println("1.Кольцо  2.Ожерелье  3.Серьги");
-        int type = scanner.nextInt();
-
-
-        ArrayList<Stone> stonesToUse;
+    ArrayList<Stone> chooseStones (){
         int i = 0;
         System.out.println("Какие камни использовать?");
         while (i != 3) {
@@ -112,18 +127,81 @@ public class Logic {
                     break;
                 case 2:
                     Stone stone;
-                    stone
-                    //stonesToUse.add(stone);
+                    storage.selectStoneTitles(storage.getStones());
+                    int choosen;
+                    choosen = scanner.nextInt();
+                    stone = storage.getStones().get(choosen - 1);
+                    stonesToUse.add(stone);
+                    storage.getStones().remove(choosen - 1);
                     break;
                 case 3:
+                    i = 3;
                     break;
             }
         }
-
-
-        Adornment adornment = new Adornment();
-        storage.addAdornmentOnStock(adornment);
+        return stonesToUse;
     }
 
+    Metal chooseMetal (){
+        int i =0;
+        Metal metal;
+        System.out.println("Выберите номер металла, который вы хотите использовать:");
+        storage.selectMetalsTitles(storage.getMetals());
+        scanner.nextInt();
+        metal = storage.getMetals().get(i-1);
+        storage.getMetals().remove(i-1);
+        return metal;
+    }
+
+    void createNewRingBase() {
+        double diametr;
+        Metal metal;
+        System.out.println("Введите название для основы для кольца:");
+        title = scanner.nextLine();
+        System.out.println("Введите цену основы:");
+        price = scanner.nextDouble();
+        System.out.println("Введите вес основы:");
+        weight = scanner.nextDouble();
+        metal = chooseMetal();
+        System.out.println("Введите диаметр основы для кольца:");
+        diametr = scanner.nextDouble();
+
+        RingBase ringBase = new RingBase(title,weight,price,metal,diametr);
+    }
+
+    void createNewNecklaceBase () {
+        double length;
+        Metal metal;
+        System.out.println("Введите название для основы для ожерелья:");
+        title = scanner.nextLine();
+        System.out.println("Введите цену основы:");
+        price = scanner.nextDouble();
+        System.out.println("Введите вес основы:");
+        weight = scanner.nextDouble();
+        metal = chooseMetal();
+        System.out.println("Введите длину основы для ожерелья:");
+        length = scanner.nextDouble();
+
+        NecklaceBase necklaceBase = new NecklaceBase(title,weight,price,metal,length);
+    }
+
+    void createNewEarringBase () {
+        boolean paired;
+        Metal metal;
+        System.out.println("Введите название для основы для серьги:");
+        title = scanner.nextLine();
+        System.out.println("Введите цену основы:");
+        price = scanner.nextDouble();
+        System.out.println("Введите вес основы:");
+        weight = scanner.nextDouble();
+        metal = chooseMetal();
+        System.out.println("Создать пару серег либо одну серьгу:");
+        System.out.println("1.Парные 2.Одиночная");
+        int i;
+        i = scanner.nextInt();
+        if (i == 1) paired = true;
+        else paired = false;
+        EarringBase earringBase = new EarringBase(title,weight,price,metal,paired);
+    }
 
 }

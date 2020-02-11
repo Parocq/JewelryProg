@@ -6,9 +6,8 @@ public class Storage {
 
     private  ArrayList<Stone> stones;
     private  ArrayList<Metal> metals;
-//    private ArrayList<Product> products;
-    private  ArrayList<Adornment> adornments; ///////////////связано с Logic. Правильно ли длавать такие модификаторы доступа?
-    private  ArrayList<RingBase> ringBases;//////////////////убраны private
+    private  ArrayList<Adornment> adornments;
+    private  ArrayList<RingBase> ringBases;
     private  ArrayList<NecklaceBase> necklaceBases;
     private  ArrayList<EarringBase> earringBases;
 
@@ -117,16 +116,34 @@ public class Storage {
         System.out.println(str);
     }
 
-    void selectStoneTitles (ArrayList<EarringBase> earringBases) {
+    void selectStoneTitles (ArrayList<Stone> earringBases) {
         String str = "";
         for (int i = 0; i < stones.size(); i++) {
             System.out.print(i + 1);
-            str += ((Material) stones.get(i)).getTitle();
+            str += stones.get(i).getTitle();
             if (i == 5) System.out.println();
         }
         System.out.println(str);
     }
 
+    void selectAdornmentTitles (ArrayList<Adornment> adornments){
+        String str = "";
+        for (int i = 0; i < adornments.size(); i++) {
+            System.out.print(i + 1);
+            str += adornments.get(i).getTitle();
+            if (i == 5) System.out.println();
+        }
+        System.out.println(str);
+    }
 
+    void selectMetalsTitles (ArrayList<Metal> metals){
+        String str = "";
+        for (int i = 0; i < metals.size(); i++) {
+            System.out.print(i + 1);
+            str += metals.get(i).getTitle();
+            if (i == 5) System.out.println();
+        }
+        System.out.println(str);
+    }
 
 }
