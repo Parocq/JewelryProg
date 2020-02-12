@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private  ArrayList<Stone> stones =  new ArrayList<Stone>();
-    private  ArrayList<Metal> metals = null;
-    private  ArrayList<Adornment> adornments = null;
-    private  ArrayList<RingBase> ringBases = null;
-    private  ArrayList<NecklaceBase> necklaceBases = null;
-    private  ArrayList<EarringBase> earringBases = null;
+    private static ArrayList<Stone> stones =  new ArrayList<Stone>();
+    private static ArrayList<Metal> metals = new ArrayList<Metal>();
+    private static   ArrayList<Adornment> adornments = new ArrayList<Adornment>();
+    private static ArrayList<RingBase> ringBases = new ArrayList<RingBase>();
+    private static ArrayList<NecklaceBase> necklaceBases = new ArrayList<NecklaceBase>();
+    private static ArrayList<EarringBase> earringBases = new ArrayList<EarringBase>();
 
     public Storage() {
     }
@@ -89,7 +89,7 @@ public class Storage {
     void selectRingTitles(ArrayList<RingBase> ringBases) {///и вот эти выводы куда девать, тут или в Storage  всё же.
         String str = "";
         for (int i = 0; i < ringBases.size(); i++) {
-            System.out.print(i + 1);
+            System.out.print(i + 1+".");
             str += ringBases.get(i).getTitle();
             if (i == 5) System.out.println();
         }
@@ -99,7 +99,7 @@ public class Storage {
     void selectNecklaceTitles(ArrayList<NecklaceBase> necklaceBases) {
         String str = "";
         for (int i = 0; i < necklaceBases.size(); i++) {
-            System.out.print(i + 1);
+            System.out.print(i + 1+".");
             str += necklaceBases.get(i).getTitle();
             if (i == 5) System.out.println();
         }
@@ -109,7 +109,7 @@ public class Storage {
     void selectEarringTitles(ArrayList<EarringBase> earringBases) {
         String str = "";
         for (int i = 0; i < earringBases.size(); i++) {
-            System.out.print(i + 1);
+            System.out.print(i + 1+".");
             str += earringBases.get(i).getTitle();
             if (i == 5) System.out.println();
         }
@@ -119,7 +119,7 @@ public class Storage {
     void selectStoneTitles (ArrayList<Stone> earringBases) {
         String str = "";
         for (int i = 0; i < stones.size(); i++) {
-            System.out.print(i + 1);
+            System.out.print(i + 1+".");
             str += stones.get(i).getTitle();
             if (i == 5) System.out.println();
         }
@@ -129,7 +129,7 @@ public class Storage {
     void selectAdornmentTitles (ArrayList<Adornment> adornments){
         String str = "";
         for (int i = 0; i < adornments.size(); i++) {
-            System.out.print(i + 1);
+            System.out.print(i + 1+".");
             str += adornments.get(i).getTitle();
             if (i == 5) System.out.println();
         }
@@ -139,7 +139,7 @@ public class Storage {
     void selectMetalsTitles (ArrayList<Metal> metals){
         String str = "";
         for (int i = 0; i < metals.size(); i++) {
-            System.out.print(i + 1);
+            System.out.print(i + 1+".");
             str += metals.get(i).getTitle();
             if (i == 5) System.out.println();
         }
@@ -147,18 +147,17 @@ public class Storage {
     }
 
     void printAll (){
-        System.out.println("Металлы, хранящиеся на складе:");
+        System.out.println("-------------Металлы, хранящиеся на складе:");
         selectMetalsTitles(metals);
-        System.out.println("Камни, хранящиеся на складе:");
+        System.out.println("-------------Камни, хранящиеся на складе:");
         selectStoneTitles(stones);
-        System.out.println("Основы для колец, хранящиеся на складе:");
+        System.out.println("-------------Основы для колец, хранящиеся на складе:");
         selectRingTitles(ringBases);
-        System.out.println("Основы для ожерелий, хранящиеся на складе:");
+        System.out.println("-------------Основы для ожерелий, хранящиеся на складе:");
         selectNecklaceTitles(necklaceBases);
-        System.out.println("Основы для серег, хранящиеся на складе:");
+        System.out.println("-------------Основы для серег, хранящиеся на складе:");
         selectEarringTitles(earringBases);
-        System.out.println("Украшения, хранящиеся на складе:");
+        System.out.println("-------------Украшения, хранящиеся на складе:");
         selectAdornmentTitles(adornments);
     }
-
 }

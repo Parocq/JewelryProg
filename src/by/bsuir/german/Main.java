@@ -19,9 +19,9 @@ public class Main {
             i = scanner.nextInt();
             switch (i) {
                 case 1:
-                    Stone stone = new Stone("Diamond", 23.2,336.3, "White", true,55.9);
-                    storage.addStoneOnStock(stone);
-//                    logic.createNewStone();
+//                    Stone stone = new Stone("Diamond", 23.2,336.3, "White", true,55.9);
+//                    storage.addStoneOnStock(stone);
+                    logic.createNewStone();
                     break;
                 case 2:
                     logic.createNewMetal();
@@ -30,17 +30,18 @@ public class Main {
                     logic.createNewBase();
                     break;
                 case 4:
-                    logic.createNewAdorment();
+                    logic.createNewAdornment();
                     break;
                 case 5:
                     storage.printAll();
+                    break;
                 case 6:
                     i = 6;
                     break;
                 default:
                     System.out.println("Такого варианта не существует");
+                    break;
             }
         }
-        
     }
 }

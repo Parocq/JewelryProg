@@ -32,7 +32,6 @@ public class Logic {
         if (q == 2) {
             type = false;
         } else type = true;
-//        Scanner scanner = new Scanner(System.in);
         System.out.println("Какого цвета камень?");
         String color;
         color = scanner.nextLine();
@@ -49,7 +48,6 @@ public class Logic {
         Stone stone = new Stone(title, weight, price, color, type, transparence);
         storage.addStoneOnStock(stone);
         System.out.println("Новый камень успешно добавлен!");
-
     }
 
     void createNewMetal() {
@@ -67,7 +65,7 @@ public class Logic {
         System.out.println("Новый метал успешно добавлен!");
     }
 
-    void createNewAdorment() {
+    void createNewAdornment() {
         Object object;
         RingBase ringBase;
         EarringBase earringBase;
@@ -105,6 +103,7 @@ public class Logic {
         Metal metal;
         System.out.println("Введите название для основы для кольца:");
         title = scanner.nextLine();
+        title = scanner.nextLine();
         System.out.println("Введите цену основы:");
         price = scanner.nextDouble();
         System.out.println("Введите вес основы:");
@@ -114,6 +113,7 @@ public class Logic {
         diametr = scanner.nextDouble();
 
         RingBase ringBase = new RingBase(title,weight,price,metal,diametr);
+        storage.addRingBaseOnStock(ringBase);
     }
 
     void createNewNecklaceBase () {
@@ -130,6 +130,7 @@ public class Logic {
         length = scanner.nextDouble();
 
         NecklaceBase necklaceBase = new NecklaceBase(title,weight,price,metal,length);
+        storage.addNecklaceBaseOnStock(necklaceBase);
     }
 
     void createNewEarringBase () {
@@ -149,6 +150,7 @@ public class Logic {
         if (i == 1) paired = true;
         else paired = false;
         EarringBase earringBase = new EarringBase(title,weight,price,metal,paired);
+        storage.addEarringBaseOnStock(earringBase);
     }
 
     void createNewBase (){
@@ -230,7 +232,5 @@ public class Logic {
         storage.getMetals().remove(i-1);
         return metal;
     }
-
-
 
 }
