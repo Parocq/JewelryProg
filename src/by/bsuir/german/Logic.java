@@ -1,15 +1,16 @@
 package by.bsuir.german;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 
 public class Logic {
 
-    private Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in).useLocale(Locale.US);
     private String title;
     private double price, weight;
-    private Storage storage;
+    private Storage storage = new Storage();
     private ArrayList<Stone> stonesToUse;
 
 //    void ShowInfo (Adornment a){
@@ -31,18 +32,24 @@ public class Logic {
         if (q == 2) {
             type = false;
         } else type = true;
+//        Scanner scanner = new Scanner(System.in);
         System.out.println("Какого цвета камень?");
-        String color = scanner.nextLine();
+        String color;
+        color = scanner.nextLine();
+        color = scanner.nextLine();
         System.out.println("Каково значение светопропускания у камня?");
-        double transparence = scanner.nextDouble();//определиться в чем указывать значение светопропускания
+        double transparence;
+        transparence = scanner.nextDouble();//определиться в чем указывать значение светопропускания
         System.out.println("Сколько весит камень? (указать знаечние в каратах)");
         weight = scanner.nextDouble();
         System.out.println("Какова стоимость$ камня?");
         price = scanner.nextDouble();
-        System.out.println("Камень успешно добавлен!");
+        scanner.close();
 
         Stone stone = new Stone(title, weight, price, color, type, transparence);
         storage.addStoneOnStock(stone);
+        System.out.println("Новый камень успешно добавлен!");
+
     }
 
     void createNewMetal() {
@@ -57,6 +64,7 @@ public class Logic {
 
         Metal metal = new Metal(title, price, weight, sample);
         storage.addMetalOnStock(metal);
+        System.out.println("Новый метал успешно добавлен!");
     }
 
     void createNewAdorment() {
@@ -76,14 +84,84 @@ public class Logic {
                 ringBase = (RingBase) object;
                 Adornment adornment1 = new Adornment(title, 1, ringBase, stonesToUse);
                 storage.addAdornmentOnStock(adornment1);
+                System.out.println("Украшение успешно создано и добавлено");
             case 2:
                 necklaceBase = (NecklaceBase) object;
                 Adornment adornment2 = new Adornment(title, 2, necklaceBase, stonesToUse);
                 storage.addAdornmentOnStock(adornment2);
+                System.out.println("Украшение успешно создано и добавлено");
             case 3:
                 earringBase = (EarringBase) object;
                 Adornment adornment3 = new Adornment(title, 3, earringBase, stonesToUse);
                 storage.addAdornmentOnStock(adornment3);
+                System.out.println("Украшение успешно создано и добавлено");
+            default:
+                System.out.println("Такого варианта ответа не существует");
+        }
+    }
+
+    void createNewRingBase() {
+        double diametr;
+        Metal metal;
+        System.out.println("Введите название для основы для кольца:");
+        title = scanner.nextLine();
+        System.out.println("Введите цену основы:");
+        price = scanner.nextDouble();
+        System.out.println("Введите вес основы:");
+        weight = scanner.nextDouble();
+        metal = chooseMetal();
+        System.out.println("Введите диаметр основы для кольца:");
+        diametr = scanner.nextDouble();
+
+        RingBase ringBase = new RingBase(title,weight,price,metal,diametr);
+    }
+
+    void createNewNecklaceBase () {
+        double length;
+        Metal metal;
+        System.out.println("Введите название для основы для ожерелья:");
+        title = scanner.nextLine();
+        System.out.println("Введите цену основы:");
+        price = scanner.nextDouble();
+        System.out.println("Введите вес основы:");
+        weight = scanner.nextDouble();
+        metal = chooseMetal();
+        System.out.println("Введите длину основы для ожерелья:");
+        length = scanner.nextDouble();
+
+        NecklaceBase necklaceBase = new NecklaceBase(title,weight,price,metal,length);
+    }
+
+    void createNewEarringBase () {
+        boolean paired;
+        Metal metal;
+        System.out.println("Введите название для основы для серьги:");
+        title = scanner.nextLine();
+        System.out.println("Введите цену основы:");
+        price = scanner.nextDouble();
+        System.out.println("Введите вес основы:");
+        weight = scanner.nextDouble();
+        metal = chooseMetal();
+        System.out.println("Создать пару серег либо одну серьгу:");
+        System.out.println("1.Парные 2.Одиночная");
+        int i;
+        i = scanner.nextInt();
+        if (i == 1) paired = true;
+        else paired = false;
+        EarringBase earringBase = new EarringBase(title,weight,price,metal,paired);
+    }
+
+    void createNewBase (){
+        int i;
+        System.out.println("Какую основу создать?");
+        System.out.println("1.Кольца 2.Ожерелья 3.Серег");
+        i = scanner.nextInt();
+        switch (i){
+            case 1: createNewRingBase();
+            case 2: createNewNecklaceBase();
+            case 3: createNewEarringBase();
+            default:
+                System.out.println("Такого варианта не существует");
         }
     }
 
@@ -153,55 +231,6 @@ public class Logic {
         return metal;
     }
 
-    void createNewRingBase() {
-        double diametr;
-        Metal metal;
-        System.out.println("Введите название для основы для кольца:");
-        title = scanner.nextLine();
-        System.out.println("Введите цену основы:");
-        price = scanner.nextDouble();
-        System.out.println("Введите вес основы:");
-        weight = scanner.nextDouble();
-        metal = chooseMetal();
-        System.out.println("Введите диаметр основы для кольца:");
-        diametr = scanner.nextDouble();
 
-        RingBase ringBase = new RingBase(title,weight,price,metal,diametr);
-    }
-
-    void createNewNecklaceBase () {
-        double length;
-        Metal metal;
-        System.out.println("Введите название для основы для ожерелья:");
-        title = scanner.nextLine();
-        System.out.println("Введите цену основы:");
-        price = scanner.nextDouble();
-        System.out.println("Введите вес основы:");
-        weight = scanner.nextDouble();
-        metal = chooseMetal();
-        System.out.println("Введите длину основы для ожерелья:");
-        length = scanner.nextDouble();
-
-        NecklaceBase necklaceBase = new NecklaceBase(title,weight,price,metal,length);
-    }
-
-    void createNewEarringBase () {
-        boolean paired;
-        Metal metal;
-        System.out.println("Введите название для основы для серьги:");
-        title = scanner.nextLine();
-        System.out.println("Введите цену основы:");
-        price = scanner.nextDouble();
-        System.out.println("Введите вес основы:");
-        weight = scanner.nextDouble();
-        metal = chooseMetal();
-        System.out.println("Создать пару серег либо одну серьгу:");
-        System.out.println("1.Парные 2.Одиночная");
-        int i;
-        i = scanner.nextInt();
-        if (i == 1) paired = true;
-        else paired = false;
-        EarringBase earringBase = new EarringBase(title,weight,price,metal,paired);
-    }
 
 }

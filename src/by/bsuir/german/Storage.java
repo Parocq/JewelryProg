@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private  ArrayList<Stone> stones;
-    private  ArrayList<Metal> metals;
-    private  ArrayList<Adornment> adornments;
-    private  ArrayList<RingBase> ringBases;
-    private  ArrayList<NecklaceBase> necklaceBases;
-    private  ArrayList<EarringBase> earringBases;
+    private  ArrayList<Stone> stones =  new ArrayList<Stone>();
+    private  ArrayList<Metal> metals = null;
+    private  ArrayList<Adornment> adornments = null;
+    private  ArrayList<RingBase> ringBases = null;
+    private  ArrayList<NecklaceBase> necklaceBases = null;
+    private  ArrayList<EarringBase> earringBases = null;
 
     public Storage() {
     }
@@ -144,6 +144,21 @@ public class Storage {
             if (i == 5) System.out.println();
         }
         System.out.println(str);
+    }
+
+    void printAll (){
+        System.out.println("Металлы, хранящиеся на складе:");
+        selectMetalsTitles(metals);
+        System.out.println("Камни, хранящиеся на складе:");
+        selectStoneTitles(stones);
+        System.out.println("Основы для колец, хранящиеся на складе:");
+        selectRingTitles(ringBases);
+        System.out.println("Основы для ожерелий, хранящиеся на складе:");
+        selectNecklaceTitles(necklaceBases);
+        System.out.println("Основы для серег, хранящиеся на складе:");
+        selectEarringTitles(earringBases);
+        System.out.println("Украшения, хранящиеся на складе:");
+        selectAdornmentTitles(adornments);
     }
 
 }
