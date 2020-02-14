@@ -12,4 +12,6 @@ public class Metal extends Material {
     public double getSample() {
         return sample;
     }
+
+
 }

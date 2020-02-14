@@ -7,4 +7,6 @@ public class RingBase extends Product {
         super(title, wight, price, metal);
         this.diametr = diametr;
     }
+
+
 }

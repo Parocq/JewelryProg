@@ -1,20 +1,21 @@
 package by.bsuir.german;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Storage {
 
-    private static ArrayList<Stone> stones =  new ArrayList<Stone>();
-    private static ArrayList<Metal> metals = new ArrayList<Metal>();
-    private static   ArrayList<Adornment> adornments = new ArrayList<Adornment>();
-    private static ArrayList<RingBase> ringBases = new ArrayList<RingBase>();
-    private static ArrayList<NecklaceBase> necklaceBases = new ArrayList<NecklaceBase>();
-    private static ArrayList<EarringBase> earringBases = new ArrayList<EarringBase>();
+    private static List<Stone> stones =  new ArrayList<>();
+    private static List<Metal> metals = new ArrayList<>();
+    private static List<Adornment> adornments = new ArrayList<>();
+    private static List<RingBase> ringBases = new ArrayList<>();
+    private static List<NecklaceBase> necklaceBases = new ArrayList<>();
+    private static List<EarringBase> earringBases = new ArrayList<>();
 
     public Storage() {
     }
 
-    public  ArrayList<Stone> getStones() {
+    public List<Stone> getStones() {
         return stones;
     }
 
@@ -22,7 +23,7 @@ public class Storage {
         this.stones = stones;
     }
 
-    public  ArrayList<Metal> getMetals() {
+    public List<Metal> getMetals() {
         return metals;
     }
 
@@ -30,7 +31,7 @@ public class Storage {
         this.metals = metals;
     }
 
-    public  ArrayList<Adornment> getAdornments() {
+    public List<Adornment> getAdornments() {
         return adornments;
     }
 
@@ -38,7 +39,7 @@ public class Storage {
         this.adornments = adornments;
     }
 
-    public  ArrayList<RingBase> getRingBases() {
+    public List<RingBase> getRingBases() {
         return ringBases;
     }
 
@@ -46,7 +47,7 @@ public class Storage {
         this.ringBases = ringBases;
     }
 
-    public  ArrayList<NecklaceBase> getNecklaceBases() {
+    public List<NecklaceBase> getNecklaceBases() {
         return necklaceBases;
     }
 
@@ -54,7 +55,7 @@ public class Storage {
         this.necklaceBases = necklaceBases;
     }
 
-    public  ArrayList<EarringBase> getEarringBases() {
+    public List<EarringBase> getEarringBases() {
         return earringBases;
     }
 
@@ -74,7 +75,7 @@ public class Storage {
         earringBases.add(earringBase);
     }
 
-    public  void addStoneOnStock (Stone stone){
+    public  void    addStoneOnStock (Stone stone){
         stones.add(stone);
     }
 
@@ -86,7 +87,7 @@ public class Storage {
         adornments.add(adornment);
     }
 
-    void selectRingTitles(ArrayList<RingBase> ringBases) {///и вот эти выводы куда девать, тут или в Storage  всё же.
+    void selectRingTitles(List<RingBase> ringBases) {///и вот эти выводы куда девать, тут или в Storage  всё же.
         String str = "";
         for (int i = 0; i < ringBases.size(); i++) {
             System.out.print(i + 1+".");
@@ -96,7 +97,7 @@ public class Storage {
         System.out.println(str);
     }
 
-    void selectNecklaceTitles(ArrayList<NecklaceBase> necklaceBases) {
+    void selectNecklaceTitles(List<NecklaceBase> necklaceBases) {
         String str = "";
         for (int i = 0; i < necklaceBases.size(); i++) {
             System.out.print(i + 1+".");
@@ -106,7 +107,7 @@ public class Storage {
         System.out.println(str);
     }
 
-    void selectEarringTitles(ArrayList<EarringBase> earringBases) {
+    void selectEarringTitles(List<EarringBase> earringBases) {
         String str = "";
         for (int i = 0; i < earringBases.size(); i++) {
             System.out.print(i + 1+".");
@@ -116,7 +117,7 @@ public class Storage {
         System.out.println(str);
     }
 
-    void selectStoneTitles (ArrayList<Stone> earringBases) {
+    void selectStoneTitles (List<Stone> earringBases) {
         String str = "";
         for (int i = 0; i < stones.size(); i++) {
             System.out.print(i + 1+".");
@@ -126,7 +127,7 @@ public class Storage {
         System.out.println(str);
     }
 
-    void selectAdornmentTitles (ArrayList<Adornment> adornments){
+    void selectAdornmentTitles (List<Adornment> adornments){
         String str = "";
         for (int i = 0; i < adornments.size(); i++) {
             System.out.print(i + 1+".");
@@ -136,7 +137,7 @@ public class Storage {
         System.out.println(str);
     }
 
-    void selectMetalsTitles (ArrayList<Metal> metals){
+    void selectMetalsTitles (List<Metal> metals){
         String str = "";
         for (int i = 0; i < metals.size(); i++) {
             System.out.print(i + 1+".");
