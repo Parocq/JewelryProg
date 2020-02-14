@@ -20,7 +20,7 @@ public class Main {
         int i = 0;
         while (flag){
             System.out.print("Что будем делать?\n1.Добавить камень на склад\n2.Добавить металл на склад\n3.Создать освнову для украшения\n");
-            System.out.println("4.Создать украшение\n5.Просмотреть уже имеющиеся материалы и украшения\n6.Выход");
+            System.out.println("4.Создать украшение\n5.Просмотреть уже имеющиеся материалы и украшения\n6.Выход\n7.Доп. функции");
 
               //  String str = scanner.nextIn();
 
@@ -53,7 +53,13 @@ public class Main {
                     scanner.close();
                     break;
                 case 7:
-                    menu.sort();
+                    System.out.println("1.Вывести информацию об украшении \n2.Отсортировать склад...\n3.Поиск камней по диапазону");
+                    int k =scanner.nextInt();
+                    if (k==1){
+                        menu.sort();
+                    } else if (k==2){
+                        menu.showAdornmentInfo();
+                    } else menu.searchByTransparence();
                     break;
                 default:
                     System.out.println("Такого варианта не существует");

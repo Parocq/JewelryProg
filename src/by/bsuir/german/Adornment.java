@@ -48,4 +48,24 @@ public class Adornment {
     public String getTitle() {
         return title;
     }
+
+    public int getType() {
+        return type;
+    }
+
+    public RingBase getRing() {
+        return ring;
+    }
+
+    public NecklaceBase getNecklace() {
+        return necklace;
+    }
+
+    public EarringBase getEarring() {
+        return earring;
+    }
+
+    public ArrayList<Stone> getUsedStones() {
+        return usedStones;
+    }
 }

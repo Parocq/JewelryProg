@@ -88,63 +88,53 @@ public class Storage {
     }
 
     void selectRingTitles(List<RingBase> ringBases) {///и вот эти выводы куда девать, тут или в Storage  всё же.
-        String str = "";
         for (int i = 0; i < ringBases.size(); i++) {
             System.out.print(i + 1+".");
-            str += ringBases.get(i).getTitle();
+            System.out.println(ringBases.get(i).getTitle());
             if (i == 5) System.out.println();
         }
-        System.out.println(str);
     }
 
     void selectNecklaceTitles(List<NecklaceBase> necklaceBases) {
-        String str = "";
         for (int i = 0; i < necklaceBases.size(); i++) {
             System.out.print(i + 1+".");
-            str += necklaceBases.get(i).getTitle();
+            System.out.println(necklaceBases.get(i).getTitle());
             if (i == 5) System.out.println();
         }
-        System.out.println(str);
     }
 
     void selectEarringTitles(List<EarringBase> earringBases) {
-        String str = "";
         for (int i = 0; i < earringBases.size(); i++) {
             System.out.print(i + 1+".");
-            str += earringBases.get(i).getTitle();
+            System.out.println(earringBases.get(i).getTitle());
             if (i == 5) System.out.println();
         }
-        System.out.println(str);
     }
 
-    void selectStoneTitles (List<Stone> earringBases) {
-        String str = "";
+    void selectStoneTitles (List<Stone> stones) {
         for (int i = 0; i < stones.size(); i++) {
             System.out.print(i + 1+".");
-            str += stones.get(i).getTitle();
+            System.out.println(stones.get(i).getTitle());
             if (i == 5) System.out.println();
         }
-        System.out.println(str);
     }
 
     void selectAdornmentTitles (List<Adornment> adornments){
-        String str = "";
         for (int i = 0; i < adornments.size(); i++) {
             System.out.print(i + 1+".");
-            str += adornments.get(i).getTitle();
+            System.out.println(adornments.get(i).getTitle());
             if (i == 5) System.out.println();
         }
-        System.out.println(str);
     }
 
+
+
     void selectMetalsTitles (List<Metal> metals){
-        String str = "";
         for (int i = 0; i < metals.size(); i++) {
             System.out.print(i + 1+".");
-            str += metals.get(i).getTitle();
+            System.out.println(ringBases.get(i).getTitle());
             if (i == 5) System.out.println();
         }
-        System.out.println(str);
     }
 
     void printAll (){

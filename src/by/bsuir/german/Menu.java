@@ -12,20 +12,34 @@ public class Menu {
     private double price, weight;
     private Storage storage = new Storage();
     private ArrayList<Stone> stonesToUse;
+    private Logic logic = new Logic();
 
 
     public Menu(Scanner scanner) {
         this.scanner = scanner;
     }
 
-    //    void ShowInfo (Adornment a){
-//        System.out.println("Название украшения: " + adornmentTitle);
-//        System.out.println("Тип бижютерии: " + adorsmentType);
-//        printStonesUsed(stonesList);
-//        System.out.println("Использованый метал: " + metalTitle);
-//        System.out.println("Вес украшения: "+ sumVeight);
-//        System.out.println("Итоговая цена украшения: " + price);
-//    }
+    void searchByTransparence (){
+        System.out.println("Введите нижнюю границу диапазона показателя прозрачности:");
+        double i = scanner.nextDouble();
+        System.out.println("Введите верхнюю границу диапазона показателя прозрачности:");
+        double j = scanner.nextDouble();
+        System.out.println("Камни на складе, удовлетворяющие условию:");
+        storage.selectStoneTitles(logic.searchForTransparence(i,j));
+    }
+
+    void showAdornmentInfo (){
+        System.out.println("Информацию о каком украшении вывести?");
+        storage.selectAdornmentTitles(storage.getAdornments());
+        int i = scanner.nextInt();
+        System.out.println("Название украшения:          " + storage.getAdornments().get(i).getTitle());
+        System.out.println("Тип бижютерии:               " + storage.getAdornments().get(i).getType());
+//            System.out.println("Использованый метал: " + storage.getAdornments().get(i).ge);
+        System.out.println("Список использованных камней:");
+        storage.selectStoneTitles(storage.getAdornments().get(i).getUsedStones());
+        System.out.println("Вес украшения:               " + logic.calculateWeight(i));
+        System.out.println("Итоговая цена украшения:     " + logic.calculatePrice(i));
+    }
 
     void sort (){
         System.out.println("Какой список отсортировать?");
@@ -34,7 +48,27 @@ public class Menu {
         int i = scanner.nextInt();
         switch (i){
             case 1:
-                
+                logic.sortAdornmentByTitle(storage.getAdornments());
+                break;
+            case 2:
+                logic.sortRingBaseByTitle(storage.getRingBases());
+                break;
+            case 3:
+                logic.sortNecklaceBaseByTitle(storage.getNecklaceBases());
+                break;
+            case 4:
+                logic.sortEarringBaseByTitle(storage.getEarringBases());
+                break;
+            case 5:
+                System.out.println("По какому параметру сортировать?");
+                System.out.println("1.Название \n2.Цена\n");
+                int j = scanner.nextInt();
+                if (j==1){
+                    logic.sortStonesByTitle(storage.getStones());
+                } else logic.sortStonesByPrice(storage.getStones());
+                break;
+            case 6:
+                logic.sortMetalByTitle(storage.getMetals());
                 break;
         }
     }
