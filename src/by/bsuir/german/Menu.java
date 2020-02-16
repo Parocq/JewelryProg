@@ -135,32 +135,43 @@ public class Menu {
         System.out.println("Какой тип украшения создаем?");
         System.out.println("1.Кольцо  2.Ожерелье  3.Серьги");
         int type = scanner.nextInt();
-        object = chooseBase(type);
-        stonesToUse = chooseStones();
-        switch (type){
-            case 1:
-                ringBase = (RingBase) object;
-                Adornment adornment1 = new Adornment(title, 1, ringBase);
-                storage.addAdornmentOnStock(adornment1);
-                System.out.println("Украшение успешно создано и добавлено");
-                break;
-            case 2:
-                necklaceBase = (NecklaceBase) object;
-                Adornment adornment2 = new Adornment(title, 2, necklaceBase);
-                storage.addAdornmentOnStock(adornment2);
-                System.out.println("Украшение успешно создано и добавлено");
-                break;
-            case 3:
-                earringBase = (EarringBase) object;
-                Adornment adornment3 = new Adornment(title, 3, earringBase);
-                storage.addAdornmentOnStock(adornment3);
-                System.out.println("Украшение успешно создано и добавлено");
-                break;
-            default:
-                System.out.println("Такого варианта ответа не существует");
-                break;
+        if (type == 1 && storage.getRingBases().isEmpty()) {
+            System.out.println("Не из чего выбирать. Добавьте основы для колец");
         }
-        stonesToUse.clear();
+        else if ( type == 2 && storage.getNecklaceBases().isEmpty()){
+            System.out.println("Не из чего выбирать. Добавьте основы для ожерелий");
+        }
+        else if (type == 3 && storage.getEarringBases().isEmpty()){
+            System.out.println("Не из чего выбирать. Добавьте камни");
+        } else {
+            object = chooseBase(type);
+            stonesToUse = chooseStones();
+            switch (type){
+                case 1:
+                    ringBase = (RingBase) object;
+                    Adornment adornment1 = new Adornment(title, 1, ringBase);
+                    storage.addAdornmentOnStock(adornment1);
+                    System.out.println("Украшение успешно создано и добавлено");
+                    break;
+                case 2:
+                    necklaceBase = (NecklaceBase) object;
+                    Adornment adornment2 = new Adornment(title, 2, necklaceBase);
+                    storage.addAdornmentOnStock(adornment2);
+                    System.out.println("Украшение успешно создано и добавлено");
+                    break;
+                case 3:
+                    earringBase = (EarringBase) object;
+                    Adornment adornment3 = new Adornment(title, 3, earringBase);
+                    storage.addAdornmentOnStock(adornment3);
+                    System.out.println("Украшение успешно создано и добавлено");
+                    break;
+                default:
+                    System.out.println("Такого варианта ответа не существует");
+                    break;
+            }
+            stonesToUse.clear();
+        }
+
     }
 
     void createNewRingBase() {
@@ -283,13 +294,13 @@ public class Menu {
                     System.out.println("Камень добавлен. Вы можете найти его на складе.");
                     break;
                 case 2:
-                    chooseStone();
+                    if (storage.getStones().isEmpty()) System.out.println("Не из чего выбирать. Добавьте камни");
+                    else chooseStone();
                     break;
                 case 3:
                     flag = 3;
                     break;
             }
-
         }
         return stonesToUse;
     }
@@ -302,7 +313,6 @@ public class Menu {
         stone = storage.getStones().get(chosen - 1);
         stonesToUse.add(stone);
     }
-
     Metal chooseMetal (){
         int chosen;
         Metal metal;
@@ -313,5 +323,4 @@ public class Menu {
 //        storage.getMetals().remove(i-1);
         return metal;
     }
-
 }
