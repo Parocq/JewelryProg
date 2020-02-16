@@ -1,6 +1,7 @@
 package by.bsuir.german;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -11,9 +12,15 @@ public class Menu {
     private String title;
     private double price, weight;
     private Storage storage = new Storage();
-    private ArrayList<Stone> stonesToUse;
+    private static List<Stone> stonesToUse = new ArrayList<>();
     private Logic logic = new Logic();
 
+    public static List<Stone> getStonesToUse() {
+        return stonesToUse;
+    }
+
+    public Menu() {
+    }
 
     public Menu(Scanner scanner) {
         this.scanner = scanner;
@@ -31,10 +38,9 @@ public class Menu {
     void showAdornmentInfo (){
         System.out.println("Информацию о каком украшении вывести?");
         storage.selectAdornmentTitles(storage.getAdornments());
-        int i = scanner.nextInt();
+        int i = scanner.nextInt()-1;
         System.out.println("Название украшения:          " + storage.getAdornments().get(i).getTitle());
         System.out.println("Тип бижютерии:               " + storage.getAdornments().get(i).getType());
-//            System.out.println("Использованый метал: " + storage.getAdornments().get(i).ge);
         System.out.println("Список использованных камней:");
         storage.selectStoneTitles(storage.getAdornments().get(i).getUsedStones());
         System.out.println("Вес украшения:               " + logic.calculateWeight(i));
@@ -72,6 +78,8 @@ public class Menu {
                 break;
         }
     }
+
+    //-------------------------------------------------------
 
     void createNewStone() {
         boolean type;
@@ -132,29 +140,33 @@ public class Menu {
         switch (type){
             case 1:
                 ringBase = (RingBase) object;
-                Adornment adornment1 = new Adornment(title, 1, ringBase, stonesToUse);
+                Adornment adornment1 = new Adornment(title, 1, ringBase);
                 storage.addAdornmentOnStock(adornment1);
                 System.out.println("Украшение успешно создано и добавлено");
+                break;
             case 2:
                 necklaceBase = (NecklaceBase) object;
-                Adornment adornment2 = new Adornment(title, 2, necklaceBase, stonesToUse);
+                Adornment adornment2 = new Adornment(title, 2, necklaceBase);
                 storage.addAdornmentOnStock(adornment2);
                 System.out.println("Украшение успешно создано и добавлено");
+                break;
             case 3:
                 earringBase = (EarringBase) object;
-                Adornment adornment3 = new Adornment(title, 3, earringBase, stonesToUse);
+                Adornment adornment3 = new Adornment(title, 3, earringBase);
                 storage.addAdornmentOnStock(adornment3);
                 System.out.println("Украшение успешно создано и добавлено");
+                break;
             default:
                 System.out.println("Такого варианта ответа не существует");
+                break;
         }
+        stonesToUse.clear();
     }
 
     void createNewRingBase() {
         double diametr;
         Metal metal;
         System.out.println("Введите название для основы для кольца:");
-        title = scanner.nextLine();
         title = scanner.nextLine();
         System.out.println("Введите цену основы:");
         price = scanner.nextDouble();
@@ -210,12 +222,21 @@ public class Menu {
         System.out.println("Какую основу создать?");
         System.out.println("1.Кольца 2.Ожерелья 3.Серег");
         i = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+//        if (i==1)createNewRingBase();
+//        else if (i==2)createNewNecklaceBase();
+//        else if (i==3)createNewEarringBase();
+//        else System.out.println("Такого варианта не существует");
         switch (i){
             case 1: createNewRingBase();
+            break;
             case 2: createNewNecklaceBase();
+            break;
             case 3: createNewEarringBase();
+            break;
             default:
                 System.out.println("Такого варианта не существует");
+                break;
         }
     }
 
@@ -223,65 +244,73 @@ public class Menu {
         RingBase usedRingBase;
         EarringBase usedEarringBase;
         NecklaceBase usedNecklaceBase;
+        int numberOfBase;
         System.out.println("Какую основу использовать?(Нажмите 0 для выхода)");
-        int numberOfBase = scanner.nextInt();
         switch (type) {
             case 1:
                 storage.selectRingTitles(storage.getRingBases());
+                numberOfBase = scanner.nextInt();
                 usedRingBase = storage.getRingBases().get(numberOfBase -1);
-                storage.getRingBases().remove(numberOfBase - 1);
+//                storage.getRingBases().remove(numberOfBase - 1);
                 return  usedRingBase;
             case 2:
                 storage.selectNecklaceTitles(storage.getNecklaceBases());
+                numberOfBase = scanner.nextInt();
                 usedNecklaceBase = storage.getNecklaceBases().get(numberOfBase-1);
-                storage.getNecklaceBases().remove(numberOfBase - 1);
+//                storage.getNecklaceBases().remove(numberOfBase - 1);
                 return usedNecklaceBase;
             case 3:
                 storage.selectEarringTitles(storage.getEarringBases());
+                numberOfBase = scanner.nextInt();
                 usedEarringBase = storage.getEarringBases().get(numberOfBase-1);
-                storage.getEarringBases().remove(numberOfBase - 1);
+//                storage.getEarringBases().remove(numberOfBase - 1);
                 return usedEarringBase;
             default: return null;
             //https://www.geeksforgeeks.org/g-fact-64/
         }
     }
 
-    ArrayList<Stone> chooseStones (){
-        int i = 0;
+    List<Stone> chooseStones (){
+        int flag = 0;
         System.out.println("Какие камни использовать?");
-        while (i != 3) {
+        while (flag != 3) {
             System.out.println("1.Создать новый камень 2.Выбрать камень из склада 3.Не использовать камни(далее)");
-            i = scanner.nextInt();
-            switch (i) {
+            flag = scanner.nextInt();
+            switch (flag) {
                 case 1:
+                    scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
                     createNewStone();
                     System.out.println("Камень добавлен. Вы можете найти его на складе.");
                     break;
                 case 2:
-                    Stone stone;
-                    storage.selectStoneTitles(storage.getStones());
-                    int choosen;
-                    choosen = scanner.nextInt();
-                    stone = storage.getStones().get(choosen - 1);
-                    stonesToUse.add(stone);
-                    storage.getStones().remove(choosen - 1);
+                    chooseStone();
                     break;
                 case 3:
-                    i = 3;
+                    flag = 3;
                     break;
             }
+
         }
         return stonesToUse;
     }
 
+    void chooseStone (){
+        int chosen;
+        Stone stone;
+        storage.selectStoneTitles(storage.getStones());
+        chosen = scanner.nextInt();
+        stone = storage.getStones().get(chosen - 1);
+        stonesToUse.add(stone);
+    }
+
     Metal chooseMetal (){
-        int i =0;
+        int chosen;
         Metal metal;
         System.out.println("Выберите номер металла, который вы хотите использовать:");
         storage.selectMetalsTitles(storage.getMetals());
-        scanner.nextInt();
-        metal = storage.getMetals().get(i-1);
-        storage.getMetals().remove(i-1);
+        chosen = scanner.nextInt();
+        metal = storage.getMetals().get(chosen-1);
+//        storage.getMetals().remove(i-1);
         return metal;
     }
 

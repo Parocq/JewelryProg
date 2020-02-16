@@ -32,17 +32,24 @@ public class Logic {
 
     double calculateWeight (int number) {
         double sum=0;
-        List<Stone> list = new ArrayList<>();
+        List<Stone> list;
+//        Metal metal = new;
         list = storage.getAdornments().get(number).getUsedStones();
+        double weight = 0;
+        weight += storage.getAdornments().get(number).getEarring().getWeight();//СДелать так чтобы учитывался вес основы
+        weight += storage.getAdornments().get(number).getNecklace().getWeight();
+        weight += storage.getAdornments().get(number).getRing().getWeight();
         for (int i = 0; i < list.size(); i++) {
             sum += storage.getAdornments().get(number).getUsedStones().get(i).getWeight();
         }
-        return sum;
+        return sum+weight;
     }
 
     double calculatePrice (int number) {
         double sum=0;
-        List<Stone> list = new ArrayList<>();
+        List<Stone> list;
+        Product base;
+
         list = storage.getAdornments().get(number).getUsedStones();
         for (int i = 0; i < list.size(); i++) {
             sum += storage.getAdornments().get(number).getUsedStones().get(i).getPrice();

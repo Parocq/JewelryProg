@@ -2,14 +2,14 @@ package by.bsuir.german;
 
 abstract class Product {
     private String title;
-    private double wight;
+    private double weight;
     private double price;
     private Metal metal;
 
 
-    public Product(String title, double wight, double price, Metal metal) {
+    public Product(String title, double weight, double price, Metal metal) {
         this.title = title;
-        this.wight = wight;
+        this.weight = weight;
         this.price = price;
         this.metal = metal;
     }
@@ -18,8 +18,8 @@ abstract class Product {
         return title;
     }
 
-    public double getWight() {
-        return wight;
+    public double getWeight() {
+        return weight;
     }
 
     public double getPrice() {

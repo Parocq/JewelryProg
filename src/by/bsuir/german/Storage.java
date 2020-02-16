@@ -132,7 +132,7 @@ public class Storage {
     void selectMetalsTitles (List<Metal> metals){
         for (int i = 0; i < metals.size(); i++) {
             System.out.print(i + 1+".");
-            System.out.println(ringBases.get(i).getTitle());
+            System.out.println(metals.get(i).getTitle());
             if (i == 5) System.out.println();
         }
     }

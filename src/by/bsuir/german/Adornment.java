@@ -1,15 +1,18 @@
 package by.bsuir.german;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Adornment {
 
-    String title;
-    int type;
-    RingBase ring;
-    NecklaceBase necklace;
-    EarringBase earring;
-    ArrayList<Stone> usedStones;
+    private String title;
+    private int type;
+    private RingBase ring;
+    private NecklaceBase necklace;
+    private EarringBase earring;
+    private  List<Stone> usedStones = new ArrayList<>();
+
+    private Menu menu = new Menu();
 
     public Adornment(RingBase ring) {this.ring = ring;}
 
@@ -24,25 +27,25 @@ public class Adornment {
     public Adornment() {
     }
 
-    public Adornment(String title, int type, RingBase ring, ArrayList<Stone> usedStones) {
+    public Adornment(String title, int type, RingBase ring) {
         this.title = title;
         this.type = type;
         this.ring = ring;
-        this.usedStones = usedStones;
+        usedStones = menu.getStonesToUse();
     }
 
-    public Adornment(String title, int type, NecklaceBase necklace, ArrayList<Stone> usedStones) {
+    public Adornment(String title, int type, NecklaceBase necklace) {
         this.title = title;
         this.type = type;
         this.necklace = necklace;
-        this.usedStones = usedStones;
+        usedStones = menu.getStonesToUse();
     }
 
-    public Adornment(String title, int type, EarringBase earring, ArrayList<Stone> usedStones) {
+    public Adornment(String title, int type, EarringBase earring) {
         this.title = title;
         this.type = type;
         this.earring = earring;
-        this.usedStones = usedStones;
+        usedStones = menu.getStonesToUse();
     }
 
     public String getTitle() {
@@ -65,7 +68,7 @@ public class Adornment {
         return earring;
     }
 
-    public ArrayList<Stone> getUsedStones() {
+    public List<Stone> getUsedStones() {
         return usedStones;
     }
 }

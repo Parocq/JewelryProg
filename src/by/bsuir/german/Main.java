@@ -6,11 +6,14 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //String title; boolean type; String color; double transparence,  weight,  price;
-        //double sample, volume;
 
         Storage storage = new Storage();
         Logic logic = new Logic();
+
+        Metal test = new Metal("fewfwe", 32, 324,423);
+        RingBase test1 = new RingBase("r3r3",234,234,test,23);
+        storage.addMetalOnStock(test);
+        storage.addRingBaseOnStock(test1);
 
         System.out.println("Добро пожаловать в нашу ювелирную лавку!");
         Scanner scanner = new Scanner(System.in).useLocale(Locale.US);
@@ -55,11 +58,26 @@ public class Main {
                 case 7:
                     System.out.println("1.Вывести информацию об украшении \n2.Отсортировать склад...\n3.Поиск камней по диапазону");
                     int k =scanner.nextInt();
-                    if (k==1){
-                        menu.sort();
-                    } else if (k==2){
-                        menu.showAdornmentInfo();
-                    } else menu.searchByTransparence();
+                    switch (k){
+                        case 1:
+                            menu.showAdornmentInfo();
+                            break;
+                        case 2:
+                            menu.sort();
+                            break;
+                        case 3:
+                            menu.searchByTransparence();
+                            break;
+                        default:
+                            System.out.println("Такого варианта нет");
+                            break;
+                    }
+
+//                    if (k==1){
+//                        menu.showAdornmentInfo();
+//                    } else if (k==2){
+//                        menu.sort();
+//                    } else menu.searchByTransparence();
                     break;
                 default:
                     System.out.println("Такого варианта не существует");
