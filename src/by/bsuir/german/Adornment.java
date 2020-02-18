@@ -10,9 +10,7 @@ public class Adornment {
     private RingBase ring;
     private NecklaceBase necklace;
     private EarringBase earring;
-    private static List<Stone> usedStones;
-
-    private Menu menu = new Menu();
+    private List<Stone> usedStones;
 
     public Adornment(String title, int type, RingBase ring, List<Stone> usedStones) {
         this.title = title;
