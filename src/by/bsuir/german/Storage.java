@@ -90,41 +90,46 @@ public class Storage {
     void selectRingTitles(List<RingBase> ringBases) {///и вот эти выводы куда девать, тут или в Storage  всё же.
         for (int i = 0; i < ringBases.size(); i++) {
             System.out.print(i + 1+".");
-            System.out.println(ringBases.get(i).getTitle());
+            System.out.print(ringBases.get(i).getTitle() + "  ");
             if (i == 5) System.out.println();
         }
+        System.out.println();
     }
 
     void selectNecklaceTitles(List<NecklaceBase> necklaceBases) {
         for (int i = 0; i < necklaceBases.size(); i++) {
             System.out.print(i + 1+".");
-            System.out.println(necklaceBases.get(i).getTitle());
+            System.out.print(necklaceBases.get(i).getTitle() + "  ");
             if (i == 5) System.out.println();
         }
+        System.out.println();
     }
 
     void selectEarringTitles(List<EarringBase> earringBases) {
         for (int i = 0; i < earringBases.size(); i++) {
             System.out.print(i + 1+".");
-            System.out.println(earringBases.get(i).getTitle());
+            System.out.print(earringBases.get(i).getTitle() + "  ");
             if (i == 5) System.out.println();
         }
+        System.out.println();
     }
 
     void selectStoneTitles (List<Stone> stones) {
         for (int i = 0; i < stones.size(); i++) {
             System.out.print(i + 1+".");
-            System.out.println(stones.get(i).getTitle());
+            System.out.print(stones.get(i).getTitle() + "  ");
             if (i == 5) System.out.println();
         }
+        System.out.println();
     }
 
     void selectAdornmentTitles (List<Adornment> adornments){
         for (int i = 0; i < adornments.size(); i++) {
             System.out.print(i + 1+".");
-            System.out.println(adornments.get(i).getTitle());
+            System.out.print(adornments.get(i).getTitle() + "  ");
             if (i == 5) System.out.println();
         }
+        System.out.println();
     }
 
 

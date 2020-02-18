@@ -10,7 +10,7 @@ public class Adornment {
     private RingBase ring;
     private NecklaceBase necklace;
     private EarringBase earring;
-    private  List<Stone> usedStones;
+    private static List<Stone> usedStones;
 
     private Menu menu = new Menu();
 
@@ -18,21 +18,21 @@ public class Adornment {
         this.title = title;
         this.type = type;
         this.ring = ring;
-        this.usedStones = usedStones;
+        this.usedStones = new ArrayList<>(usedStones);
     }
 
     public Adornment(String title, int type, NecklaceBase necklace, List<Stone> usedStones) {
         this.title = title;
         this.type = type;
         this.necklace = necklace;
-        this.usedStones = usedStones;
+        this.usedStones = new ArrayList<>(usedStones);
     }
 
     public Adornment(String title, int type, EarringBase earring, List<Stone> usedStones) {
         this.title = title;
         this.type = type;
         this.earring = earring;
-        this.usedStones = usedStones;
+        this.usedStones = new ArrayList<>(usedStones);
     }
 
     public String getTitle() {

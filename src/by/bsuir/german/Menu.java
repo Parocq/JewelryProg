@@ -83,7 +83,7 @@ public class Menu {
 
     void createNewStone() {
         boolean type;
-        System.out.println("Введите название камня: ");
+        System.out.print("Введите название камня: ");
         title = scanner.nextLine();
         System.out.println("Камень является: 1.Драгоценным 2.Полудрагоценным");
         int q = 0;
@@ -147,6 +147,7 @@ public class Menu {
         } else {
             object = chooseBase(type);
             stonesToUse = chooseStones(stonesToUse);
+
             switch (type){
                 case 1:
                     ringBase = (RingBase) object;
@@ -170,10 +171,8 @@ public class Menu {
                     System.out.println("Такого варианта ответа не существует");
                     break;
             }
-            Adornment test = storage.getAdornments().get(0);
             stonesToUse.clear();
         }
-
     }
 
     void createNewRingBase() {
@@ -236,10 +235,6 @@ public class Menu {
         System.out.println("1.Кольца 2.Ожерелья 3.Серег");
         i = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-//        if (i==1)createNewRingBase();
-//        else if (i==2)createNewNecklaceBase();
-//        else if (i==3)createNewEarringBase();
-//        else System.out.println("Такого варианта не существует");
         switch (i){
             case 1: createNewRingBase();
             break;
@@ -264,19 +259,16 @@ public class Menu {
                 storage.selectRingTitles(storage.getRingBases());
                 numberOfBase = scanner.nextInt();
                 usedRingBase = storage.getRingBases().get(numberOfBase -1);
-//                storage.getRingBases().remove(numberOfBase - 1);
                 return  usedRingBase;
             case 2:
                 storage.selectNecklaceTitles(storage.getNecklaceBases());
                 numberOfBase = scanner.nextInt();
                 usedNecklaceBase = storage.getNecklaceBases().get(numberOfBase-1);
-//                storage.getNecklaceBases().remove(numberOfBase - 1);
                 return usedNecklaceBase;
             case 3:
                 storage.selectEarringTitles(storage.getEarringBases());
                 numberOfBase = scanner.nextInt();
                 usedEarringBase = storage.getEarringBases().get(numberOfBase-1);
-//                storage.getEarringBases().remove(numberOfBase - 1);
                 return usedEarringBase;
             default: return null;
             //https://www.geeksforgeeks.org/g-fact-64/
