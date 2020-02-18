@@ -14,10 +14,6 @@ public class Menu {
     private Storage storage = new Storage();
     private Logic logic = new Logic();
 
-//    public List<Stone> getStonesToUse() {
-//        return stonesToUse;
-//    }
-
     public Menu() {
     }
 
@@ -185,55 +181,6 @@ public class Menu {
         System.out.println("Новый метал успешно добавлен!");
     }
 
-    void createNewAdornment() {
-        List<Stone> stonesToUse = new ArrayList<>();
-        Object object;
-        RingBase ringBase;
-        EarringBase earringBase;
-        NecklaceBase necklaceBase;
-        System.out.println("Как будет называться создаваемое украшение?");
-        title = scanner.nextLine();
-        System.out.println("Какой тип украшения создаем?");
-        System.out.println("1.Кольцо  2.Ожерелье  3.Серьги");
-        int type = scanner.nextInt();
-        if (type == 1 && storage.getRingBases().isEmpty()) {
-            System.out.println("Не из чего выбирать. Добавьте основы для колец");
-        }
-        else if ( type == 2 && storage.getNecklaceBases().isEmpty()){
-            System.out.println("Не из чего выбирать. Добавьте основы для ожерелий");
-        }
-        else if (type == 3 && storage.getEarringBases().isEmpty()){
-            System.out.println("Не из чего выбирать. Добавьте основы для серег");
-        } else {
-            object = chooseBase(type);
-            stonesToUse = chooseStones(stonesToUse);
-
-            switch (type){
-                case 1:
-                    ringBase = (RingBase) object;
-                    Adornment adornment1 = new Adornment(title, 1, ringBase, stonesToUse);
-                    storage.addAdornmentOnStock(adornment1);
-                    System.out.println("Украшение успешно создано и добавлено");
-                    break;
-                case 2:
-                    necklaceBase = (NecklaceBase) object;
-                    Adornment adornment2 = new Adornment(title, 2, necklaceBase, stonesToUse);
-                    storage.addAdornmentOnStock(adornment2);
-                    System.out.println("Украшение успешно создано и добавлено");
-                    break;
-                case 3:
-                    earringBase = (EarringBase) object;
-                    Adornment adornment3 = new Adornment(title, 3, earringBase, stonesToUse);
-                    storage.addAdornmentOnStock(adornment3);
-                    System.out.println("Украшение успешно создано и добавлено");
-                    break;
-                default:
-                    System.out.println("Такого варианта ответа не существует");
-                    break;
-            }
-            stonesToUse.clear();
-        }
-    }
 
     void createNewRingBase() {
         double diametr;
@@ -288,6 +235,59 @@ public class Menu {
         EarringBase earringBase = new EarringBase(title,weight,price,metal,paired);
         storage.addEarringBaseOnStock(earringBase);
     }
+
+
+    void createNewAdornment() {
+        List<Stone> stonesToUse = new ArrayList<>();
+        Object object;
+        RingBase ringBase;
+        EarringBase earringBase;
+        NecklaceBase necklaceBase;
+        System.out.println("Как будет называться создаваемое украшение?");
+        title = scanner.nextLine();
+        System.out.println("Какой тип украшения создаем?");
+        System.out.println("1.Кольцо  2.Ожерелье  3.Серьги");
+        int type = scanner.nextInt();
+        if (type == 1 && storage.getRingBases().isEmpty()) {
+            System.out.println("Не из чего выбирать. Добавьте основы для колец");
+        }
+        else if ( type == 2 && storage.getNecklaceBases().isEmpty()){
+            System.out.println("Не из чего выбирать. Добавьте основы для ожерелий");
+        }
+        else if (type == 3 && storage.getEarringBases().isEmpty()){
+            System.out.println("Не из чего выбирать. Добавьте основы для серег");
+        } else {
+            object = chooseBase(type);
+            stonesToUse = chooseStones(stonesToUse);
+
+            switch (type){
+                case 1:
+                    ringBase = (RingBase) object;
+                    Adornment adornment1 = new Adornment(title, 1, ringBase, stonesToUse);
+                    storage.addAdornmentOnStock(adornment1);
+                    System.out.println("Украшение успешно создано и добавлено");
+                    break;
+                case 2:
+                    necklaceBase = (NecklaceBase) object;
+                    Adornment adornment2 = new Adornment(title, 2, necklaceBase, stonesToUse);
+                    storage.addAdornmentOnStock(adornment2);
+                    System.out.println("Украшение успешно создано и добавлено");
+                    break;
+                case 3:
+                    earringBase = (EarringBase) object;
+                    Adornment adornment3 = new Adornment(title, 3, earringBase, stonesToUse);
+                    storage.addAdornmentOnStock(adornment3);
+                    System.out.println("Украшение успешно создано и добавлено");
+                    break;
+                default:
+                    System.out.println("Такого варианта ответа не существует");
+                    break;
+            }
+            stonesToUse.clear();
+        }
+    }
+
+
 
     void createNewBase (){
         int i;
