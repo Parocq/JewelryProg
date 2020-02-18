@@ -12,12 +12,11 @@ public class Menu {
     private String title;
     private double price, weight;
     private Storage storage = new Storage();
-    private static List<Stone> stonesToUse = new ArrayList<>();
     private Logic logic = new Logic();
 
-    public static List<Stone> getStonesToUse() {
-        return stonesToUse;
-    }
+//    public List<Stone> getStonesToUse() {
+//        return stonesToUse;
+//    }
 
     public Menu() {
     }
@@ -39,6 +38,7 @@ public class Menu {
         System.out.println("Информацию о каком украшении вывести?");
         storage.selectAdornmentTitles(storage.getAdornments());
         int i = scanner.nextInt()-1;
+//        Adornment adornment = storage.getAdornments().get(i);
         System.out.println("Название украшения:          " + storage.getAdornments().get(i).getTitle());
         System.out.println("Тип бижютерии:               " + storage.getAdornments().get(i).getType());
         System.out.println("Список использованных камней:");
@@ -126,6 +126,7 @@ public class Menu {
     }
 
     void createNewAdornment() {
+        List<Stone> stonesToUse = new ArrayList<>();
         Object object;
         RingBase ringBase;
         EarringBase earringBase;
@@ -142,26 +143,26 @@ public class Menu {
             System.out.println("Не из чего выбирать. Добавьте основы для ожерелий");
         }
         else if (type == 3 && storage.getEarringBases().isEmpty()){
-            System.out.println("Не из чего выбирать. Добавьте камни");
+            System.out.println("Не из чего выбирать. Добавьте основы для серег");
         } else {
             object = chooseBase(type);
-            stonesToUse = chooseStones();
+            stonesToUse = chooseStones(stonesToUse);
             switch (type){
                 case 1:
                     ringBase = (RingBase) object;
-                    Adornment adornment1 = new Adornment(title, 1, ringBase);
+                    Adornment adornment1 = new Adornment(title, 1, ringBase, stonesToUse);
                     storage.addAdornmentOnStock(adornment1);
                     System.out.println("Украшение успешно создано и добавлено");
                     break;
                 case 2:
                     necklaceBase = (NecklaceBase) object;
-                    Adornment adornment2 = new Adornment(title, 2, necklaceBase);
+                    Adornment adornment2 = new Adornment(title, 2, necklaceBase, stonesToUse);
                     storage.addAdornmentOnStock(adornment2);
                     System.out.println("Украшение успешно создано и добавлено");
                     break;
                 case 3:
                     earringBase = (EarringBase) object;
-                    Adornment adornment3 = new Adornment(title, 3, earringBase);
+                    Adornment adornment3 = new Adornment(title, 3, earringBase, stonesToUse);
                     storage.addAdornmentOnStock(adornment3);
                     System.out.println("Украшение успешно создано и добавлено");
                     break;
@@ -169,6 +170,7 @@ public class Menu {
                     System.out.println("Такого варианта ответа не существует");
                     break;
             }
+            Adornment test = storage.getAdornments().get(0);
             stonesToUse.clear();
         }
 
@@ -281,11 +283,11 @@ public class Menu {
         }
     }
 
-    List<Stone> chooseStones (){
+    List<Stone> chooseStones (List<Stone> stonesToUse){
         int flag = 0;
         System.out.println("Какие камни использовать?");
         while (flag != 3) {
-            System.out.println("1.Создать новый камень 2.Выбрать камень из склада 3.Не использовать камни(далее)");
+            System.out.println("1.Создать новый камень 2.Выбрать камень из склада 3.Далее");
             flag = scanner.nextInt();
             switch (flag) {
                 case 1:
@@ -295,7 +297,7 @@ public class Menu {
                     break;
                 case 2:
                     if (storage.getStones().isEmpty()) System.out.println("Не из чего выбирать. Добавьте камни");
-                    else chooseStone();
+                    else stonesToUse = chooseStone(stonesToUse);
                     break;
                 case 3:
                     flag = 3;
@@ -305,14 +307,16 @@ public class Menu {
         return stonesToUse;
     }
 
-    void chooseStone (){
+    List<Stone> chooseStone ( List<Stone> stonesToUse ){
         int chosen;
         Stone stone;
         storage.selectStoneTitles(storage.getStones());
         chosen = scanner.nextInt();
         stone = storage.getStones().get(chosen - 1);
         stonesToUse.add(stone);
+        return stonesToUse;
     }
+
     Metal chooseMetal (){
         int chosen;
         Metal metal;

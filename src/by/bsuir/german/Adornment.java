@@ -10,42 +10,29 @@ public class Adornment {
     private RingBase ring;
     private NecklaceBase necklace;
     private EarringBase earring;
-    private  List<Stone> usedStones = new ArrayList<>();
+    private  List<Stone> usedStones;
 
     private Menu menu = new Menu();
 
-    public Adornment(RingBase ring) {this.ring = ring;}
-
-    public Adornment(NecklaceBase necklace){
-        this.necklace = necklace;
-    }
-
-    public Adornment(EarringBase earring){
-        this.earring = earring;
-    }
-
-    public Adornment() {
-    }
-
-    public Adornment(String title, int type, RingBase ring) {
+    public Adornment(String title, int type, RingBase ring, List<Stone> usedStones) {
         this.title = title;
         this.type = type;
         this.ring = ring;
-        usedStones = menu.getStonesToUse();
+        this.usedStones = usedStones;
     }
 
-    public Adornment(String title, int type, NecklaceBase necklace) {
+    public Adornment(String title, int type, NecklaceBase necklace, List<Stone> usedStones) {
         this.title = title;
         this.type = type;
         this.necklace = necklace;
-        usedStones = menu.getStonesToUse();
+        this.usedStones = usedStones;
     }
 
-    public Adornment(String title, int type, EarringBase earring) {
+    public Adornment(String title, int type, EarringBase earring, List<Stone> usedStones) {
         this.title = title;
         this.type = type;
         this.earring = earring;
-        usedStones = menu.getStonesToUse();
+        this.usedStones = usedStones;
     }
 
     public String getTitle() {

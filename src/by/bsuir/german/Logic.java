@@ -32,14 +32,15 @@ public class Logic {
 
     double calculateWeight (int number) {
         double sum=0;
-        List<Stone> list;
-//        Metal metal = new;
-        list = storage.getAdornments().get(number).getUsedStones();
+
         double weight = 0;
-        weight += storage.getAdornments().get(number).getEarring().getWeight();//СДелать так чтобы учитывался вес основы
-        weight += storage.getAdornments().get(number).getNecklace().getWeight();
-        weight += storage.getAdornments().get(number).getRing().getWeight();
-        for (int i = 0; i < list.size(); i++) {
+        if (storage.getAdornments().get(number).getEarring() != null){
+            weight = storage.getAdornments().get(number).getEarring().getWeight();
+        } else if (storage.getAdornments().get(number).getNecklace() != null){
+            weight = storage.getAdornments().get(number).getNecklace().getWeight();
+        } else weight += storage.getAdornments().get(number).getRing().getWeight();
+
+        for (int i = 0; i < storage.getAdornments().get(number).getUsedStones().size(); i++) {
             sum += storage.getAdornments().get(number).getUsedStones().get(i).getWeight();
         }
         return sum+weight;
@@ -47,14 +48,18 @@ public class Logic {
 
     double calculatePrice (int number) {
         double sum=0;
-        List<Stone> list;
-        Product base;
 
-        list = storage.getAdornments().get(number).getUsedStones();
-        for (int i = 0; i < list.size(); i++) {
+        double price = 0;
+        if (storage.getAdornments().get(number).getEarring() != null){
+            price = storage.getAdornments().get(number).getEarring().getWeight();
+        } else if (storage.getAdornments().get(number).getNecklace() != null){
+            price = storage.getAdornments().get(number).getNecklace().getWeight();
+        } else price += storage.getAdornments().get(number).getRing().getWeight();
+
+        for (int i = 0; i < storage.getAdornments().get(number).getUsedStones().size(); i++) {
             sum += storage.getAdornments().get(number).getUsedStones().get(i).getPrice();
         }
-        return sum;
+        return sum+price;
     }
 
     List<Stone> searchForTransparence (double start, double finish){
