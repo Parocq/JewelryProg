@@ -1,4 +1,4 @@
-package by.bsuir.german;
+package by.bsuir.german.entity;
 
 public class EarringBase extends Product {
     private boolean paired;

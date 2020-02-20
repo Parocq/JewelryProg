@@ -1,8 +1,11 @@
 package by.bsuir.german;
 
+import by.bsuir.german.entity.*;
+import by.bsuir.german.service.Logic;
+import by.bsuir.german.service.Storage;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -18,7 +21,7 @@ public class Menu {
         this.scanner = scanner;
     }
 
-    void showMenu (){
+    public void showMenu (){
         boolean flag = true;
         int i = 0;
         while (flag){
@@ -78,7 +81,7 @@ public class Menu {
         }
     }
 
-    void searchByTransparence (){
+    public void searchByTransparence (){
         System.out.println("Введите нижнюю границу диапазона показателя прозрачности:");
         double i = scanner.nextDouble();
         System.out.println("Введите верхнюю границу диапазона показателя прозрачности:");
@@ -87,7 +90,7 @@ public class Menu {
         storage.selectTitles(logic.searchForTransparence(i,j));
     }
 
-    void showAdornmentInfo (){
+    public void showAdornmentInfo (){
         System.out.println("Информацию о каком украшении вывести?");
         storage.selectTitles(storage.getAdornments());
         int i = scanner.nextInt()-1;
@@ -99,7 +102,7 @@ public class Menu {
         System.out.println("Итоговая цена украшения:     " + logic.calculatePrice(i));
     }
 
-    void sort (){
+    public void sort (){
         System.out.println("Какой список отсортировать?");
         System.out.println("1.Украшения\n2.Основы для колец\n3.Основы для ожерелий\n4.Основы для серег");
         System.out.println("5.Камни\n6.Металлы\n");
@@ -131,7 +134,7 @@ public class Menu {
         }
     }
 
-    void createNewStone() {
+    public void createNewStone() {
         boolean type;
         System.out.print("Введите название камня: ");
         title = scanner.nextLine();
@@ -160,7 +163,7 @@ public class Menu {
         System.out.println("Новый камень успешно добавлен!");
     }
 
-    void createNewMetal() {
+    public void createNewMetal() {
         System.out.println("Ведите название металла: ");
         title = scanner.nextLine();
         System.out.println("Сколько весит металл?");
@@ -176,7 +179,7 @@ public class Menu {
     }
 
 
-    void createNewRingBase() {
+    public void createNewRingBase() {
         double diametr;
         Metal metal;
         System.out.println("Введите название для основы для кольца:");
@@ -193,7 +196,7 @@ public class Menu {
         storage.addRingBaseOnStock(ringBase);
     }
 
-    void createNewNecklaceBase () {
+    public void createNewNecklaceBase () {
         double length;
         Metal metal;
         System.out.println("Введите название для основы для ожерелья:");
@@ -210,7 +213,7 @@ public class Menu {
         storage.addNecklaceBaseOnStock(necklaceBase);
     }
 
-    void createNewEarringBase () {
+    public void createNewEarringBase () {
         boolean paired;
         Metal metal;
         System.out.println("Введите название для основы для серьги:");
@@ -231,7 +234,7 @@ public class Menu {
     }
 
 
-    void createNewAdornment() {
+    public void createNewAdornment() {
         List<Stone> stonesToUse = new ArrayList<>();
         Object object;
         RingBase ringBase;
@@ -281,7 +284,7 @@ public class Menu {
         }
     }
 
-    void createNewBase (){
+    public void createNewBase (){
         int i;
         System.out.println("Какую основу создать?");
         System.out.println("1.Кольца 2.Ожерелья 3.Серег");
@@ -300,7 +303,7 @@ public class Menu {
         }
     }
 
-    Object chooseBase (int type){
+    public Object chooseBase (int type){
         RingBase usedRingBase;
         EarringBase usedEarringBase;
         NecklaceBase usedNecklaceBase;
@@ -327,7 +330,7 @@ public class Menu {
         }
     }
 
-    List<Stone> chooseStones (List<Stone> stonesToUse){
+    public List<Stone> chooseStones (List<Stone> stonesToUse){
         int flag = 0;
         System.out.println("Какие камни использовать?");
         while (flag != 3) {
@@ -351,7 +354,7 @@ public class Menu {
         return stonesToUse;
     }
 
-    List<Stone> chooseStone ( List<Stone> stonesToUse ){
+    public List<Stone> chooseStone ( List<Stone> stonesToUse ){
         int chosen;
         Stone stone;
         storage.selectTitles(storage.getStones());
@@ -361,7 +364,7 @@ public class Menu {
         return stonesToUse;
     }
 
-    Metal chooseMetal (){
+    public Metal chooseMetal (){
         int chosen;
         Metal metal;
         System.out.println("Выберите номер металла, который вы хотите использовать:");

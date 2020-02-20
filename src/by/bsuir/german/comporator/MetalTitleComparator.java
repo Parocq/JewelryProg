@@ -1,6 +1,6 @@
 package by.bsuir.german.comporator;
 
-import by.bsuir.german.Metal;
+import by.bsuir.german.entity.Metal;
 
 import java.util.Comparator;
 

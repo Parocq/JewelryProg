@@ -1,4 +1,4 @@
-package by.bsuir.german;
+package by.bsuir.german.entity;
 
 public class Metal extends Material {
 

@@ -1,5 +1,10 @@
 package by.bsuir.german;
 
+import by.bsuir.german.entity.Metal;
+import by.bsuir.german.entity.RingBase;
+import by.bsuir.german.entity.Stone;
+import by.bsuir.german.service.Storage;
+
 import java.util.Locale;
 import java.util.Scanner;
 

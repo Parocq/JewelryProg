@@ -1,4 +1,4 @@
-package by.bsuir.german;
+package by.bsuir.german.entity;
 
 import java.util.ArrayList;
 import java.util.List;

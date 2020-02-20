@@ -1,6 +1,6 @@
 package by.bsuir.german.comporator;
 
-import by.bsuir.german.Adornment;
+import by.bsuir.german.entity.Adornment;
 
 import java.util.Comparator;
 

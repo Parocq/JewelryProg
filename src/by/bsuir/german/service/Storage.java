@@ -1,5 +1,5 @@
-package by.bsuir.german;
-
+package by.bsuir.german.service;
+import by.bsuir.german.entity.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +64,7 @@ public class Storage {
     }
 
 
-    void selectTitles (List<?> objects){
+    public void selectTitles (List<?> objects){
         for (int i = 0; i < objects.size(); i++) {
             System.out.print(i + 1+".");
             if (objects.get(i) instanceof Product){
@@ -80,7 +80,7 @@ public class Storage {
     }
 
 
-    void printAll (){
+    public void printAll (){
         System.out.println("-------------Металлы, хранящиеся на складе:");
         selectTitles(metals);
         System.out.println("-------------Камни, хранящиеся на складе:");

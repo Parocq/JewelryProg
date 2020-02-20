@@ -1,6 +1,6 @@
 package by.bsuir.german.comporator;
 
-import by.bsuir.german.NecklaceBase;
+import by.bsuir.german.entity.NecklaceBase;
 
 import java.util.Comparator;
 

@@ -1,6 +1,6 @@
 package by.bsuir.german.comporator;
 
-import by.bsuir.german.RingBase;
+import by.bsuir.german.entity.RingBase;
 
 import java.util.Comparator;
 

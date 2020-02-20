@@ -1,6 +1,6 @@
 package by.bsuir.german.comporator;
 
-import by.bsuir.german.Stone;
+import by.bsuir.german.entity.Stone;
 
 import java.util.Comparator;
 

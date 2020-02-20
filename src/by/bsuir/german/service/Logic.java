@@ -1,36 +1,31 @@
-package by.bsuir.german;
-
+package by.bsuir.german.service;
 import by.bsuir.german.comporator.*;
-
+import by.bsuir.german.entity.*;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import java.util.List;
 
 public class Logic {
 
     private Storage storage = new Storage();
 
-    void sortMetalByTitle (List<Metal> list){
+    public void sortMetalByTitle (List<Metal> list){
         Collections.sort(list, new MetalTitleComparator());
     }
-    void sortStonesByTitle (List<Stone> list){
+    public void sortStonesByTitle (List<Stone> list){
         Collections.sort(list, new StoneTitleComparator());
     }
-    void sortRingBaseByTitle (List<RingBase> list){
+    public void sortRingBaseByTitle (List<RingBase> list){
         Collections.sort(list, new RingBaseTitleComporator());
     }
-    void sortEarringBaseByTitle (List<EarringBase> list){
-        Collections.sort(list, new EarringBaseTitleComparator());
-    }    void sortNecklaceBaseByTitle (List<NecklaceBase> list){
-        Collections.sort(list, new NecklaceBaseTitleComparator());
-    }
-    void sortAdornmentByTitle (List<Adornment> list){
+    public void sortEarringBaseByTitle (List<EarringBase> list){ Collections.sort(list, new EarringBaseTitleComparator()); }
+    public void sortNecklaceBaseByTitle (List<NecklaceBase> list){ Collections.sort(list, new NecklaceBaseTitleComparator());  }
+    public void sortAdornmentByTitle (List<Adornment> list){
         Collections.sort(list, new AdormentTitleComparator());
     }
-    void sortStonesByPrice (List<Stone> list ){ Collections.sort(list, new StonePriceComporator());}
+    public void sortStonesByPrice (List<Stone> list ){ Collections.sort(list, new StonePriceComporator());}
 
-    double calculateWeight (int number) {
+    public double calculateWeight (int number) {
         double sum=0;
 
         double weight = 0;
@@ -46,7 +41,7 @@ public class Logic {
         return sum+weight;
     }
 
-    double calculatePrice (int number) {
+    public double calculatePrice (int number) {
         double sum=0;
 
         double price = 0;
@@ -62,7 +57,7 @@ public class Logic {
         return sum+price;
     }
 
-    List<Stone> searchForTransparence (double start, double finish){
+    public List<Stone> searchForTransparence (double start, double finish){
         List<Stone> suit = new ArrayList<>();
         for (int i = 0; i<storage.getStones().size();i++){
             if (storage.getStones().get(i).getTransparence() >= start && storage.getStones().get(i).getTransparence() <= finish){

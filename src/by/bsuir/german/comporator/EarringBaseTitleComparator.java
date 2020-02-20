@@ -1,6 +1,6 @@
 package by.bsuir.german.comporator;
 
-import by.bsuir.german.EarringBase;
+import by.bsuir.german.entity.EarringBase;
 
 import java.util.Comparator;
 

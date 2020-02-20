@@ -1,6 +1,6 @@
-package by.bsuir.german;
+package by.bsuir.german.entity;
 
-abstract class Product {
+public abstract class Product {
     private String title;
     private double weight;
     private double price;
