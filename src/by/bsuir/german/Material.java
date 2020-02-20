@@ -15,23 +15,11 @@ public abstract class Material {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public double getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 }

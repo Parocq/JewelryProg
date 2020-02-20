@@ -13,18 +13,6 @@ public class Stone extends Material {
         this.transparence = transparence;
     }
 
-//    public interface Comparable<Stone>{
-//        public int compareTo(Stone title);
-//    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public boolean isStoneType() {
-        return stoneType;
-    }
-
     public double getTransparence() {
         return transparence;
     }

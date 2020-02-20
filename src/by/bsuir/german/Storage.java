@@ -19,48 +19,24 @@ public class Storage {
         return stones;
     }
 
-    public  void setStones(ArrayList<Stone> stones) {
-        this.stones = stones;
-    }
-
     public List<Metal> getMetals() {
         return metals;
-    }
-
-    public  void setMetals(ArrayList<Metal> metals) {
-        this.metals = metals;
     }
 
     public List<Adornment> getAdornments() {
         return adornments;
     }
 
-    public  void setAdornments(ArrayList<Adornment> adornments) {
-        this.adornments = adornments;
-    }
-
     public List<RingBase> getRingBases() {
         return ringBases;
-    }
-
-    public  void setRingBases(ArrayList<RingBase> ringBases) {
-        this.ringBases = ringBases;
     }
 
     public List<NecklaceBase> getNecklaceBases() {
         return necklaceBases;
     }
 
-    public  void setNecklaceBases(ArrayList<NecklaceBase> necklaceBases) {
-        this.necklaceBases = necklaceBases;
-    }
-
     public List<EarringBase> getEarringBases() {
         return earringBases;
-    }
-
-    public  void setEarringBases(ArrayList<EarringBase> earringBases) {
-        this.earringBases = earringBases;
     }
 
     public  void addRingBaseOnStock (RingBase ringBase){

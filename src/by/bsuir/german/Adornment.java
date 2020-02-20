@@ -11,7 +11,6 @@ public class Adornment {
     private NecklaceBase necklace;
     private EarringBase earring;
     private List<Stone> usedStones;
-    ///vvvvvvvvvfvdv еъе
 
     public Adornment(String title, int type, RingBase ring, List<Stone> usedStones) {
         this.title = title;

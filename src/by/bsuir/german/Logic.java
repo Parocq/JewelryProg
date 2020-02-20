@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Logic {
 
-    Storage storage = new Storage();
+    private Storage storage = new Storage();
 
     void sortMetalByTitle (List<Metal> list){
         Collections.sort(list, new MetalTitleComparator());

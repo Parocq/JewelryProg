@@ -21,8 +21,4 @@ abstract class Product {
     public double getWeight() {
         return weight;
     }
-
-    public double getPrice() {
-        return price;
-    }
 }

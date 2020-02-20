@@ -8,10 +8,4 @@ public class Metal extends Material {
         super(title, weight, price);
         this.sample = sample;
     }
-
-    public double getSample() {
-        return sample;
-    }
-
-
 }

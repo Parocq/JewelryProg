@@ -14,9 +14,6 @@ public class Menu {
     private Storage storage = new Storage();
     private Logic logic = new Logic();
 
-    public Menu() {
-    }
-
     public Menu(Scanner scanner) {
         this.scanner = scanner;
     }
@@ -94,7 +91,6 @@ public class Menu {
         System.out.println("Информацию о каком украшении вывести?");
         storage.selectTitles(storage.getAdornments());
         int i = scanner.nextInt()-1;
-//        Adornment adornment = storage.getAdornments().get(i);
         System.out.println("Название украшения:          " + storage.getAdornments().get(i).getTitle());
         System.out.println("Тип бижютерии:               " + storage.getAdornments().get(i).getType());
         System.out.println("Список использованных камней:");
@@ -135,8 +131,6 @@ public class Menu {
         }
     }
 
-    //-------------------------------------------------------
-
     void createNewStone() {
         boolean type;
         System.out.print("Введите название камня: ");
@@ -155,10 +149,10 @@ public class Menu {
         color = scanner.nextLine();
         System.out.println("Каково значение светопропускания у камня?");
         double transparence;
-        transparence = scanner.nextDouble();//определиться в чем указывать значение светопропускания
+        transparence = scanner.nextDouble();
         System.out.println("Сколько весит камень? (указать знаечние в каратах)");
         weight = scanner.nextDouble();
-        System.out.println("Какова стоимость$ камня?");
+        System.out.println("Какова стоимость камня?");
         price = scanner.nextDouble();
 
         Stone stone = new Stone(title, weight, price, color, type, transparence);
@@ -171,7 +165,7 @@ public class Menu {
         title = scanner.nextLine();
         System.out.println("Сколько весит металл?");
         weight = scanner.nextDouble();
-        System.out.println("Какова стоимость$ металла?");
+        System.out.println("Какова стоимость металла?");
         price = scanner.nextDouble();
         System.out.println("Проба добавляемого металла составляет:");
         double sample = scanner.nextDouble();
@@ -286,8 +280,6 @@ public class Menu {
             stonesToUse.clear();
         }
     }
-
-
 
     void createNewBase (){
         int i;
