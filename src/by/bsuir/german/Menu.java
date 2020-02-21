@@ -17,6 +17,7 @@ public class Menu {
     private Storage storage = new Storage();
     private Logic logic = new Logic();
 
+
     public Menu(Scanner scanner) {
         this.scanner = scanner;
     }
