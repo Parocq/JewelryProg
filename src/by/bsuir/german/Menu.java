@@ -1,12 +1,13 @@
 package by.bsuir.german;
 
 import by.bsuir.german.entity.*;
+import by.bsuir.german.exception.InvalidFieldValueException;
+import by.bsuir.german.service.IO;
 import by.bsuir.german.service.Logic;
 import by.bsuir.german.service.Storage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.IOException;
+import java.util.*;
 
 
 public class Menu {
@@ -16,18 +17,19 @@ public class Menu {
     private double price, weight;
     private Storage storage = new Storage();
     private Logic logic = new Logic();
+    private IO io;
 
-
-    public Menu(Scanner scanner) {
+    public Menu(Scanner scanner, IO io) {
         this.scanner = scanner;
+        this.io = io;
     }
 
-    public void showMenu (){
-        boolean flag = true;
+    public boolean showMenu() throws InputMismatchException, InvalidFieldValueException, IOException {
         int i = 0;
-        while (flag){
-            System.out.print("Что будем делать?\n1.Добавить камень на склад\n2.Добавить металл на склад\n3.Создать освнову для украшения\n");
-            System.out.println("4.Создать украшение\n5.Просмотреть уже имеющиеся материалы и украшения\n6.Выход\n7.Доп. функции");
+            System.out.print("Что будем делать?\n1.Добавить камень на склад\n2.Добавить металл на склад" +
+                    "\n3.Создать освнову для украшения\n4.Создать украшение" +
+                    "\n5.Просмотреть уже имеющиеся материалы и украшения\n6.Выход\n7.Доп. функции" +
+                    "\n8.Работа с файлами\n");
 
             i = scanner.nextInt();
             scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
@@ -53,9 +55,8 @@ public class Menu {
                     storage.printAll();
                     break;
                 case 6:
-                    flag = false;
                     scanner.close();
-                    break;
+                    return false;
                 case 7:
                     System.out.println("1.Вывести информацию об украшении \n2.Отсортировать склад...\n3.Поиск камней по диапазону");
                     int k =scanner.nextInt();
@@ -72,14 +73,28 @@ public class Menu {
                         default:
                             System.out.println("Такого варианта нет");
                             break;
+                   }
+                    break;
+                case 8:
+                    System.out.println("1.Основное задание   2.Дополнительное задание   3.Возврат в меню");
+                    int f = scanner.nextInt();
+                    switch (f){
+                        case 1:
+                            String s = storage.getAdormentTitles();
+                            io.write(s);
+                            io.read();
+                            break;
+                        case 3:
+                            break;
                     }
+
                     break;
                 default:
                     System.out.println("Такого варианта не существует");
                     break;
             }
             System.out.println();
-        }
+            return true;
     }
 
     public void searchByTransparence (){
@@ -135,7 +150,63 @@ public class Menu {
         }
     }
 
-    public void createNewStone() {
+    public double scanWeight () throws InvalidFieldValueException {
+        System.out.println("Укажите вес:");
+        weight = scanner.nextDouble();
+        if (weight <= 0){
+            throw new InvalidFieldValueException();
+        }
+        return weight;
+    }
+
+    public double scanPrice () throws InvalidFieldValueException {
+        System.out.println("Укажите стоимость:");
+        price = scanner.nextDouble();
+        if (price < 0){
+            throw new InvalidFieldValueException();
+        }
+        return price;
+    }
+
+    public double scanTransparense (double transparence) throws InvalidFieldValueException {
+        System.out.println("Каково значение светопропускания у камня?");
+        transparence = scanner.nextDouble();
+        if (transparence < 0 || transparence > 100){
+            throw new InvalidFieldValueException();
+        }
+        return transparence;
+    }
+
+    public double scanSize (int t) throws InvalidFieldValueException {
+        double value;
+        switch (t){
+            case 1:
+                System.out.println("Введите диаметр основы для кольца:");
+                value = scanner.nextDouble();
+                if (value < 0){
+                    throw new InvalidFieldValueException();
+                }
+                return value;
+            case 2:
+                System.out.println("Введите длину основы для ожерелья:");
+                value = scanner.nextDouble();
+                if (value <= 0){
+                    throw new InvalidFieldValueException();
+                }
+                return value;
+            case 3:
+                System.out.println("Создать пару серег либо одну серьгу:");
+                System.out.println("1.Парные 2.Одиночная");
+                int i;
+                i = scanner.nextInt();
+                if (i == 1) value = 1;
+                else value = 0;
+                break;
+        }
+        return 0;
+    }
+
+    public void createNewStone() throws InvalidFieldValueException {
         boolean type;
         System.out.print("Введите название камня: ");
         title = scanner.nextLine();
@@ -151,26 +222,20 @@ public class Menu {
         System.out.println("Какого цвета камень?");
         String color;
         color = scanner.nextLine();
-        System.out.println("Каково значение светопропускания у камня?");
-        double transparence;
-        transparence = scanner.nextDouble();
-        System.out.println("Сколько весит камень? (указать знаечние в каратах)");
-        weight = scanner.nextDouble();
-        System.out.println("Какова стоимость камня?");
-        price = scanner.nextDouble();
-
+        double transparence = -2;
+        transparence = scanTransparense(transparence);
+        weight = scanWeight();
+        price = scanPrice();
         Stone stone = new Stone(title, weight, price, color, type, transparence);
         storage.addStoneOnStock(stone);
         System.out.println("Новый камень успешно добавлен!");
     }
 
-    public void createNewMetal() {
+    public void createNewMetal() throws InvalidFieldValueException {
         System.out.println("Ведите название металла: ");
         title = scanner.nextLine();
-        System.out.println("Сколько весит металл?");
-        weight = scanner.nextDouble();
-        System.out.println("Какова стоимость металла?");
-        price = scanner.nextDouble();
+        weight = scanWeight();
+        price = scanPrice();
         System.out.println("Проба добавляемого металла составляет:");
         double sample = scanner.nextDouble();
 
@@ -179,63 +244,51 @@ public class Menu {
         System.out.println("Новый метал успешно добавлен!");
     }
 
-
-    public void createNewRingBase() {
+    public void createNewRingBase() throws InvalidFieldValueException {
         double diametr;
         Metal metal;
         System.out.println("Введите название для основы для кольца:");
         title = scanner.nextLine();
-        System.out.println("Введите цену основы:");
-        price = scanner.nextDouble();
-        System.out.println("Введите вес основы:");
-        weight = scanner.nextDouble();
+        price = scanPrice();
+        weight = scanWeight();
         metal = chooseMetal();
-        System.out.println("Введите диаметр основы для кольца:");
-        diametr = scanner.nextDouble();
+        diametr = scanSize(1);
 
         RingBase ringBase = new RingBase(title,weight,price,metal,diametr);
         storage.addRingBaseOnStock(ringBase);
     }
 
-    public void createNewNecklaceBase () {
+    public void createNewNecklaceBase () throws InvalidFieldValueException {
         double length;
         Metal metal;
         System.out.println("Введите название для основы для ожерелья:");
         title = scanner.nextLine();
-        System.out.println("Введите цену основы:");
-        price = scanner.nextDouble();
-        System.out.println("Введите вес основы:");
-        weight = scanner.nextDouble();
+        price = scanPrice();
+        weight = scanWeight();
         metal = chooseMetal();
-        System.out.println("Введите длину основы для ожерелья:");
-        length = scanner.nextDouble();
+        length = scanSize(2);
 
         NecklaceBase necklaceBase = new NecklaceBase(title,weight,price,metal,length);
         storage.addNecklaceBaseOnStock(necklaceBase);
     }
 
-    public void createNewEarringBase () {
+    public void createNewEarringBase () throws InvalidFieldValueException {
         boolean paired;
         Metal metal;
         System.out.println("Введите название для основы для серьги:");
         title = scanner.nextLine();
-        System.out.println("Введите цену основы:");
-        price = scanner.nextDouble();
-        System.out.println("Введите вес основы:");
-        weight = scanner.nextDouble();
+        price = scanPrice();
+        weight =scanWeight();
         metal = chooseMetal();
-        System.out.println("Создать пару серег либо одну серьгу:");
-        System.out.println("1.Парные 2.Одиночная");
-        int i;
-        i = scanner.nextInt();
-        if (i == 1) paired = true;
+        double value = scanSize(3);
+        if (value == 1) paired = true;
         else paired = false;
+
         EarringBase earringBase = new EarringBase(title,weight,price,metal,paired);
         storage.addEarringBaseOnStock(earringBase);
     }
 
-
-    public void createNewAdornment() {
+    public void createNewAdornment() throws InvalidFieldValueException {
         List<Stone> stonesToUse = new ArrayList<>();
         Object object;
         RingBase ringBase;
@@ -285,7 +338,7 @@ public class Menu {
         }
     }
 
-    public void createNewBase (){
+    public void createNewBase () throws InvalidFieldValueException {
         int i;
         System.out.println("Какую основу создать?");
         System.out.println("1.Кольца 2.Ожерелья 3.Серег");
@@ -331,7 +384,7 @@ public class Menu {
         }
     }
 
-    public List<Stone> chooseStones (List<Stone> stonesToUse){
+    public List<Stone> chooseStones (List<Stone> stonesToUse) throws InvalidFieldValueException {
         int flag = 0;
         System.out.println("Какие камни использовать?");
         while (flag != 3) {

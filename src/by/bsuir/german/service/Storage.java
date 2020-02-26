@@ -94,4 +94,12 @@ public class Storage {
         System.out.println("-------------Украшения, хранящиеся на складе:");
         selectTitles(adornments);
     }
+
+    public String getAdormentTitles (){
+        String s="";
+        for (int i=0;i<getAdornments().size();i++){
+            s+=getAdornments().get(i).getTitle() + ", ";
+        }
+        return s;
+    }
 }
