@@ -1,9 +1,10 @@
 package by.bsuir.german.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Adornment {
+public class Adornment implements  Serializable{
 
     private String title;
     private int type;

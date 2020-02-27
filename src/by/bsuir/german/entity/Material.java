@@ -1,6 +1,8 @@
 package by.bsuir.german.entity;
 
-public abstract class Material {
+import java.io.Serializable;
+
+public abstract class Material  implements Serializable {
     private String title;
     private double weight;
     private double price;

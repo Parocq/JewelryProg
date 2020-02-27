@@ -1,9 +1,11 @@
 package by.bsuir.german.service;
 import by.bsuir.german.entity.*;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Storage {
+public class Storage implements Serializable {
 
     private static List<Stone> stones =  new ArrayList<>();
     private static List<Metal> metals = new ArrayList<>();

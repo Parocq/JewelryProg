@@ -1,6 +1,8 @@
 package by.bsuir.german.entity;
 
-public class Metal extends Material {
+import java.io.Serializable;
+
+public class Metal extends Material implements Serializable {
 
     private double sample;
 

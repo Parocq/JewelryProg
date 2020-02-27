@@ -5,11 +5,10 @@ import by.bsuir.german.entity.RingBase;
 import by.bsuir.german.entity.Stone;
 import by.bsuir.german.exception.InvalidFieldValueException;
 import by.bsuir.german.service.IO;
+import by.bsuir.german.service.Serialization;
 import by.bsuir.german.service.Storage;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
@@ -21,8 +20,15 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in).useLocale(Locale.US);
         Storage storage = new Storage();
-        FileWriter fileWriter = new FileWriter("test.txt");
-        FileReader fileReader = new FileReader("test.txt");
+
+        FileOutputStream fileOutputStream = new FileOutputStream("Stones.out");
+        ObjectOutputStream oosStones = new ObjectOutputStream(fileOutputStream);
+        FileInputStream fileInputStream = new FileInputStream("Stones.out");
+        ObjectInputStream oisStones = new ObjectInputStream(fileInputStream);
+        Serialization serialization = new Serialization(oosStones,oisStones);
+
+        FileWriter fileWriter = new FileWriter("MainTask.txt");
+        FileReader fileReader = new FileReader("MainTask.txt");
         Scanner fileScanner = new Scanner(fileReader);
         IO io = new IO(fileReader,fileWriter, fileScanner, storage);
 
@@ -37,7 +43,7 @@ public class Main {
         storage.addStoneOnStock(test3);
 
         System.out.println("Добро пожаловать в нашу ювелирную лавку!");
-        Menu menu = new Menu(scanner,io);
+        Menu menu = new Menu(scanner,io,serialization);
 
         boolean flag = true;
         while (flag){
@@ -50,7 +56,7 @@ public class Main {
                 System.out.println("Недопустимое значение данной величины!");
             } catch (IOException exc){
                 System.out.println("Проблемы с вводом или выводом!");
-            }
+            } catch (ClassNotFoundException exce){System.out.println(exce.getMessage());}
             System.out.println();
         }
 

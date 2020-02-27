@@ -1,6 +1,8 @@
 package by.bsuir.german.entity;
 
-public abstract class Product {
+import java.io.Serializable;
+
+public abstract class Product implements Serializable {
     private String title;
     private double weight;
     private double price;

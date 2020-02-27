@@ -1,6 +1,8 @@
 package by.bsuir.german.entity;
 
-public class Stone extends Material {
+import java.io.Serializable;
+
+public class Stone extends Material implements Serializable {
 
     private String color;
     private boolean stoneType;

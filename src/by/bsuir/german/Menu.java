@@ -4,6 +4,7 @@ import by.bsuir.german.entity.*;
 import by.bsuir.german.exception.InvalidFieldValueException;
 import by.bsuir.german.service.IO;
 import by.bsuir.german.service.Logic;
+import by.bsuir.german.service.Serialization;
 import by.bsuir.german.service.Storage;
 
 import java.io.IOException;
@@ -18,13 +19,15 @@ public class Menu {
     private Storage storage = new Storage();
     private Logic logic = new Logic();
     private IO io;
+    private Serialization serialization;
 
-    public Menu(Scanner scanner, IO io) {
+    public Menu(Scanner scanner, IO io, Serialization serialization) {
         this.scanner = scanner;
         this.io = io;
+        this.serialization = serialization;
     }
 
-    public boolean showMenu() throws InputMismatchException, InvalidFieldValueException, IOException {
+    public boolean showMenu() throws InputMismatchException, InvalidFieldValueException, IOException, ClassNotFoundException {
         int i = 0;
             System.out.print("Что будем делать?\n1.Добавить камень на склад\n2.Добавить металл на склад" +
                     "\n3.Создать освнову для украшения\n4.Создать украшение" +
@@ -76,15 +79,50 @@ public class Menu {
                    }
                     break;
                 case 8:
-                    System.out.println("1.Основное задание   2.Дополнительное задание   3.Возврат в меню");
+                    System.out.println("1.Основное задание   2.Сиреализация   3.Десиреализация   4.Возврат в меню");
                     int f = scanner.nextInt();
                     switch (f){
                         case 1:
                             String s = storage.getAdormentTitles();
                             io.write(s);
+                            System.out.println("Запись прошла успешно");
                             io.read();
                             break;
+                        case 2:
+                            System.out.println("Какой список сериализовать?");
+                            System.out.println("1.Камней\n2.Металлов\n3.Украшений\n4.Основ колец\n" +
+                                    "5.Основ ожерелий\n6.Основ серег\n");
+                            int l = scanner.nextInt();
+                            switch (l){
+                                case 1:
+                                    serialization.serializeArrayList(storage.getStones());
+                                    break;
+                                case 2:
+//                                    serialization.serializeArrayList(storage.getMetals());
+//                                    break;
+//                                case 3:
+//                                    serialization.serializeArrayList(storage.getAdornments());
+//                                    break;
+//                                case 4:
+//                                    serialization.serializeArrayList(storage.getRingBases());
+//                                    break;
+//                                case 5:
+//                                    serialization.serializeArrayList(storage.getNecklaceBases());
+//                                    break;
+//                                case 6:
+//                                    serialization.serializeArrayList(storage.getEarringBases());
+                                    break;
+                                default:
+                                    System.out.println("Такого варианта не представлено");
+                            }
+                            break;
                         case 3:
+                            List<Stone> list = serialization.desirealizeArrayList();
+                            for (i=0;i<list.size();i++){
+                                storage.addStoneOnStock(list.get(i));
+                            }
+                            break;
+                        default:
                             break;
                     }
 
