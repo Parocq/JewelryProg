@@ -21,16 +21,44 @@ public class Main {
         Scanner scanner = new Scanner(System.in).useLocale(Locale.US);
         Storage storage = new Storage();
 
-        FileOutputStream fileOutputStream = new FileOutputStream("Stones.out");
-        ObjectOutputStream oosStones = new ObjectOutputStream(fileOutputStream);
-        FileInputStream fileInputStream = new FileInputStream("Stones.out");
-        ObjectInputStream oisStones = new ObjectInputStream(fileInputStream);
-        Serialization serialization = new Serialization(oosStones,oisStones);
+        FileOutputStream fosStones = new FileOutputStream("Stones.out");
+        ObjectOutputStream oosStones = new ObjectOutputStream(fosStones);
+        FileInputStream fisStones = new FileInputStream("Stones.out");
+        ObjectInputStream oisStones = new ObjectInputStream(fisStones);
+
+        FileOutputStream fosMetal = new FileOutputStream("Metals.out");
+        ObjectOutputStream oooMetals = new ObjectOutputStream(fosMetal);
+        FileInputStream fisMetals = new FileInputStream("Metals.out");
+        ObjectInputStream oisMetals = new ObjectInputStream(fisMetals);
+
+        FileOutputStream fosAdornments = new FileOutputStream("Adornment.out");
+        ObjectOutputStream oooAdornments = new ObjectOutputStream(fosAdornments);
+        FileInputStream fisAdornment = new FileInputStream("Adornment.out");
+        ObjectInputStream oisAdornments = new ObjectInputStream(fisAdornment);
+
+        FileOutputStream fosRingBases = new FileOutputStream("RingBase.out");
+        ObjectOutputStream oooRingBases = new ObjectOutputStream(fosRingBases);
+        FileInputStream fisRingBases = new FileInputStream("RingBase.out");
+        ObjectInputStream oisRingBases = new ObjectInputStream(fisRingBases);
+
+        FileOutputStream fosNecklaceBases = new FileOutputStream("NecklaceBase.out");
+        ObjectOutputStream oooNecklaceBases = new ObjectOutputStream(fosNecklaceBases);
+        FileInputStream fisNecklaceBases = new FileInputStream("NecklaceBase.out");
+        ObjectInputStream oisNecklaceBases = new ObjectInputStream(fisNecklaceBases);
+
+        FileOutputStream fosEarringBases = new FileOutputStream("EarringBase.out");
+        ObjectOutputStream oosEarringBases = new ObjectOutputStream(fosEarringBases);
+        FileInputStream fisEarringBases = new FileInputStream("EarringBase.out");
+        ObjectInputStream oisEarringBases = new ObjectInputStream(fisEarringBases);
+
+        Serialization serialization = new Serialization(oosStones,oisStones,oooMetals,oisMetals,oooAdornments, oisAdornments,
+                oooRingBases,oisRingBases,oooNecklaceBases,oisNecklaceBases,oosEarringBases,oisEarringBases, storage);
 
         FileWriter fileWriter = new FileWriter("MainTask.txt");
         FileReader fileReader = new FileReader("MainTask.txt");
         Scanner fileScanner = new Scanner(fileReader);
         IO io = new IO(fileReader,fileWriter, fileScanner, storage);
+
 
 
         Metal test = new Metal("fewfwe", 32, 324,423);

@@ -89,38 +89,24 @@ public class Menu {
                             io.read();
                             break;
                         case 2:
-                            System.out.println("Какой список сериализовать?");
-                            System.out.println("1.Камней\n2.Металлов\n3.Украшений\n4.Основ колец\n" +
-                                    "5.Основ ожерелий\n6.Основ серег\n");
-                            int l = scanner.nextInt();
-                            switch (l){
-                                case 1:
-                                    serialization.serializeArrayList(storage.getStones());
-                                    break;
-                                case 2:
-//                                    serialization.serializeArrayList(storage.getMetals());
-//                                    break;
-//                                case 3:
-//                                    serialization.serializeArrayList(storage.getAdornments());
-//                                    break;
-//                                case 4:
-//                                    serialization.serializeArrayList(storage.getRingBases());
-//                                    break;
-//                                case 5:
-//                                    serialization.serializeArrayList(storage.getNecklaceBases());
-//                                    break;
-//                                case 6:
-//                                    serialization.serializeArrayList(storage.getEarringBases());
-                                    break;
-                                default:
-                                    System.out.println("Такого варианта не представлено");
-                            }
+                            System.out.println("Сериализация всего хранилища...");
+                            serialization.serializeStone(storage.getStones());
+                            serialization.serializeMetal(storage.getMetals());
+                            serialization.serializeAdornment(storage.getAdornments());
+                            serialization.serializeRingBase(storage.getRingBases());
+                            serialization.serializeNecklaceBase(storage.getNecklaceBases());
+                            serialization.serializeEarringBase(storage.getEarringBases());
+                            System.out.println("Успешно!");
                             break;
                         case 3:
-                            List<Stone> list = serialization.desirealizeArrayList();
-                            for (i=0;i<list.size();i++){
-                                storage.addStoneOnStock(list.get(i));
-                            }
+                            System.out.println("Десиреализация хранилища...");
+                            serialization.desirealizeStoneList();
+                            serialization.desirealizeAdornmentList();
+                            serialization.desirealizeEarringBaseList();
+                            serialization.desirealizeMetalList();
+                            serialization.desirealizeNecklaceBaseList();
+                            serialization.desirealizeRingBaseList();
+                            System.out.println("Успех!");
                             break;
                         default:
                             break;
@@ -134,6 +120,8 @@ public class Menu {
             System.out.println();
             return true;
     }
+
+
 
     public void searchByTransparence (){
         System.out.println("Введите нижнюю границу диапазона показателя прозрачности:");
