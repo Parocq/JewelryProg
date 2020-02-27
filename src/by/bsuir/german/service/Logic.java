@@ -7,7 +7,39 @@ import java.util.List;
 
 public class Logic {
 
-    private Storage storage = new Storage();
+    private Storage storage;
+
+    public Logic(Storage storage) {
+        this.storage = storage;
+    }
+
+    public void fillStorage (Storage st){
+        List<Stone> stones = st.getStones();
+        List<Metal> metals = st.getMetals();
+        List<Adornment> adornments = st.getAdornments();
+        List<RingBase> ringBases = st.getRingBases();
+        List<NecklaceBase> necklaceBases = st.getNecklaceBases();
+        List<EarringBase> earringBases = st.getEarringBases();
+
+        for (int i = 0;i<stones.size();i++){
+            storage.addStoneOnStock(stones.get(i));
+        }
+        for (int i = 0;i<metals.size();i++){
+            storage.addMetalOnStock(metals.get(i));
+        }
+        for (int i = 0;i<adornments.size();i++){
+            storage.addAdornmentOnStock(adornments.get(i));
+        }
+        for (int i = 0;i<ringBases.size();i++){
+            storage.addRingBaseOnStock(ringBases.get(i));
+        }
+        for (int i = 0;i<necklaceBases.size();i++){
+            storage.addNecklaceBaseOnStock(necklaceBases.get(i));
+        }
+        for (int i = 0;i<earringBases.size();i++){
+            storage.addEarringBaseOnStock(earringBases.get(i));
+        }
+    }
 
     public void sortMetalByTitle (List<Metal> list){
         Collections.sort(list, new MetalTitleComparator());

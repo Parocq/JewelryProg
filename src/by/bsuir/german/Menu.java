@@ -16,19 +16,23 @@ public class Menu {
     private Scanner scanner ;
     private String title;
     private double price, weight;
-    private Storage storage = new Storage();
-    private Logic logic = new Logic();
+    private Storage storage;
+    private Logic logic;
     private IO io;
     private Serialization serialization;
 
-    public Menu(Scanner scanner, IO io, Serialization serialization) {
+    public Menu(Scanner scanner, IO io, Serialization serialization, Storage storage, Logic logic) {
         this.scanner = scanner;
         this.io = io;
         this.serialization = serialization;
+        this.storage = storage;
+        this.logic = logic;
     }
 
-    public boolean showMenu() throws InputMismatchException, InvalidFieldValueException, IOException, ClassNotFoundException {
-        int i = 0;
+    public void showMenu() throws InputMismatchException, InvalidFieldValueException, IOException, ClassNotFoundException {
+        boolean flag = false;
+        while (!flag) {
+            int i = 0;
             System.out.print("Что будем делать?\n1.Добавить камень на склад\n2.Добавить металл на склад" +
                     "\n3.Создать освнову для украшения\n4.Создать украшение" +
                     "\n5.Просмотреть уже имеющиеся материалы и украшения\n6.Выход\n7.Доп. функции" +
@@ -47,10 +51,10 @@ public class Menu {
                 case 3:
                     if (storage.getMetals().size() == 0) {
                         System.out.println("Вы не можете создать основу, не имея ни одного металла.");
-                    }else createNewBase();
+                    } else createNewBase();
                     break;
                 case 4:
-                    if (storage.getRingBases().size() == 0 && storage.getNecklaceBases().size() == 0 && storage.getEarringBases().size() == 0){
+                    if (storage.getRingBases().size() == 0 && storage.getNecklaceBases().size() == 0 && storage.getEarringBases().size() == 0) {
                         System.out.println("Вы не можете создать украшение, не имея ни одной основы.");
                     } else createNewAdornment();
                     break;
@@ -58,12 +62,13 @@ public class Menu {
                     storage.printAll();
                     break;
                 case 6:
+                    flag = true;
                     scanner.close();
-                    return false;
+                    break;
                 case 7:
                     System.out.println("1.Вывести информацию об украшении \n2.Отсортировать склад...\n3.Поиск камней по диапазону");
-                    int k =scanner.nextInt();
-                    switch (k){
+                    int k = scanner.nextInt();
+                    switch (k) {
                         case 1:
                             showAdornmentInfo();
                             break;
@@ -76,12 +81,14 @@ public class Menu {
                         default:
                             System.out.println("Такого варианта нет");
                             break;
-                   }
+                    }
                     break;
                 case 8:
                     System.out.println("1.Основное задание   2.Сиреализация   3.Десиреализация   4.Возврат в меню");
                     int f = scanner.nextInt();
-                    switch (f){
+                    Storage storage1 = new Storage(storage.getStones(), storage.getMetals(), storage.getAdornments(),
+                            storage.getRingBases(), storage.getNecklaceBases(), storage.getEarringBases());
+                    switch (f) {
                         case 1:
                             String s = storage.getAdormentTitles();
                             io.write(s);
@@ -90,22 +97,12 @@ public class Menu {
                             break;
                         case 2:
                             System.out.println("Сериализация всего хранилища...");
-                            serialization.serializeStone(storage.getStones());
-                            serialization.serializeMetal(storage.getMetals());
-                            serialization.serializeAdornment(storage.getAdornments());
-                            serialization.serializeRingBase(storage.getRingBases());
-                            serialization.serializeNecklaceBase(storage.getNecklaceBases());
-                            serialization.serializeEarringBase(storage.getEarringBases());
+                            serialization.serializeStorage(storage1);
                             System.out.println("Успешно!");
                             break;
                         case 3:
                             System.out.println("Десиреализация хранилища...");
-                            serialization.desirealizeStoneList();
-                            serialization.desirealizeAdornmentList();
-                            serialization.desirealizeEarringBaseList();
-                            serialization.desirealizeMetalList();
-                            serialization.desirealizeNecklaceBaseList();
-                            serialization.desirealizeRingBaseList();
+                            logic.fillStorage(serialization.desirealizeStorage());
                             System.out.println("Успех!");
                             break;
                         default:
@@ -118,7 +115,7 @@ public class Menu {
                     break;
             }
             System.out.println();
-            return true;
+        }
     }
 
 
