@@ -15,12 +15,16 @@ public class Serialization {
     public void serializeStorage(Storage storage) throws IOException {
         objectOutputStream.writeObject(storage);
         objectOutputStream.flush();
-        objectOutputStream.close();
+//        objectOutputStream.close();
     }
 
     public Storage desirealizeStorage () throws IOException, ClassNotFoundException {
         Storage storage = (Storage) objectInputStream.readObject();
         return storage;
+    }
+
+    public void cleanFile () throws IOException {
+//        fileOutputStream.reset();
     }
 
 }

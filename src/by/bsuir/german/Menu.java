@@ -84,7 +84,7 @@ public class Menu {
                     }
                     break;
                 case 8:
-                    System.out.println("1.Основное задание   2.Сиреализация   3.Десиреализация   4.Возврат в меню");
+                    System.out.println("1.Основное задание   2.Сиреализация   3.Десиреализация   4.Очистить файл");
                     int f = scanner.nextInt();
                     Storage storage1 = new Storage(storage.getStones(), storage.getMetals(), storage.getAdornments(),
                             storage.getRingBases(), storage.getNecklaceBases(), storage.getEarringBases());
@@ -104,6 +104,10 @@ public class Menu {
                             System.out.println("Десиреализация хранилища...");
                             logic.fillStorage(serialization.desirealizeStorage());
                             System.out.println("Успех!");
+                            break;
+                        case 4:
+                            serialization.cleanFile();
+                            System.out.println("Файл хранилища успешно очищен");
                             break;
                         default:
                             break;
@@ -126,17 +130,17 @@ public class Menu {
         System.out.println("Введите верхнюю границу диапазона показателя прозрачности:");
         double j = scanner.nextDouble();
         System.out.println("Камни на складе, удовлетворяющие условию:");
-        storage.selectTitles(logic.searchForTransparence(i,j));
+        System.out.println(storage.getTitles(logic.searchForTransparence(i,j)));
     }
 
     public void showAdornmentInfo (){
         System.out.println("Информацию о каком украшении вывести?");
-        storage.selectTitles(storage.getAdornments());
+        System.out.println(storage.getTitles(storage.getAdornments()));
         int i = scanner.nextInt()-1;
         System.out.println("Название украшения:          " + storage.getAdornments().get(i).getTitle());
         System.out.println("Тип бижютерии:               " + storage.getAdornments().get(i).getType());
         System.out.println("Список использованных камней:");
-        storage.selectTitles(storage.getAdornments().get(i).getUsedStones());
+        System.out.println(storage.getTitles(storage.getAdornments().get(i).getUsedStones()));
         System.out.println("Вес украшения:               " + logic.calculateWeight(i));
         System.out.println("Итоговая цена украшения:     " + logic.calculatePrice(i));
     }
@@ -388,17 +392,17 @@ public class Menu {
         System.out.println("Какую основу использовать?(Нажмите 0 для выхода)");
         switch (type) {
             case 1:
-                storage.selectTitles(storage.getRingBases());
+                System.out.println(storage.getTitles(storage.getRingBases()));
                 numberOfBase = scanner.nextInt();
                 usedRingBase = storage.getRingBases().get(numberOfBase -1);
                 return  usedRingBase;
             case 2:
-                storage.selectTitles(storage.getNecklaceBases());
+                System.out.println(storage.getTitles(storage.getNecklaceBases()));
                 numberOfBase = scanner.nextInt();
                 usedNecklaceBase = storage.getNecklaceBases().get(numberOfBase-1);
                 return usedNecklaceBase;
             case 3:
-                storage.selectTitles(storage.getEarringBases());
+                System.out.println(storage.getTitles(storage.getEarringBases()));
                 numberOfBase = scanner.nextInt();
                 usedEarringBase = storage.getEarringBases().get(numberOfBase-1);
                 return usedEarringBase;
@@ -434,7 +438,7 @@ public class Menu {
     public List<Stone> chooseStone ( List<Stone> stonesToUse ){
         int chosen;
         Stone stone;
-        storage.selectTitles(storage.getStones());
+        System.out.println(storage.getTitles(storage.getStones()));
         chosen = scanner.nextInt();
         stone = storage.getStones().get(chosen - 1);
         stonesToUse.add(stone);
@@ -445,7 +449,7 @@ public class Menu {
         int chosen;
         Metal metal;
         System.out.println("Выберите номер металла, который вы хотите использовать:");
-        storage.selectTitles(storage.getMetals());
+        System.out.println(storage.getTitles(storage.getMetals()));
         chosen = scanner.nextInt();
         metal = storage.getMetals().get(chosen-1);
         return metal;

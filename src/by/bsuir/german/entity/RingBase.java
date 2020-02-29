@@ -10,5 +10,7 @@ public class RingBase extends Product implements Serializable {
         this.diametr = diametr;
     }
 
-
+    public double getDiametr() {
+        return diametr;
+    }
 }

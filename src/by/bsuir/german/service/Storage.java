@@ -78,35 +78,41 @@ public class Storage implements Serializable {
     }
 
 
-    public void selectTitles(List<?> objects) {
-        for (int i = 0; i < objects.size(); i++) {
-            System.out.print(i + 1 + ".");
-            if (objects.get(i) instanceof Product) {
-                System.out.print(((Product) objects.get(i)).getTitle() + "  ");
-            } else if (objects.get(i) instanceof Material) {
-                System.out.print(((Material) objects.get(i)).getTitle() + "  ");
-            } else if (objects.get(i) instanceof Adornment) {
-                System.out.print(((Adornment) objects.get(i)).getTitle() + "  ");
-            }
-            if (i == 5) System.out.println();
+    public String getTitles(List<?> objects) {
+        String s = "";
+        if (objects.isEmpty()) {
+            return s;
         }
-        System.out.println();
+        if (objects.get(0) instanceof Product) {
+            for (int i = 0; i < objects.size(); i++) {
+                s += i + 1 + "." + ((Product) objects.get(i)).getTitle() + " ";
+            }
+        } else if (objects.get(0) instanceof Material) {
+            for (int i = 0; i < objects.size(); i++) {
+                s += i + 1 + "." + ((Material) objects.get(i)).getTitle() + " ";
+            }
+        } else if (objects.get(0) instanceof Adornment) {
+            for (int i = 0; i < objects.size(); i++) {
+                s += i + 1 + "." + ((Adornment) objects.get(i)).getTitle() + " ";
+            }
+        }
+        return s;
     }
 
 
     public void printAll() {
         System.out.println("-------------Металлы, хранящиеся на складе:");
-        selectTitles(metals);
+        System.out.println(getTitles(metals));
         System.out.println("-------------Камни, хранящиеся на складе:");
-        selectTitles(stones);
+        System.out.println(getTitles(stones));
         System.out.println("-------------Основы для колец, хранящиеся на складе:");
-        selectTitles(ringBases);
+        System.out.println(getTitles(ringBases));
         System.out.println("-------------Основы для ожерелий, хранящиеся на складе:");
-        selectTitles(necklaceBases);
+        System.out.println(getTitles(ringBases));
         System.out.println("-------------Основы для серег, хранящиеся на складе:");
-        selectTitles(earringBases);
+        System.out.println(getTitles(earringBases));
         System.out.println("-------------Украшения, хранящиеся на складе:");
-        selectTitles(adornments);
+        System.out.println(getTitles(adornments));
     }
 
     public String getAdormentTitles() {
