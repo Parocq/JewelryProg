@@ -21,13 +21,13 @@ public class IO {
 
     public void write(String s) throws IOException {
         fileWriter.write(s);
-        fileWriter.close();
+//        fileWriter.close();
     }
     public void read() throws IOException {
         while (scanner.hasNextLine()) {
             System.out.println(scanner.nextLine());
         }
-        fileReader.close();
+//        fileReader.close();
     }
 
 }
