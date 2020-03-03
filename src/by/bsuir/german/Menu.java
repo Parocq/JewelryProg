@@ -84,7 +84,7 @@ public class Menu {
                     }
                     break;
                 case 8:
-                    System.out.println("1.Основное задание   2.Сиреализация   3.Десиреализация   4.Очистить файл");
+                    System.out.println("1.Основное задание   2.Сиреализация   3.Десиреализация");
                     int f = scanner.nextInt();
                     Storage storage1 = new Storage(storage.getStones(), storage.getMetals(), storage.getAdornments(),
                             storage.getRingBases(), storage.getNecklaceBases(), storage.getEarringBases());
@@ -105,14 +105,9 @@ public class Menu {
                             logic.fillStorage(serialization.desirealizeStorage());
                             System.out.println("Успех!");
                             break;
-                        case 4:
-                            serialization.cleanFile();
-                            System.out.println("Файл хранилища успешно очищен");
-                            break;
                         default:
                             break;
                     }
-
                     break;
                 default:
                     System.out.println("Такого варианта не существует");
