@@ -85,24 +85,24 @@ public class Storage implements Serializable {
 
 
     public String getTitles(List<?> objects) {
-        String s = "";
+        StringBuilder stringBuilder = new StringBuilder();
         if (objects.isEmpty()) {
-            return s;
+            return stringBuilder.toString();
         }
         if (objects.get(0) instanceof Product) {
             for (int i = 0; i < objects.size(); i++) {
-                s += i + 1 + "." + ((Product) objects.get(i)).getTitle() + " ";
+                stringBuilder.append(i + 1 + "." + ((Product) objects.get(i)).getTitle() + " ");
             }
         } else if (objects.get(0) instanceof Material) {
             for (int i = 0; i < objects.size(); i++) {
-                s += i + 1 + "." + ((Material) objects.get(i)).getTitle() + " ";
+                stringBuilder.append(i + 1 + "." + ((Material) objects.get(i)).getTitle() + " ");
             }
         } else if (objects.get(0) instanceof Adornment) {
             for (int i = 0; i < objects.size(); i++) {
-                s += i + 1 + "." + ((Adornment) objects.get(i)).getTitle() + " ";
+                stringBuilder.append(i + 1 + "." + ((Adornment) objects.get(i)).getTitle() + " ");
             }
         }
-        return s;
+        return stringBuilder.toString();
     }
 
 
@@ -122,10 +122,11 @@ public class Storage implements Serializable {
     }
 
     public String getAdormentTitles() {
-        String s = "";
-        for (int i = 0; i < getAdornments().size(); i++) {
-            s += getAdornments().get(i).getTitle() + ", ";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < getAdornments().size(); i++){
+            stringBuilder.append(i+1+adornments.get(i).getTitle()+" ");
         }
-        return s;
+        return stringBuilder.toString();
     }
 }
