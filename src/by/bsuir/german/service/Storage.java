@@ -8,12 +8,12 @@ import java.util.List;
 
 public class Storage implements Serializable {
 
-    private List<Stone> stones = new ArrayList<>();
-    private List<Metal> metals = new ArrayList<>();
-    private List<Adornment> adornments = new ArrayList<>();
-    private List<RingBase> ringBases = new ArrayList<>();
-    private List<NecklaceBase> necklaceBases = new ArrayList<>();
-    private List<EarringBase> earringBases = new ArrayList<>();
+    private List<Stone> stones;// = new ArrayList<>();
+    private List<Metal> metals;// = new ArrayList<>();
+    private List<Adornment> adornments;// = new ArrayList<>();
+    private List<RingBase> ringBases;// = new ArrayList<>();
+    private List<NecklaceBase> necklaceBases;// = new ArrayList<>();
+    private List<EarringBase> earringBases;// = new ArrayList<>();
 
     public Storage(List<Stone> stones, List<Metal> metals, List<Adornment> adornments,
                    List<RingBase> ringBases, List<NecklaceBase> necklaceBases, List<EarringBase> earringBases) {
@@ -26,6 +26,12 @@ public class Storage implements Serializable {
     }
 
     public Storage() {
+        this.stones = new ArrayList<>();
+        this.metals = new ArrayList<>();
+        this.adornments = new ArrayList<>();
+        this.ringBases = new ArrayList<>();
+        this.necklaceBases = new ArrayList<>();
+        this.earringBases = new ArrayList<>();
     }
 
 

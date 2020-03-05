@@ -1,5 +1,6 @@
 package by.bsuir.german;
 
+import by.bsuir.german.entity.Adornment;
 import by.bsuir.german.entity.Metal;
 import by.bsuir.german.entity.RingBase;
 import by.bsuir.german.entity.Stone;
@@ -19,25 +20,24 @@ public class Main {
     public static void main(String[] args) throws InvalidFieldValueException, IOException {
 
         System.out.println("Добро пожаловать в нашу ювелирную лавку!");
-            try {
+            try (
+
+                    FileOutputStream fileOutputStream = new FileOutputStream("Storage.txt");
+                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+                    FileInputStream fileInputStream = new FileInputStream("Storage.txt");
+                    ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+                    FileWriter fileWriter = new FileWriter("MainTask.txt");
+                    FileReader fileReader = new FileReader("MainTask.txt");
+                    Scanner fileScanner = new Scanner(fileReader);
+                    ) {
                 Scanner scanner = new Scanner(System.in).useLocale(Locale.US);
 
                 Storage storage = new Storage();
                 Logic logic = new Logic(storage);
 
-                FileOutputStream fileOutputStream = new FileOutputStream("Storage.txt",true);
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-                FileInputStream fileInputStream = new FileInputStream("Storage.txt");
-                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-
                 Serialization serialization = new Serialization(objectOutputStream,objectInputStream);
 
-                FileWriter fileWriter = new FileWriter("MainTask.txt");
-                FileReader fileReader = new FileReader("MainTask.txt");
-                Scanner fileScanner = new Scanner(fileReader);
                 IO io = new IO(fileReader,fileWriter, fileScanner, storage);
-
-
 
                 Menu menu = new Menu(scanner, io, serialization, storage, logic);
 

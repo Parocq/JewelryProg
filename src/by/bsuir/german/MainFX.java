@@ -16,8 +16,8 @@ public class MainFX extends Application {
         myStage.setScene(scene);
 
         myStage.setTitle("Jewelry shop");
-        myStage.setWidth(800);
-        myStage.setHeight(500);
+        //myStage.setWidth(800);
+        //myStage.setHeight(500);
 
         myStage.show();
     }

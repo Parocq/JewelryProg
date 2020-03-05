@@ -17,21 +17,21 @@ public class Adornment implements  Serializable{
         this.title = title;
         this.type = type;
         this.ring = ring;
-        this.usedStones = new ArrayList<>(usedStones);
+        this.usedStones = usedStones;
     }
 
     public Adornment(String title, int type, NecklaceBase necklace, List<Stone> usedStones) {
         this.title = title;
         this.type = type;
         this.necklace = necklace;
-        this.usedStones = new ArrayList<>(usedStones);
+        this.usedStones = usedStones;
     }
 
     public Adornment(String title, int type, EarringBase earring, List<Stone> usedStones) {
         this.title = title;
         this.type = type;
         this.earring = earring;
-        this.usedStones = new ArrayList<>(usedStones);
+        this.usedStones = usedStones;
     }
 
     public String getTitle() {
