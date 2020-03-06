@@ -58,14 +58,11 @@ public class AddingMetalController {
 
         Metal metal = new Metal(title,weight,price,sample);
         storage.addMetalOnStock(metal);
-//        System.out.println(storage.getTitles(storage.getMetals()));
     }
 
     @FXML
     void backToMenu(ActionEvent event) throws IOException {
         addMetal.getScene().getWindow().hide();
-//            FXMLLoader loader = new FXMLLoader(AddingMetalController.class.getResource("AddingMetal.fxml"));
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/AddingMetal.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/MainMenu.fxml"));
         Scene scene = new Scene(root);
 

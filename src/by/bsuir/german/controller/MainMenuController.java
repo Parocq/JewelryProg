@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import by.bsuir.german.MainFX;
 import by.bsuir.german.service.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,9 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class MainMenuController {
 
@@ -50,13 +49,10 @@ public class MainMenuController {
     private Button checkStorage;
 
     @FXML
-    private Button sortStorage;
+    private Button workWithStorage;
 
     @FXML
     private Button getAdornmentInfo;
-
-    @FXML
-    private Button findStones;
 
     @FXML
     private Button printAdornmentTitles;
@@ -68,81 +64,56 @@ public class MainMenuController {
     private Button deserializeStorage;
 
     @FXML
-    void addMetal(ActionEvent event) {
-        try {
-            addMetal.getScene().getWindow().hide();
-//            FXMLLoader loader = new FXMLLoader(AddingMetalController.class.getResource("AddingMetal.fxml"));
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/AddingMetal.fxml"));
-            Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/AddingMetal.fxml"));
-            Scene scene = new Scene(root);
-
-            Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
-
-            window.setScene(scene);
-            window.show();
-////            Parent root = (Parent) loader.load();
-////            Stage stage = new Stage();
-////
-////            stage.initModality(Modality.APPLICATION_MODAL);
-//////            stage.initStyle(StageStyle.UNDECORATED);
-//////            stage.setTitle("ABC");
-////            stage.setScene(new Scene(root));
-////            stage.show();
-//
-////            Stage stage = new Stage();
-////            stage.setScene(new Scene(root));
-////            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    void addMetal(ActionEvent event) throws IOException {
+        addMetal.getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/AddingMetal.fxml"));
+        showScene(root,event);
     }
 
     @FXML
-    void addStone(ActionEvent event) {
-
+    void addStone(ActionEvent event) throws IOException {
+        addMetal.getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/AddingStone.fxml"));
+        showScene(root,event);
     }
 
     @FXML
     void checkStorage(ActionEvent event) throws IOException {
         addMetal.getScene().getWindow().hide();
-//            FXMLLoader loader = new FXMLLoader(AddingMetalController.class.getResource("AddingMetal.fxml"));
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/AddingMetal.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/StorageContent.fxml"));
-        Scene scene = new Scene(root);
-
-        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
-
-        window.setScene(scene);
-        window.show();
+        showScene(root,event);
     }
 
     @FXML
-    void createAdornment(ActionEvent event) {
-
+    void createAdornment(ActionEvent event) throws IOException {
+        addMetal.getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateAdornment.fxml"));
+        showScene(root,event);
     }
 
     @FXML
-    void createEarringBase(ActionEvent event) {
-
+    void createEarringBase(ActionEvent event) throws IOException {
+        addMetal.getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateEarringBase.fxml"));
+        showScene(root,event);
     }
 
     @FXML
-    void createNecklaceBase(ActionEvent event) {
-
+    void createNecklaceBase(ActionEvent event) throws IOException {
+        addMetal.getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateNecklaceBase.fxml"));
+        showScene(root,event);
     }
 
     @FXML
-    void createRingBase(ActionEvent event) {
-
+    void createRingBase(ActionEvent event) throws IOException {
+        addMetal.getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateRingBase.fxml"));
+        showScene(root,event);
     }
 
     @FXML
     void deserializeStorage(ActionEvent event) {
-
-    }
-
-    @FXML
-    void findStones(ActionEvent event) {
 
     }
 
@@ -162,11 +133,20 @@ public class MainMenuController {
     }
 
     @FXML
-    void sortStorage(ActionEvent event) {
+    void workWithStorage(ActionEvent event) {
 
     }
 
     @FXML
     void initialize() {
+
+    }
+
+
+    private void showScene (Parent root, ActionEvent event){
+        Scene scene = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
     }
 }

@@ -1,16 +1,29 @@
 package by.bsuir.german.controller;
 
 //import com.gluonhq.charm.glisten.control.TextField;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import by.bsuir.german.MainFX;
+import by.bsuir.german.entity.Metal;
+import by.bsuir.german.entity.Stone;
+import by.bsuir.german.service.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class AddingStoneController {
+
+    private Storage storage;
 
     @FXML
     private ResourceBundle resources;
@@ -50,26 +63,31 @@ public class AddingStoneController {
 
     @FXML
     void addStone(ActionEvent event) {
+        String title = nameField.getText();
+        double price = Double.parseDouble(priceField.getText());
+        double weight = Double.parseDouble(weightField.getText());
+        double transparence = Double.parseDouble(transparenceField.getText());
+        String color = colorField.getText();
 
+        boolean type = isPrecious.isSelected();
+
+        Stone stone = new Stone(title,weight,price,color,type,transparence);
+        storage.addStoneOnStock(stone);
     }
 
     @FXML
-    void backToMenu(ActionEvent event) {
-
+    void backToMenu(ActionEvent event) throws IOException {
+        addStone.getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/MainMenu.fxml"));
+        Scene scene = new Scene(root);
+        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
     }
 
     @FXML
     void initialize() {
-        assert root != null : "fx:id=\"root\" was not injected: check your FXML file 'AddingMetal.fxml'.";
-        assert isPrecious != null : "fx:id=\"isPrecious\" was not injected: check your FXML file 'AddingMetal.fxml'.";
-        assert isHalfPrecious != null : "fx:id=\"isHalfPrecious\" was not injected: check your FXML file 'AddingMetal.fxml'.";
-        assert nameField != null : "fx:id=\"nameField\" was not injected: check your FXML file 'AddingMetal.fxml'.";
-        assert priceField != null : "fx:id=\"priceField\" was not injected: check your FXML file 'AddingMetal.fxml'.";
-        assert colorField != null : "fx:id=\"colorField\" was not injected: check your FXML file 'AddingMetal.fxml'.";
-        assert weightField != null : "fx:id=\"weightField\" was not injected: check your FXML file 'AddingMetal.fxml'.";
-        assert transparenceField != null : "fx:id=\"transparenceField\" was not injected: check your FXML file 'AddingMetal.fxml'.";
-        assert addStone != null : "fx:id=\"addStone\" was not injected: check your FXML file 'AddingMetal.fxml'.";
-        assert back != null : "fx:id=\"back\" was not injected: check your FXML file 'AddingMetal.fxml'.";
-
+        MainFX mainFX = new MainFX();
+        storage = mainFX.getStorage();
     }
 }

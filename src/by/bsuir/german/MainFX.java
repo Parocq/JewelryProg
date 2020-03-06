@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 
 public class MainFX extends Application {
 
-    private Storage storage = new Storage();
+    private static Storage storage = new Storage();
 
     @Override
     public void start(Stage myStage) throws Exception {
@@ -20,7 +20,6 @@ public class MainFX extends Application {
         Scene scene = new Scene(root);
         myStage.setScene(scene);
         myStage.setTitle("Jewelry shop");
-
 
 //        AddingMetalController amc = new AddingMetalController(storage);
 //        MainMenuController mmc = new MainMenuController(storage,amc);

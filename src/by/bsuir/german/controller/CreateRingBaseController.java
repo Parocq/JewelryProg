@@ -1,15 +1,29 @@
 package by.bsuir.german.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import by.bsuir.german.MainFX;
+import by.bsuir.german.entity.Metal;
+import by.bsuir.german.entity.NecklaceBase;
+import by.bsuir.german.entity.RingBase;
+import by.bsuir.german.service.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class CreateRingBaseController {
+
+    private Storage storage;
 
     @FXML
     private ResourceBundle resources;
@@ -46,25 +60,33 @@ public class CreateRingBaseController {
 
     @FXML
     void AddRingBase(ActionEvent event) {
+        String title = nameField.getText();
+        double price = Double.parseDouble(priceField.getText());
+        double weight = Double.parseDouble(weightField.getText());
+        double diametr = Double.parseDouble(diametrField.getText());
+        int metallNum = Integer.parseInt(choosenMetal.getText());
+        Metal metal = storage.getMetals().get(metallNum);
 
+        RingBase ringBase = new RingBase(title,weight,price,metal,diametr);
+        storage.addRingBaseOnStock(ringBase);
     }
 
     @FXML
-    void backToMenu(ActionEvent event) {
+    void backToMenu(ActionEvent event) throws IOException {
+        back.getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/MainMenu.fxml"));
+        Scene scene = new Scene(root);
 
+        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+        window.show();
     }
 
     @FXML
     void initialize() {
-        assert root != null : "fx:id=\"root\" was not injected: check your FXML file 'CreateRingBase.fxml'.";
-        assert nameField != null : "fx:id=\"nameField\" was not injected: check your FXML file 'CreateRingBase.fxml'.";
-        assert priceField != null : "fx:id=\"priceField\" was not injected: check your FXML file 'CreateRingBase.fxml'.";
-        assert weightField != null : "fx:id=\"weightField\" was not injected: check your FXML file 'CreateRingBase.fxml'.";
-        assert addRingBase != null : "fx:id=\"addRingBase\" was not injected: check your FXML file 'CreateRingBase.fxml'.";
-        assert back != null : "fx:id=\"back\" was not injected: check your FXML file 'CreateRingBase.fxml'.";
-        assert metalListField != null : "fx:id=\"metalListField\" was not injected: check your FXML file 'CreateRingBase.fxml'.";
-        assert choosenMetal != null : "fx:id=\"choosenMetal\" was not injected: check your FXML file 'CreateRingBase.fxml'.";
-        assert diametrField != null : "fx:id=\"diametrField\" was not injected: check your FXML file 'CreateRingBase.fxml'.";
-
+        MainFX mainFX = new MainFX();
+        storage = mainFX.getStorage();
+        metalListField.setText(storage.getTitles(storage.getMetals()));
     }
 }
