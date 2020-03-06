@@ -34,7 +34,6 @@ public class Storage implements Serializable {
         this.earringBases = new ArrayList<>();
     }
 
-
     public List<Stone> getStones() {
         return stones;
     }

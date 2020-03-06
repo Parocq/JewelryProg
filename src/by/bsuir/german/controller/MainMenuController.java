@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import by.bsuir.german.service.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,7 +73,7 @@ public class MainMenuController {
             addMetal.getScene().getWindow().hide();
 //            FXMLLoader loader = new FXMLLoader(AddingMetalController.class.getResource("AddingMetal.fxml"));
 //            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/AddingMetal.fxml"));
-            Parent root = FXMLLoader.load(getClass().getResource("FXML/AddingMetal.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/AddingMetal.fxml"));
             Scene scene = new Scene(root);
 
             Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
@@ -80,17 +81,17 @@ public class MainMenuController {
             window.setScene(scene);
             window.show();
 ////            Parent root = (Parent) loader.load();
-//            Stage stage = new Stage();
+////            Stage stage = new Stage();
+////
+////            stage.initModality(Modality.APPLICATION_MODAL);
+//////            stage.initStyle(StageStyle.UNDECORATED);
+//////            stage.setTitle("ABC");
+////            stage.setScene(new Scene(root));
+////            stage.show();
 //
-//            stage.initModality(Modality.APPLICATION_MODAL);
-////            stage.initStyle(StageStyle.UNDECORATED);
-////            stage.setTitle("ABC");
-//            stage.setScene(new Scene(root));
-//            stage.show();
-
-//            Stage stage = new Stage();
-//            stage.setScene(new Scene(root));
-//            stage.showAndWait();
+////            Stage stage = new Stage();
+////            stage.setScene(new Scene(root));
+////            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -102,8 +103,17 @@ public class MainMenuController {
     }
 
     @FXML
-    void checkStorage(ActionEvent event) {
+    void checkStorage(ActionEvent event) throws IOException {
+        addMetal.getScene().getWindow().hide();
+//            FXMLLoader loader = new FXMLLoader(AddingMetalController.class.getResource("AddingMetal.fxml"));
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/AddingMetal.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/StorageContent.fxml"));
+        Scene scene = new Scene(root);
 
+        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+        window.show();
     }
 
     @FXML
@@ -158,20 +168,5 @@ public class MainMenuController {
 
     @FXML
     void initialize() {
-        assert root != null : "fx:id=\"root\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert addStone != null : "fx:id=\"addStone\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert addMetal != null : "fx:id=\"addMetal\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert createRingBase != null : "fx:id=\"createRingBase\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert createNecklaceBase != null : "fx:id=\"createNecklaceBase\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert createEarringBase != null : "fx:id=\"createEarringBase\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert createAdornment != null : "fx:id=\"createAdornment\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert checkStorage != null : "fx:id=\"checkStorage\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert sortStorage != null : "fx:id=\"sortStorage\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert getAdornmentInfo != null : "fx:id=\"getAdornmentInfo\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert findStones != null : "fx:id=\"findStones\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert printAdornmentTitles != null : "fx:id=\"printAdornmentTitles\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert serializeStorage != null : "fx:id=\"serializeStorage\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert deserializeStorage != null : "fx:id=\"deserializeStorage\" was not injected: check your FXML file 'MainMenu.fxml'.";
-
     }
 }
