@@ -32,37 +32,42 @@
             <Label layoutX="51.0" layoutY="262.0" text="Основы для ожерелий:" />
             <Label layoutX="51.0" layoutY="186.0" text="Основы для серег:" />
             <Label layoutX="56.0" layoutY="414.0" text="Украшения:" />
-            <TextArea fx:id="stonesList" editable="false" layoutX="38.0" layoutY="57.0" prefHeight="7.0" prefWidth="738.0" promptText="Пусто" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="57.0">
+            <TextArea fx:id="stonesList" editable="false" layoutX="38.0" layoutY="57.0" prefHeight="7.0" prefWidth="720.0" promptText="Пусто...">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </TextArea>
-            <TextArea fx:id="metalsList" editable="false" layoutX="38.0" layoutY="127.0" prefHeight="25.0" prefWidth="720.0" promptText="Пусто">
+            <TextArea fx:id="metalsList" editable="false" layoutX="38.0" layoutY="127.0" prefHeight="25.0" prefWidth="720.0" promptText="Пусто...">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </TextArea>
-            <TextArea fx:id="earringBasesList" editable="false" layoutX="40.0" layoutY="203.0" prefHeight="30.0" prefWidth="720.0" promptText="Пусто">
+            <TextArea fx:id="earringBasesList" editable="false" layoutX="40.0" layoutY="203.0" prefHeight="30.0" prefWidth="720.0" promptText="Пусто...">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </TextArea>
-            <TextArea fx:id="necklaceBasesList" editable="false" layoutX="40.0" layoutY="279.0" prefHeight="39.0" prefWidth="720.0" promptText="Пусто">
+            <TextArea fx:id="necklaceBasesList" editable="false" layoutX="40.0" layoutY="279.0" prefHeight="39.0" prefWidth="720.0" promptText="Пусто...">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </TextArea>
-            <TextArea fx:id="ringBasesList" editable="false" layoutX="40.0" layoutY="355.0" prefHeight="29.0" prefWidth="720.0" promptText="Пусто">
+            <TextArea fx:id="ringBasesList" editable="false" layoutX="40.0" layoutY="355.0" prefHeight="29.0" prefWidth="720.0" promptText="Пусто...">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </TextArea>
-            <TextArea fx:id="adornmentList" editable="false" layoutX="40.0" layoutY="431.0" prefHeight="29.0" prefWidth="720.0" promptText="Пусто" AnchorPane.topAnchor="431.0">
+            <TextArea fx:id="adornmentList" editable="false" layoutX="40.0" layoutY="431.0" prefHeight="29.0" prefWidth="720.0" promptText="Пусто..." AnchorPane.topAnchor="431.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </TextArea>
-            <Button fx:id="update" alignment="CENTER" layoutX="313.0" layoutY="505.0" mnemonicParsing="false" onAction="#update" prefHeight="59.0" prefWidth="170.0" text="Обновить" textAlignment="CENTER">
+            <Button fx:id="update" alignment="CENTER" layoutX="356.0" layoutY="505.0" mnemonicParsing="false" onAction="#update" prefHeight="59.0" prefWidth="170.0" text="Обновить" textAlignment="CENTER">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <Button fx:id="sortButton" alignment="CENTER" layoutX="553.0" layoutY="505.0" mnemonicParsing="false" onAction="#sortAll" prefHeight="60.0" prefWidth="217.0" text="Сортировать" textAlignment="CENTER">
                <font>
                   <Font size="28.0" />
                </font>

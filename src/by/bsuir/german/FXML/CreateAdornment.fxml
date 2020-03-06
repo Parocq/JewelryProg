@@ -4,31 +4,21 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #aaaaaa;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.german.controller.CreateAdornmentController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #aaaaaa;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.german.controller.CreateAdornmentController">
     <children>
         <AnchorPane layoutY="48.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="800.0" style="-fx-background-color: #eeeeee;">
             <cursor>
                 <Cursor fx:constant="DEFAULT" />
             </cursor>
             <children>
-                <Label layoutX="55.0" layoutY="55.0" text="Название:" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="70.0">
-                    <font>
-                        <Font size="26.0" />
-                    </font>
-                </Label>
-                <Label layoutX="58.0" layoutY="100.0" text="Цена:" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="120.0">
-                    <font>
-                        <Font size="26.0" />
-                    </font>
-                </Label>
-                <Label layoutX="58.0" layoutY="145.0" text="Вес:" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="170.0">
+                <Label layoutX="55.0" layoutY="55.0" text="Название:" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="50.0">
                     <font>
                         <Font size="26.0" />
                     </font>
@@ -38,15 +28,7 @@
                         <Font size="30.0" />
                     </font>
                 </Label>
-                <TextField fx:id="nameField" layoutX="300.0" layoutY="71.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="71.0">
-                    <font>
-                        <Font size="16.0" />
-                    </font></TextField>
-                <TextField fx:id="priceField" layoutX="300.0" layoutY="121.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="121.0">
-                    <font>
-                        <Font size="16.0" />
-                    </font></TextField>
-                <TextField fx:id="weightField" layoutX="300.0" layoutY="171.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="171.0">
+                <TextField fx:id="nameField" layoutX="300.0" layoutY="71.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="50.0">
                     <font>
                         <Font size="16.0" />
                     </font></TextField>
@@ -60,22 +42,48 @@
                         <Font size="28.0" />
                     </font>
                 </Button>
-                <Label layoutX="58.0" layoutY="278.0" text="Введите номер металла, который вы хотите использовать при создании основы:" />
-                <TextArea fx:id="metalListField" editable="false" layoutX="58.0" layoutY="295.0" prefHeight="57.0" prefWidth="613.0" promptText="empty">
+                <Label layoutX="58.0" layoutY="278.0" text="Введите номера камней, которые вы хотите использовать в украшении(через запятую и без пробелов)" />
+                <TextArea fx:id="stonesListField" editable="false" layoutX="58.0" layoutY="295.0" prefHeight="57.0" prefWidth="613.0" promptText="Пусто...">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </TextArea>
-                <TextField fx:id="choosenMetal" layoutX="702.0" layoutY="305.0" prefHeight="25.0" prefWidth="38.0" AnchorPane.rightAnchor="60.0">
+            <TextArea fx:id="choosedStones" layoutX="678.0" layoutY="295.0" prefHeight="57.0" prefWidth="67.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextArea>
+            <RadioButton fx:id="isRing" layoutX="60.0" layoutY="109.0" mnemonicParsing="false" text="Кольцо">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </RadioButton>
+                <RadioButton fx:id="isEarring" layoutX="446.0" layoutY="109.0" mnemonicParsing="false" text="Серьги">
                     <font>
-                        <Font size="16.0" />
-                    </font>
-                </TextField>
-                <CheckBox fx:id="isPair" layoutX="294.0" layoutY="224.0" mnemonicParsing="false" text="Парные">
-                    <font>
-                        <Font size="26.0" />
-                    </font>
-                </CheckBox>
+                  <Font size="26.0" />
+               </font>
+            </RadioButton>
+                <RadioButton fx:id="isNecklace" layoutX="232.0" layoutY="109.0" mnemonicParsing="false" text="Ожерелье">
+                <font>
+                  <Font size="26.0" />
+               </font>
+            </RadioButton>
+            <Button fx:id="getVariants" alignment="CENTER" layoutX="604.0" layoutY="98.0" mnemonicParsing="false" onAction="#getVariants" text="Варианты" textAlignment="CENTER">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <TextArea fx:id="basesList" editable="false" layoutX="58.0" layoutY="197.0" prefHeight="60.0" prefWidth="613.0" promptText="Пусто...">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextArea>
+            <TextField fx:id="choosedBase" layoutX="678.0" layoutY="197.0" prefHeight="60.0" prefWidth="67.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <Label layoutX="58.0" layoutY="180.0" text="Выберите один вариант основы, который вы хотите использовать. Для получения списка - &quot;ВАРИАНТЫ&quot;" />
             </children>
         </AnchorPane>
         <Label contentDisplay="CENTER" layoutX="323.0" prefHeight="48.0" prefWidth="154.0" text="Jewelry Prog">

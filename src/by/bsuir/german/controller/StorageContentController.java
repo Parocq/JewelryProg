@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import by.bsuir.german.MainFX;
+import by.bsuir.german.service.Logic;
 import by.bsuir.german.service.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +20,12 @@ import javafx.stage.Stage;
 
 public class StorageContentController {
 
+
     private Storage storage;
+    private Logic logic;
+
+    @FXML
+    public Button sortButton;
 
     @FXML
     private ResourceBundle resources;
@@ -71,13 +77,6 @@ public class StorageContentController {
         setLists();
     }
 
-    @FXML
-    void initialize() {
-        MainFX mainFX = new MainFX();
-        storage = mainFX.getStorage();
-        setLists();
-    }
-
     private void setLists (){
         stonesList.setText(storage.getTitles(storage.getStones()));
         metalsList.setText(storage.getTitles(storage.getMetals()));
@@ -85,5 +84,22 @@ public class StorageContentController {
         necklaceBasesList.setText(storage.getTitles(storage.getNecklaceBases()));
         ringBasesList.setText(storage.getTitles(storage.getRingBases()));
         adornmentList.setText(storage.getTitles(storage.getAdornments()));
+    }
+
+    public void sortAll(ActionEvent actionEvent) {
+        logic.sortAdornmentByTitle(storage.getAdornments());
+        logic.sortRingBaseByTitle(storage.getRingBases());
+        logic.sortNecklaceBaseByTitle(storage.getNecklaceBases());
+        logic.sortEarringBaseByTitle(storage.getEarringBases());
+        logic.sortStonesByTitle(storage.getStones());
+        logic.sortMetalByTitle(storage.getMetals());
+    }
+
+    @FXML
+    void initialize() {
+        MainFX mainFX = new MainFX();
+        storage = mainFX.getStorage();
+        logic = mainFX.getLogic();
+        setLists();
     }
 }

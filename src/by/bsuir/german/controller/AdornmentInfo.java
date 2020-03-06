@@ -5,10 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import by.bsuir.german.MainFX;
-import by.bsuir.german.entity.EarringBase;
-import by.bsuir.german.entity.Metal;
-import by.bsuir.german.entity.NecklaceBase;
-import by.bsuir.german.entity.Stone;
+import by.bsuir.german.entity.Adornment;
+import by.bsuir.german.service.Logic;
 import by.bsuir.german.service.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,14 +15,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class CreateNecklaceBaseController {
+public class AdornmentInfo {
 
     private Storage storage;
+    private Logic logic;
 
     @FXML
     private ResourceBundle resources;
@@ -36,41 +36,28 @@ public class CreateNecklaceBaseController {
     private AnchorPane root;
 
     @FXML
-    private TextField nameField;
-
-    @FXML
-    private TextField priceField;
-
-    @FXML
-    private TextField weightField;
-
-    @FXML
-    private Button addNecklaceBase;
+    private Button getInfo;
 
     @FXML
     private Button back;
 
     @FXML
-    private TextArea metalListField;
+    private TextArea adornmentsList;
 
     @FXML
-    private TextField choosenMetal;
+    private TextField choosenAdornment;
 
     @FXML
-    private TextField lengthField;
+    private Label adornmentTitle;
 
     @FXML
-    void addNecklaceBase(ActionEvent event) {
-        String title = nameField.getText();
-        double price = Double.parseDouble(priceField.getText());
-        double weight = Double.parseDouble(weightField.getText());
-        double length = Double.parseDouble(lengthField.getText());
-        int metallNum = Integer.parseInt(choosenMetal.getText())-1;
-        Metal metal = storage.getMetals().get(metallNum);
+    private Label adornmentPrice;
 
-        NecklaceBase necklaceBase = new NecklaceBase(title,weight,price,metal,length);
-        storage.addNecklaceBaseOnStock(necklaceBase);
-    }
+    @FXML
+    private Label adornmentWeight;
+
+    @FXML
+    private TextArea usedStonesList;
 
     @FXML
     void backToMenu(ActionEvent event) throws IOException {
@@ -85,9 +72,20 @@ public class CreateNecklaceBaseController {
     }
 
     @FXML
+    void getInfo(ActionEvent event) {
+        int choosenAd = Integer.parseInt(choosenAdornment.getText())-1;
+        Adornment adornment = storage.getAdornments().get(choosenAd);
+        adornmentTitle.setText(adornment.getTitle());
+        adornmentPrice.setText(Double.toString(logic.calculatePrice(choosenAd)));
+        adornmentWeight.setText(Double.toString(logic.calculateWeight(choosenAd)));
+        usedStonesList.setText(storage.getTitles(storage.getAdornments().get(choosenAd).getUsedStones()));
+    }
+
+    @FXML
     void initialize() {
         MainFX mainFX = new MainFX();
         storage = mainFX.getStorage();
-        metalListField.setText(storage.getTitles(storage.getMetals()));
+        logic = mainFX.getLogic();
+        adornmentsList.setText(storage.getTitles(storage.getAdornments()));
     }
 }

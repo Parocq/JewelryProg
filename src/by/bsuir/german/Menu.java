@@ -128,12 +128,11 @@ public class Menu {
         System.out.println(storage.getTitles(logic.searchForTransparence(i,j)));
     }
 
-    public void showAdornmentInfo (){
+            public void showAdornmentInfo (){
         System.out.println("Информацию о каком украшении вывести?");
         System.out.println(storage.getTitles(storage.getAdornments()));
         int i = scanner.nextInt()-1;
         System.out.println("Название украшения:          " + storage.getAdornments().get(i).getTitle());
-        System.out.println("Тип бижютерии:               " + storage.getAdornments().get(i).getType());
         System.out.println("Список использованных камней:");
         System.out.println(storage.getTitles(storage.getAdornments().get(i).getUsedStones()));
         System.out.println("Вес украшения:               " + logic.calculateWeight(i));
@@ -336,19 +335,19 @@ public class Menu {
             switch (type){
                 case 1:
                     ringBase = (RingBase) object;
-                    Adornment adornment1 = new Adornment(title, 1, ringBase, stonesToUse);
+                    Adornment adornment1 = new Adornment(title,  ringBase, stonesToUse);
                     storage.addAdornmentOnStock(adornment1);
                     System.out.println("Украшение успешно создано и добавлено");
                     break;
                 case 2:
                     necklaceBase = (NecklaceBase) object;
-                    Adornment adornment2 = new Adornment(title, 2, necklaceBase, stonesToUse);
+                    Adornment adornment2 = new Adornment(title,  necklaceBase, stonesToUse);
                     storage.addAdornmentOnStock(adornment2);
                     System.out.println("Украшение успешно создано и добавлено");
                     break;
                 case 3:
                     earringBase = (EarringBase) object;
-                    Adornment adornment3 = new Adornment(title, 3, earringBase, stonesToUse);
+                    Adornment adornment3 = new Adornment(title,  earringBase, stonesToUse);
                     storage.addAdornmentOnStock(adornment3);
                     System.out.println("Украшение успешно создано и добавлено");
                     break;

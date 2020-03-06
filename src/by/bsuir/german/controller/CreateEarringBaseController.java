@@ -64,7 +64,7 @@ public class CreateEarringBaseController {
         double price = Double.parseDouble(priceField.getText());
         double weight = Double.parseDouble(weightField.getText());
         boolean paired = isPair.isSelected();
-        int metallNum = Integer.parseInt(choosenMetal.getText());
+        int metallNum = Integer.parseInt(choosenMetal.getText()) -1;
         Metal metal = storage.getMetals().get(metallNum);
 
         EarringBase earringBase = new EarringBase(title,weight,price,metal,paired);

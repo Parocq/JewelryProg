@@ -1,10 +1,14 @@
 package by.bsuir.german.controller;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import by.bsuir.german.MainFX;
+import by.bsuir.german.service.IO;
+import by.bsuir.german.service.Logic;
+import by.bsuir.german.service.Serialization;
 import by.bsuir.german.service.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +21,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainMenuController {
+
+    private Logic logic;
+    private Storage storage;
+    private IO io;
+    private Serialization serialization;
+    private MainFX mainFX;
+
+//    private static FileOutputStream fileOutputStream;
+//    private static ObjectOutputStream objectOutputStream;
+//    private static FileInputStream fileInputStream;
+//    private static ObjectInputStream objectInputStream;
+//    private static FileWriter fileWriter;
+//    private static FileReader fileReader;
+//    private static Scanner fileScanner;
 
     @FXML
     private ResourceBundle resources;
@@ -113,23 +131,32 @@ public class MainMenuController {
     }
 
     @FXML
-    void deserializeStorage(ActionEvent event) {
-
+    void getAdornmentInfo(ActionEvent event) throws IOException {
+        addMetal.getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/AdornmentInfo.fxml"));
+        showScene(root,event);
     }
 
     @FXML
-    void getAdornmentInfo(ActionEvent event) {
-
+    void deserializeStorage(ActionEvent event) throws IOException, ClassNotFoundException {
+        System.out.println("Десиреализация хранилища...");
+        logic.fillStorage(serialization.desirealizeStorage());
+        System.out.println("Успех!");
     }
 
     @FXML
-    void printAdornmentTitles(ActionEvent event) {
-
+    void printAdornmentTitles(ActionEvent event) throws IOException {
+        String s = storage.getAdormentTitles();
+        io.write(s);
+        System.out.println("Запись прошла успешно");
+        io.read();
     }
 
     @FXML
-    void serializeStorage(ActionEvent event) {
-
+    void serializeStorage(ActionEvent event) throws IOException {
+        Storage storageFull = new Storage(storage.getStones(), storage.getMetals(), storage.getAdornments(),
+                storage.getRingBases(), storage.getNecklaceBases(), storage.getEarringBases());
+        serialization.serializeStorage(storageFull);
     }
 
     @FXML
@@ -139,8 +166,14 @@ public class MainMenuController {
 
     @FXML
     void initialize() {
-
+        System.out.println("IN CONTRROLLER");
+        mainFX = new MainFX();
+        storage = mainFX.getStorage();
+        logic = mainFX.getLogic();
+        io = mainFX.getIO();
+        serialization = mainFX.getSerialization();
     }
+
 
 
     private void showScene (Parent root, ActionEvent event){

@@ -64,7 +64,7 @@ public class CreateRingBaseController {
         double price = Double.parseDouble(priceField.getText());
         double weight = Double.parseDouble(weightField.getText());
         double diametr = Double.parseDouble(diametrField.getText());
-        int metallNum = Integer.parseInt(choosenMetal.getText());
+        int metallNum = Integer.parseInt(choosenMetal.getText())-1;
         Metal metal = storage.getMetals().get(metallNum);
 
         RingBase ringBase = new RingBase(title,weight,price,metal,diametr);
