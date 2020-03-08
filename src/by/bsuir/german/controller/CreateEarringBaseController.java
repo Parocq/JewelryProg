@@ -2,11 +2,13 @@ package by.bsuir.german.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import by.bsuir.german.MainFX;
 import by.bsuir.german.entity.EarringBase;
 import by.bsuir.german.entity.Metal;
+import by.bsuir.german.exception.InvalidFieldValueException;
 import by.bsuir.german.service.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,16 +61,30 @@ public class CreateEarringBaseController {
     private CheckBox isPair;
 
     @FXML
-    void AddEarringBase(ActionEvent event) {
+    void AddEarringBase(ActionEvent event) throws NumberFormatException {
         String title = nameField.getText();
         double price = Double.parseDouble(priceField.getText());
         double weight = Double.parseDouble(weightField.getText());
         boolean paired = isPair.isSelected();
         int metallNum = Integer.parseInt(choosenMetal.getText()) -1;
+        try {
+            checkValues(price,weight,metallNum);
+        } catch (InvalidFieldValueException e) {
+            System.out.println("Ошибка вводимых значений!");
+        }
         Metal metal = storage.getMetals().get(metallNum);
 
         EarringBase earringBase = new EarringBase(title,weight,price,metal,paired);
         storage.addEarringBaseOnStock(earringBase);
+    }
+
+    private void checkValues(double price,double weight,int metal) throws InvalidFieldValueException {
+        if (weight <= 0 || price < 0){
+            throw new InvalidFieldValueException();
+        }
+        if (metal>storage.getMetals().size()-1 || metal<0){
+            throw new InvalidFieldValueException();
+        }
     }
 
     @FXML

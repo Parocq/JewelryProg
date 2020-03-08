@@ -2,10 +2,12 @@ package by.bsuir.german.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 
 import by.bsuir.german.MainFX;
 import by.bsuir.german.entity.Metal;
+import by.bsuir.german.exception.InvalidFieldValueException;
 import by.bsuir.german.service.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,14 +52,25 @@ public class AddingMetalController {
     private Button back;
 
     @FXML
-    void addMetal(ActionEvent event) {
+    void addMetal(ActionEvent event) throws InputMismatchException {
         String title = nameField.getText();
         double price = Double.parseDouble(priceField.getText());
         double weight = Double.parseDouble(weightField.getText());
         double sample = Double.parseDouble(sampleField.getText());
+        try {
+            checkValues(weight,price);
+        } catch (InvalidFieldValueException e) {
+            System.out.println("Ошибка вводимых значений!");
+        }
 
         Metal metal = new Metal(title,weight,price,sample);
         storage.addMetalOnStock(metal);
+    }
+
+    private void checkValues(double weight, double price) throws InvalidFieldValueException {
+        if (weight <= 0 || price < 0){
+            throw new InvalidFieldValueException();
+        }
     }
 
     @FXML

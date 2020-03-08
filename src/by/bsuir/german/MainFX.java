@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MainFX extends Application {
@@ -66,6 +67,8 @@ public class MainFX extends Application {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (InputMismatchException e) {
+            System.out.println("Ошибка при вводе данных! Проверьте вводимые типы!");
         }
     }
 

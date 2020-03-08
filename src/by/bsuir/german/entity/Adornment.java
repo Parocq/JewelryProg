@@ -13,33 +13,26 @@ public class Adornment implements  Serializable{
     private EarringBase earring;
     private List<Stone> usedStones;
 
-    public Adornment(String title, int type, RingBase ring, List<Stone> usedStones) {
+    public Adornment(String title, RingBase ring, List<Stone> usedStones) {
         this.title = title;
-        this.type = type;
         this.ring = ring;
         this.usedStones = usedStones;
     }
 
-    public Adornment(String title, int type, NecklaceBase necklace, List<Stone> usedStones) {
+    public Adornment(String title, NecklaceBase necklace, List<Stone> usedStones) {
         this.title = title;
-        this.type = type;
         this.necklace = necklace;
         this.usedStones = usedStones;
     }
 
-    public Adornment(String title, int type, EarringBase earring, List<Stone> usedStones) {
+    public Adornment(String title, EarringBase earring, List<Stone> usedStones) {
         this.title = title;
-        this.type = type;
         this.earring = earring;
         this.usedStones = usedStones;
     }
 
     public String getTitle() {
         return title;
-    }
-
-    public int getType() {
-        return type;
     }
 
     public RingBase getRing() {

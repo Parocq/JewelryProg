@@ -8,6 +8,7 @@ import by.bsuir.german.MainFX;
 import by.bsuir.german.entity.Metal;
 import by.bsuir.german.entity.NecklaceBase;
 import by.bsuir.german.entity.RingBase;
+import by.bsuir.german.exception.InvalidFieldValueException;
 import by.bsuir.german.service.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,10 +66,24 @@ public class CreateRingBaseController {
         double weight = Double.parseDouble(weightField.getText());
         double diametr = Double.parseDouble(diametrField.getText());
         int metallNum = Integer.parseInt(choosenMetal.getText())-1;
+        try {
+            checkValues(price,weight,diametr,metallNum);
+        } catch (InvalidFieldValueException e) {
+            System.out.println("Ошибка вводимых значений!");
+        }
         Metal metal = storage.getMetals().get(metallNum);
 
         RingBase ringBase = new RingBase(title,weight,price,metal,diametr);
         storage.addRingBaseOnStock(ringBase);
+    }
+
+    private void checkValues(double price,double weight,double diametr, int metal) throws InvalidFieldValueException {
+        if (weight <= 0 || price < 0 || diametr <=0){
+            throw new InvalidFieldValueException();
+        }
+        if (metal>storage.getMetals().size()-1 || metal<0){
+            throw new InvalidFieldValueException();
+        }
     }
 
     @FXML
@@ -76,9 +91,7 @@ public class CreateRingBaseController {
         back.getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/MainMenu.fxml"));
         Scene scene = new Scene(root);
-
         Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
-
         window.setScene(scene);
         window.show();
     }

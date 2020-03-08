@@ -117,8 +117,6 @@ public class Menu {
         }
     }
 
-
-
     public void searchByTransparence (){
         System.out.println("Введите нижнюю границу диапазона показателя прозрачности:");
         double i = scanner.nextDouble();
@@ -128,7 +126,7 @@ public class Menu {
         System.out.println(storage.getTitles(logic.searchForTransparence(i,j)));
     }
 
-            public void showAdornmentInfo (){
+    public void showAdornmentInfo (){
         System.out.println("Информацию о каком украшении вывести?");
         System.out.println(storage.getTitles(storage.getAdornments()));
         int i = scanner.nextInt()-1;

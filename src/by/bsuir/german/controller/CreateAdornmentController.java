@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import by.bsuir.german.MainFX;
 import by.bsuir.german.entity.*;
+import by.bsuir.german.exception.InvalidFieldValueException;
 import by.bsuir.german.service.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -72,7 +73,12 @@ public class CreateAdornmentController {
     @FXML
     void AddEarringBase(ActionEvent event) {
         String title = nameField.getText();
-        List<Stone> stonesToUse = getStonesToUse(prepareString(addDot(choosedStones.getText())));
+        List<Stone> stonesToUse = new ArrayList<>();
+        try {
+            stonesToUse = getStonesToUse(prepareString(addDot(choosedStones.getText())));
+        } catch (InvalidFieldValueException e) {
+            System.out.println("Ошибка вводимых значений!");
+        }
         switch (getType()){
             case 1:
                 RingBase base = storage.getRingBases().get(Integer.parseInt(choosedBase.getText())-1);
@@ -93,11 +99,11 @@ public class CreateAdornmentController {
         }
     }
 
-    private static String addDot(String s){
+    private String addDot(String s){
         return ","+s+",";
     }
 
-    private static List<Integer> prepareString (String s){
+    private List<Integer> prepareString (String s){
         List<Integer> numbers = new ArrayList<>();
         int start=0;
         int end=0;
@@ -119,7 +125,16 @@ public class CreateAdornmentController {
         return numbers;
     }
 
-    private List<Stone> getStonesToUse (List<Integer> numbers){
+    private void checkValues(List<Integer> list) throws InvalidFieldValueException {
+        for (Integer i: list){
+            if (i>=list.size() || i<=0){
+                throw new InvalidFieldValueException();
+            }
+        }
+    }
+
+    private List<Stone> getStonesToUse (List<Integer> numbers) throws InvalidFieldValueException {
+        checkValues(numbers);
         List<Stone> stonesToUse = new ArrayList<>();
         for (Integer i: numbers){
             stonesToUse.add(storage.getStones().get(i-1));

@@ -3,11 +3,13 @@ package by.bsuir.german.controller;
 //import com.gluonhq.charm.glisten.control.TextField;
 import java.io.IOException;
 import java.net.URL;
+import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 
 import by.bsuir.german.MainFX;
 import by.bsuir.german.entity.Metal;
 import by.bsuir.german.entity.Stone;
+import by.bsuir.german.exception.InvalidFieldValueException;
 import by.bsuir.german.service.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -62,17 +64,31 @@ public class AddingStoneController {
     private Button back;
 
     @FXML
-    void addStone(ActionEvent event) {
+    void addStone(ActionEvent event) throws InputMismatchException {
         String title = nameField.getText();
         double price = Double.parseDouble(priceField.getText());
         double weight = Double.parseDouble(weightField.getText());
         double transparence = Double.parseDouble(transparenceField.getText());
         String color = colorField.getText();
+        try {
+            checkValues(weight,price,transparence);
+        } catch (InvalidFieldValueException e) {
+            System.out.println("Ошибка вводимых значений!");
+        }
 
         boolean type = isPrecious.isSelected();
 
         Stone stone = new Stone(title,weight,price,color,type,transparence);
         storage.addStoneOnStock(stone);
+    }
+
+    private void checkValues(double weight, double price, double transparence) throws InvalidFieldValueException {
+        if (weight <= 0 || price < 0){
+            throw new InvalidFieldValueException();
+        }
+        if (transparence < 0 || transparence > 100){
+            throw new InvalidFieldValueException();
+        }
     }
 
     @FXML

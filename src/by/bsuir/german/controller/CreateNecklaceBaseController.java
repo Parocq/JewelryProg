@@ -9,6 +9,7 @@ import by.bsuir.german.entity.EarringBase;
 import by.bsuir.german.entity.Metal;
 import by.bsuir.german.entity.NecklaceBase;
 import by.bsuir.german.entity.Stone;
+import by.bsuir.german.exception.InvalidFieldValueException;
 import by.bsuir.german.service.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -66,10 +67,24 @@ public class CreateNecklaceBaseController {
         double weight = Double.parseDouble(weightField.getText());
         double length = Double.parseDouble(lengthField.getText());
         int metallNum = Integer.parseInt(choosenMetal.getText())-1;
+        try {
+            checkValues(price,weight,length,metallNum);
+        } catch (InvalidFieldValueException e) {
+            System.out.println("Ошибка вводимых значений!");
+        }
         Metal metal = storage.getMetals().get(metallNum);
 
         NecklaceBase necklaceBase = new NecklaceBase(title,weight,price,metal,length);
         storage.addNecklaceBaseOnStock(necklaceBase);
+    }
+
+    private void checkValues(double price,double weight,double length, int metal) throws InvalidFieldValueException {
+        if (weight <= 0 || price < 0 || length <=0){
+            throw new InvalidFieldValueException();
+        }
+        if (metal>storage.getMetals().size()-1 || metal<0){
+            throw new InvalidFieldValueException();
+        }
     }
 
     @FXML

@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import by.bsuir.german.MainFX;
+import by.bsuir.german.exception.InvalidFieldValueException;
 import by.bsuir.german.service.IO;
 import by.bsuir.german.service.Logic;
 import by.bsuir.german.service.Serialization;
