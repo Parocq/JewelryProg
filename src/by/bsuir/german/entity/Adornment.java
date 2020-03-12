@@ -7,7 +7,6 @@ import java.util.List;
 public class Adornment implements  Serializable{
 
     private String title;
-    private int type;
     private RingBase ring;
     private NecklaceBase necklace;
     private EarringBase earring;
