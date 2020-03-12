@@ -53,22 +53,26 @@ public class AddingMetalController {
 
     @FXML
     void addMetal(ActionEvent event) throws InputMismatchException {
-        String title = nameField.getText();
-        double price = Double.parseDouble(priceField.getText());
-        double weight = Double.parseDouble(weightField.getText());
-        double sample = Double.parseDouble(sampleField.getText());
         try {
-            checkValues(weight,price);
+            String title = nameField.getText();
+            double price = Double.parseDouble(priceField.getText());
+            double weight = Double.parseDouble(weightField.getText());
+            double sample = Double.parseDouble(sampleField.getText());
+
+            checkValues(weight, price);
+
+            Metal metal = new Metal(title, weight, price, sample);
+            storage.addMetalOnStock(metal);
         } catch (InvalidFieldValueException e) {
             System.out.println("Ошибка вводимых значений!");
+        } catch (NumberFormatException ex) {
+            System.out.println("Ошибка форматов! / Не введены все значения!");
         }
 
-        Metal metal = new Metal(title,weight,price,sample);
-        storage.addMetalOnStock(metal);
     }
 
     private void checkValues(double weight, double price) throws InvalidFieldValueException {
-        if (weight <= 0 || price < 0){
+        if (weight <= 0 || price < 0) {
             throw new InvalidFieldValueException();
         }
     }
@@ -79,7 +83,7 @@ public class AddingMetalController {
         Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/MainMenu.fxml"));
         Scene scene = new Scene(root);
 
-        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         window.setScene(scene);
         window.show();
@@ -87,7 +91,7 @@ public class AddingMetalController {
 
     @FXML
     void initialize() {
-       MainFX mainFX = new MainFX();
-       storage = mainFX.getStorage();
+        MainFX mainFX = new MainFX();
+        storage = mainFX.getStorage();
     }
 }

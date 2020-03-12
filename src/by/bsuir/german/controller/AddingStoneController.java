@@ -1,6 +1,7 @@
 package by.bsuir.german.controller;
 
 //import com.gluonhq.charm.glisten.control.TextField;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.InputMismatchException;
@@ -65,28 +66,33 @@ public class AddingStoneController {
 
     @FXML
     void addStone(ActionEvent event) throws InputMismatchException {
-        String title = nameField.getText();
-        double price = Double.parseDouble(priceField.getText());
-        double weight = Double.parseDouble(weightField.getText());
-        double transparence = Double.parseDouble(transparenceField.getText());
-        String color = colorField.getText();
-        try {
-            checkValues(weight,price,transparence);
-        } catch (InvalidFieldValueException e) {
-            System.out.println("Ошибка вводимых значений!");
-        }
+        if (isPrecious.isSelected() || isHalfPrecious.isSelected()) {
+            try {
+                String title = nameField.getText();
+                double price = Double.parseDouble(priceField.getText());
+                double weight = Double.parseDouble(weightField.getText());
+                double transparence = Double.parseDouble(transparenceField.getText());
+                String color = colorField.getText();
+                checkValues(weight, price, transparence);
 
-        boolean type = isPrecious.isSelected();
+                boolean type = isPrecious.isSelected();
+                if (type) isHalfPrecious.setSelected(false);
 
-        Stone stone = new Stone(title,weight,price,color,type,transparence);
-        storage.addStoneOnStock(stone);
+                Stone stone = new Stone(title, weight, price, color, type, transparence);
+                storage.addStoneOnStock(stone);
+            } catch (InvalidFieldValueException e) {
+                System.out.println("Ошибка вводимых значений!");
+            } catch (NumberFormatException ex) {
+                System.out.println("Ошибка форматов! / Не введены все значения!");
+            }
+        } else System.out.println("Необходимо отметить хотя бы 1 checkbox");
     }
 
     private void checkValues(double weight, double price, double transparence) throws InvalidFieldValueException {
-        if (weight <= 0 || price < 0){
+        if (weight <= 0 || price < 0) {
             throw new InvalidFieldValueException();
         }
-        if (transparence < 0 || transparence > 100){
+        if (transparence < 0 || transparence > 100) {
             throw new InvalidFieldValueException();
         }
     }
@@ -96,7 +102,7 @@ public class AddingStoneController {
         addStone.getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/MainMenu.fxml"));
         Scene scene = new Scene(root);
-        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
     }

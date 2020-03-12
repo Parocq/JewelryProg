@@ -72,51 +72,58 @@ public class CreateAdornmentController {
 
     @FXML
     void AddEarringBase(ActionEvent event) {
-        String title = nameField.getText();
-        List<Stone> stonesToUse = new ArrayList<>();
         try {
+            String title = nameField.getText();
+            List<Stone> stonesToUse;
+//            if (choosedStones.getText() == null){
+//                stonesToUse = null;
+//            } else
             stonesToUse = getStonesToUse(prepareString(addDot(choosedStones.getText())));
+
+            switch (getType()) {
+                case 1:
+                    RingBase base = storage.getRingBases().get(Integer.parseInt(choosedBase.getText()) - 1);
+                    Adornment adornment = new Adornment(title, base, stonesToUse);
+                    storage.addAdornmentOnStock(adornment);
+                    break;
+                case 2:
+                    EarringBase base1 = storage.getEarringBases().get(Integer.parseInt(choosedBase.getText()) - 1);
+                    Adornment adornment1 = new Adornment(title, base1, stonesToUse);
+                    storage.addAdornmentOnStock(adornment1);
+                    break;
+                case 3:
+                    NecklaceBase base2 = storage.getNecklaceBases().get(Integer.parseInt(choosedBase.getText()) - 1);
+                    Adornment adornment2 = new Adornment(title, base2, stonesToUse);
+                    storage.addAdornmentOnStock(adornment2);
+                    break;
+                default:
+                    break;
+            }
         } catch (InvalidFieldValueException e) {
             System.out.println("Ошибка вводимых значений!");
-        }
-        switch (getType()){
-            case 1:
-                RingBase base = storage.getRingBases().get(Integer.parseInt(choosedBase.getText())-1);
-                Adornment adornment = new Adornment(title, base, stonesToUse);
-                storage.addAdornmentOnStock(adornment);
-                break;
-            case 2:
-                EarringBase base1 = storage.getEarringBases().get(Integer.parseInt(choosedBase.getText())-1);
-                Adornment adornment1 = new Adornment(title, base1, stonesToUse);
-                storage.addAdornmentOnStock(adornment1);
-                break;
-            case 3:
-                NecklaceBase base2 = storage.getNecklaceBases().get(Integer.parseInt(choosedBase.getText())-1);
-                Adornment adornment2 = new Adornment(title, base2, stonesToUse);
-                storage.addAdornmentOnStock(adornment2);
-                break;
-            default:break;
+        } catch (NumberFormatException ex) {
+            System.out.println("Ошибка форматов! / Не введены все значения!");
         }
     }
 
-    private String addDot(String s){
-        return ","+s+",";
+    private String addDot(String s) {
+        return "," + s + ",";
     }
 
-    private List<Integer> prepareString (String s){
+    private List<Integer> prepareString(String s) {
         List<Integer> numbers = new ArrayList<>();
-        int start=0;
-        int end=0;
+        int start = 0;
+        int end = 0;
 
-        for (int i = 0;i<s.length();i++){
-            if (s.charAt(i) == ','){
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == ',') {
                 start = i;
-                for (int j=start+1;j<s.length();j++){
-                    if (s.charAt(j) == ','){
+                for (int j = start + 1; j < s.length(); j++) {
+                    if (s.charAt(j) == ',') {
                         end = j;
-                        String sub =  s.substring(start+1,end);
+                        String sub = s.substring(start + 1, end);
                         numbers.add((Integer.parseInt(sub)));
-                        i = end-1;
+                        i = end - 1;
                         break;
                     }
                 }
@@ -126,18 +133,18 @@ public class CreateAdornmentController {
     }
 
     private void checkValues(List<Integer> list) throws InvalidFieldValueException {
-        for (Integer i: list){
-            if (i>=list.size() || i<=0){
+        for (Integer i : list) {
+            if (i > storage.getStones().size() || i <= 0) {
                 throw new InvalidFieldValueException();
             }
         }
     }
 
-    private List<Stone> getStonesToUse (List<Integer> numbers) throws InvalidFieldValueException {
+    private List<Stone> getStonesToUse(List<Integer> numbers) throws InvalidFieldValueException {
         checkValues(numbers);
         List<Stone> stonesToUse = new ArrayList<>();
-        for (Integer i: numbers){
-            stonesToUse.add(storage.getStones().get(i-1));
+        for (Integer i : numbers) {
+            stonesToUse.add(storage.getStones().get(i - 1));
         }
         return stonesToUse;
     }
@@ -147,24 +154,25 @@ public class CreateAdornmentController {
         back.getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/MainMenu.fxml"));
         Scene scene = new Scene(root);
-        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
     }
 
     @FXML
     void getVariants(ActionEvent event) {
-        switch (getType()){
+        switch (getType()) {
             case 1:
                 basesList.setText(storage.getTitles(storage.getRingBases()));
-            break;
+                break;
             case 2:
                 basesList.setText(storage.getTitles(storage.getEarringBases()));
-            break;
+                break;
             case 3:
                 basesList.setText(storage.getTitles(storage.getNecklaceBases()));
-            break;
-            default: break;
+                break;
+            default:
+                break;
         }
     }
 
@@ -175,10 +183,20 @@ public class CreateAdornmentController {
         stonesListField.setText(storage.getTitles(storage.getStones()));
     }
 
-    private int getType (){
-        if (isRing.isSelected()){isEarring.setSelected(false); isNecklace.setSelected(false); return 1;}
-        else if (isEarring.isSelected()){isRing.setSelected(false); isNecklace.setSelected(false); return 2;}
-        else if (isNecklace.isSelected()){isEarring.setSelected(false); isRing.setSelected(false); return 3;}
+    private int getType() {
+        if (isRing.isSelected()) {
+            isEarring.setSelected(false);
+            isNecklace.setSelected(false);
+            return 1;
+        } else if (isEarring.isSelected()) {
+            isRing.setSelected(false);
+            isNecklace.setSelected(false);
+            return 2;
+        } else if (isNecklace.isSelected()) {
+            isEarring.setSelected(false);
+            isRing.setSelected(false);
+            return 3;
+        }
         return 0;
     }
 }

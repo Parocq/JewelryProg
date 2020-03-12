@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -68,9 +69,6 @@ public class MainMenuController {
     private Button checkStorage;
 
     @FXML
-    private Button workWithStorage;
-
-    @FXML
     private Button getAdornmentInfo;
 
     @FXML
@@ -83,81 +81,104 @@ public class MainMenuController {
     private Button deserializeStorage;
 
     @FXML
+    private Label countSerializated;
+
+    @FXML
     void addMetal(ActionEvent event) throws IOException {
         addMetal.getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/AddingMetal.fxml"));
-        showScene(root,event);
+        showScene(root, event);
     }
 
     @FXML
     void addStone(ActionEvent event) throws IOException {
         addMetal.getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/AddingStone.fxml"));
-        showScene(root,event);
+        showScene(root, event);
     }
 
     @FXML
     void checkStorage(ActionEvent event) throws IOException {
         addMetal.getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/StorageContent.fxml"));
-        showScene(root,event);
+        showScene(root, event);
     }
 
     @FXML
     void createAdornment(ActionEvent event) throws IOException {
         addMetal.getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateAdornment.fxml"));
-        showScene(root,event);
+        showScene(root, event);
     }
 
     @FXML
     void createEarringBase(ActionEvent event) throws IOException {
         addMetal.getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateEarringBase.fxml"));
-        showScene(root,event);
+        showScene(root, event);
     }
 
     @FXML
     void createNecklaceBase(ActionEvent event) throws IOException {
         addMetal.getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateNecklaceBase.fxml"));
-        showScene(root,event);
+        showScene(root, event);
     }
 
     @FXML
     void createRingBase(ActionEvent event) throws IOException {
         addMetal.getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateRingBase.fxml"));
-        showScene(root,event);
+        showScene(root, event);
     }
 
     @FXML
     void getAdornmentInfo(ActionEvent event) throws IOException {
         addMetal.getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/AdornmentInfo.fxml"));
-        showScene(root,event);
+        showScene(root, event);
     }
 
     @FXML
     void deserializeStorage(ActionEvent event) throws IOException, ClassNotFoundException {
-        System.out.println("Десиреализация хранилища...");
-        logic.fillStorage(serialization.desirealizeStorage());
-        System.out.println("Успех!");
+        try {
+            System.out.println("Десиреализация хранилища...");
+            logic.fillStorage(serialization.desirealizeStorage());
+            System.out.println("Успех!");
+            countSerializated.setText(""+(Integer.parseInt(countSerializated.getText())-1));
+        } catch (IOException e) {
+            System.out.println("Ошибка ввода/вывода");
+        } catch (NullPointerException e) {
+            System.out.println("Файл пуст! Нечего десериализоввывать.");
+        }
     }
 
     @FXML
     void printAdornmentTitles(ActionEvent event) throws IOException {
-        String s = storage.getAdormentTitles();
-        io.write(s);
-        System.out.println("Запись прошла успешно");
-        io.read();
+        try {
+            String s = storage.getAdormentTitles();
+            io.write(s);
+            System.out.println("Запись прошла успешно");
+            io.read();
+        } catch (IOException e) {
+            System.out.println("Ошибка ввода/вывода");
+        } catch (NullPointerException e) {
+            System.out.println("Список пуст! Нечего переписывать!.");
+        }
     }
 
     @FXML
-    void serializeStorage(ActionEvent event) throws IOException {
-        Storage storageFull = new Storage(storage.getStones(), storage.getMetals(), storage.getAdornments(),
-                storage.getRingBases(), storage.getNecklaceBases(), storage.getEarringBases());
-        serialization.serializeStorage(storageFull);
+    void serializeStorage(ActionEvent event) {
+        try {
+            Storage storageFull = new Storage(storage.getStones(), storage.getMetals(), storage.getAdornments(),
+                    storage.getRingBases(), storage.getNecklaceBases(), storage.getEarringBases());
+            serialization.serializeStorage(storageFull);
+            countSerializated.setText(""+(Integer.parseInt(countSerializated.getText())+1));
+        } catch (IOException e) {
+            System.out.println("Ошибка ввода/вывода");
+        } catch (NullPointerException e) {
+            System.out.println("Список пуст! Нечего сериализоввывать.");
+        }
     }
 
     @FXML
@@ -175,9 +196,7 @@ public class MainMenuController {
         serialization = mainFX.getSerialization();
     }
 
-
-
-    private void showScene (Parent root, ActionEvent event){
+    private void showScene(Parent root, ActionEvent event) {
         Scene scene = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
