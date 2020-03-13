@@ -188,7 +188,6 @@ public class MainMenuController {
 
     @FXML
     void initialize() {
-        System.out.println("IN CONTRROLLER");
         mainFX = new MainFX();
         storage = mainFX.getStorage();
         logic = mainFX.getLogic();

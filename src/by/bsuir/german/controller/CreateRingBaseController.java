@@ -72,7 +72,7 @@ public class CreateRingBaseController {
 
             Metal metal = storage.getMetals().get(metallNum);
 
-            RingBase ringBase = new RingBase(title, weight, price, metal, diametr);
+            RingBase ringBase = new RingBase(title, weight, price, metal, diametr,"Кольцо");
             storage.addRingBaseOnStock(ringBase);
         } catch (InvalidFieldValueException e) {
             System.out.println("Ошибка вводимых значений!");
@@ -90,6 +90,7 @@ public class CreateRingBaseController {
         }
     }
 
+    
     @FXML
     void backToMenu(ActionEvent event) throws IOException {
         back.getScene().getWindow().hide();

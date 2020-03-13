@@ -2,6 +2,7 @@ package by.bsuir.german;
 
 import by.bsuir.german.controller.AddingMetalController;
 import by.bsuir.german.controller.MainMenuController;
+import by.bsuir.german.entity.*;
 import by.bsuir.german.exception.InvalidFieldValueException;
 import by.bsuir.german.service.IO;
 import by.bsuir.german.service.Logic;
@@ -14,7 +15,9 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class MainFX extends Application {
@@ -30,12 +33,10 @@ public class MainFX extends Application {
     private static Logic logic;
     private static Serialization serialization;
     private static IO io;
-
+    private AdornmentExtended adornmentExtended;
 
     @Override
     public void start(Stage myStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXML/MainMenu.fxml"));
-
         try {
             fileOutputStream = new FileOutputStream("Storage.txt");
             objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -54,7 +55,21 @@ public class MainFX extends Application {
             storage = mainFX.getStorage();
             serialization = new Serialization(objectOutputStream, objectInputStream);
             io = mainFX.getIO();
+            adornmentExtended = new AdornmentExtended(logic,storage);
 
+            Stone stone = new Stone("Камень",22.3,12.3,"Красный",true,11.2);
+            storage.addStoneOnStock(stone);
+            List<Stone> stoneList = new ArrayList<>();
+            stoneList.add(stone);
+            Metal metal = new Metal("Металл",323.23,232.1,2.3);
+            storage.addMetalOnStock(metal);
+            RingBase ringBase =  new RingBase("Кольца основа",32,45, metal,32.3,"Кольцо");
+            storage.addRingBaseOnStock(ringBase);
+
+            Adornment adornment = new Adornment("Украшение", ringBase,stoneList);
+            storage.addAdornmentOnStock(adornment);
+
+            Parent root = FXMLLoader.load(getClass().getResource("FXML/NewMainScreen.fxml"));
 
             Scene scene = new Scene(root);
             myStage.setScene(scene);

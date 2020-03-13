@@ -73,7 +73,7 @@ public class CreateEarringBaseController {
 
             Metal metal = storage.getMetals().get(metallNum);
 
-            EarringBase earringBase = new EarringBase(title, weight, price, metal, paired);
+            EarringBase earringBase = new EarringBase(title, weight, price, metal, paired,"Серьги");
             storage.addEarringBaseOnStock(earringBase);
         } catch (InvalidFieldValueException e) {
             System.out.println("Ошибка вводимых значений!");

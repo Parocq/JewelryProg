@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class NecklaceBase extends Product implements Serializable {
     private double length;
 
-    public NecklaceBase(String title, double weight, double price, Metal metal, double length) {
-        super(title, weight, price, metal);
+    public NecklaceBase(String title, double weight, double price, Metal metal, double length, String type) {
+        super(title, weight, price, metal, type);
         this.length = length;
     }
 }

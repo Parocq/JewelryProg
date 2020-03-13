@@ -71,7 +71,7 @@ public class CreateNecklaceBaseController {
             checkValues(price, weight, length, metallNum);
 
             Metal metal = storage.getMetals().get(metallNum);
-            NecklaceBase necklaceBase = new NecklaceBase(title, weight, price, metal, length);
+            NecklaceBase necklaceBase = new NecklaceBase(title, weight, price, metal, length, "Ожерелье");
             storage.addNecklaceBaseOnStock(necklaceBase);
         } catch (InvalidFieldValueException e) {
             System.out.println("Ошибка вводимых значений!");
