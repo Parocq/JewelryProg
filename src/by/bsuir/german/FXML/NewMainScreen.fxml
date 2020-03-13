@@ -56,7 +56,7 @@
             </MenuBar>
          </children>
         </AnchorPane>
-        <Label contentDisplay="CENTER" layoutX="326.0" prefHeight="48.0" prefWidth="154.0" text="Jewelry Prog">
+        <Label fx:id="banner" contentDisplay="CENTER" layoutX="326.0" prefHeight="48.0" prefWidth="154.0" text="Jewelry Prog">
             <font>
                 <Font name="ItalicT" size="27.0" />
             </font>

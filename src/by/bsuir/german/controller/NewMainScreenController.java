@@ -1,26 +1,22 @@
 package by.bsuir.german.controller;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import by.bsuir.german.MainFX;
-import by.bsuir.german.entity.Adornment;
 import by.bsuir.german.entity.AdornmentExtended;
 import by.bsuir.german.service.IO;
 import by.bsuir.german.service.Logic;
 import by.bsuir.german.service.Serialization;
 import by.bsuir.german.service.Storage;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -31,7 +27,6 @@ import javafx.stage.Stage;
 
 public class NewMainScreenController {
 
-    private List<Adornment> adornmentList = new ArrayList<>();
     private IO io;
     private Storage storage;
     private Logic logic;
@@ -39,6 +34,9 @@ public class NewMainScreenController {
     private Serialization serialization;
 
     private ObservableList<AdornmentExtended> adornmentExtendedList;
+
+    @FXML
+    private Label banner;
 
     @FXML
     private ResourceBundle resources;
@@ -103,61 +101,53 @@ public class NewMainScreenController {
     @FXML
     private MenuItem printAdornment;
 
-
-    private void showScene(Parent root, ActionEvent event) {
-        Scene scene = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-    }
-
     @FXML
     void ItemAddMetal(ActionEvent event) throws IOException {
         root.getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/AddingMetal.fxml"));
-        showScene(root, event);
+//        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/AddingMetal.fxml"));
+        setScene( "/by/bsuir/german/FXML/AddingMetal.fxml");
     }
 
     @FXML
     void ItemAddStone(ActionEvent event) throws IOException {
         root.getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/AddingStone.fxml"));
-        showScene(root, event);
+//        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/AddingStone.fxml"));
+        setScene("/by/bsuir/german/FXML/AddingStone.fxml");
     }
 
     @FXML
     void ItemCreateAdornment(ActionEvent event) throws IOException {
         root.getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateAdornment.fxml"));
-        showScene(root, event);
+//        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateAdornment.fxml"));
+        setScene( "/by/bsuir/german/FXML/CreateAdornment.fxml");
     }
 
     @FXML
     void ItemCreateEarring(ActionEvent event) throws IOException {
         root.getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateEarringBase.fxml"));
-        showScene(root, event);
+//        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateEarringBase.fxml"));
+        setScene("/by/bsuir/german/FXML/CreateEarringBase.fxml");
     }
 
     @FXML
     void ItemCreateNecklace(ActionEvent event) throws IOException {
         root.getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateNecklaceBase.fxml"));
-        showScene(root, event);
+//        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateNecklaceBase.fxml"));
+        setScene("/by/bsuir/german/FXML/CreateNecklaceBase.fxml");
     }
 
     @FXML
     void ItemCreateRing(ActionEvent event) throws IOException {
         root.getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateRingBase.fxml"));
-        showScene(root, event);
+//        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/CreateRingBase.fxml"));
+        setScene("/by/bsuir/german/FXML/CreateRingBase.fxml");
     }
 
     @FXML
     void goToStorage(ActionEvent event) throws IOException {
-        root.getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/StorageContentController.fxml"));
-        showScene(root, event);
+        banner.getScene().getWindow().hide();
+//        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/StorageContent.fxml"));
+        setScene("/by/bsuir/german/FXML/StorageContent.fxml");
     }
 
     @FXML
@@ -170,10 +160,6 @@ public class NewMainScreenController {
 
     }
 
-    @FXML
-    void update(ActionEvent event) {
-
-    }
 
     @FXML
     void uploadFile(ActionEvent event) {
@@ -181,21 +167,32 @@ public class NewMainScreenController {
     }
 
     @FXML
+    void update(ActionEvent event) {
+        setTableValues();
+    }
+
+    public void setTableValues (){
+        tableAdornments.getItems().clear();
+        storage.fillAdornmentObservableList();
+
+        adornmentExtendedList = storage.getAdornmentExtendedList();
+        idTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        idType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        idPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        idWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        idBaseTitle.setCellValueFactory(new PropertyValueFactory<>("baseTitle"));
+        idUsedStones.setCellValueFactory(new PropertyValueFactory<>("usedStones"));
+
+        tableAdornments.setItems(adornmentExtendedList);
+        idTitle.getColumns().clear();
+    }
+
+    @FXML
     void initialize() {
         mainFX = new MainFX();
         initializateVariables();
 
-        storage.fillAdornmentObservableList();
-
-        adornmentExtendedList = storage.getAdornmentExtendedList();
-        idTitle.setCellValueFactory(new PropertyValueFactory<AdornmentExtended, String>("title"));
-        idType.setCellValueFactory(new PropertyValueFactory<AdornmentExtended, String>("type"));
-        idPrice.setCellValueFactory(new PropertyValueFactory<AdornmentExtended, Double>("price"));
-        idWeight.setCellValueFactory(new PropertyValueFactory<AdornmentExtended, Double>("weight"));
-        idBaseTitle.setCellValueFactory(new PropertyValueFactory<AdornmentExtended, String>("baseTitle"));
-        idUsedStones.setCellValueFactory(new PropertyValueFactory<AdornmentExtended, String>("usedStones"));
-
-        tableAdornments.setItems(adornmentExtendedList);
+//        setTableValues();
     }
 
     private void initializateVariables() {
@@ -203,5 +200,19 @@ public class NewMainScreenController {
         logic = mainFX.getLogic();
         io = mainFX.getIO();
         serialization = mainFX.getSerialization();
+    }
+
+    private void setScene(String fileLocation) {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource(fileLocation));
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent root2 = fxmlLoader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root2));
+        stage.show();
     }
 }

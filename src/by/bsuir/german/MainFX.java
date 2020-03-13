@@ -45,7 +45,6 @@ public class MainFX extends Application {
             fileWriter = new FileWriter("MainTask.txt");
             fileReader = new FileReader("MainTask.txt");
             fileScanner = new Scanner(fileReader);
-            System.out.println("32werw");
 
 
             MainFX mainFX = new MainFX();

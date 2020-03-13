@@ -80,7 +80,7 @@ public class AddingMetalController {
     @FXML
     void backToMenu(ActionEvent event) throws IOException {
         addMetal.getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/MainMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/NewMainScreen.fxml"));
         Scene scene = new Scene(root);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
