@@ -1,5 +1,6 @@
 package by.bsuir.german.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -9,6 +10,8 @@ import by.bsuir.german.MainFX;
 import by.bsuir.german.entity.EarringBase;
 import by.bsuir.german.entity.Metal;
 import by.bsuir.german.exception.InvalidFieldValueException;
+import by.bsuir.german.service.Logic;
+import by.bsuir.german.service.Serialization;
 import by.bsuir.german.service.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,11 +24,15 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class CreateEarringBaseController {
 
     private Storage storage;
+    private Logic logic;
+    private MainFX mainFX;
+    private Serialization serialization;
 
     @FXML
     private ResourceBundle resources;
@@ -59,6 +66,92 @@ public class CreateEarringBaseController {
 
     @FXML
     private CheckBox isPair;
+
+    @FXML
+    void ItemAddMetal(ActionEvent event) throws IOException {
+        root.getScene().getWindow().hide();
+        setScene( "/by/bsuir/german/FXML/AddingMetal.fxml");
+    }
+
+    @FXML
+    void ItemAddStone(ActionEvent event) throws IOException {
+        root.getScene().getWindow().hide();
+        setScene("/by/bsuir/german/FXML/AddingStone.fxml");
+    }
+
+    @FXML
+    void ItemCreateAdornment(ActionEvent event) throws IOException {
+        root.getScene().getWindow().hide();
+        setScene( "/by/bsuir/german/FXML/CreateAdornment.fxml");
+    }
+
+    @FXML
+    void ItemCreateNecklace(ActionEvent event) throws IOException {
+        root.getScene().getWindow().hide();
+        setScene("/by/bsuir/german/FXML/CreateNecklaceBase.fxml");
+    }
+
+    @FXML
+    void ItemCreateRing(ActionEvent event) throws IOException {
+        root.getScene().getWindow().hide();
+        setScene("/by/bsuir/german/FXML/CreateRingBase.fxml");
+    }
+
+    @FXML
+    void goToStorage(ActionEvent event) throws IOException {
+        root.getScene().getWindow().hide();
+        setScene("/by/bsuir/german/FXML/StorageContent.fxml");
+    }
+
+    public String getFilePath (){
+        final FileChooser fileChooser = new FileChooser();
+        Stage stage = (Stage) root.getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+        return file.getAbsolutePath();
+    }
+
+    @FXML
+    void openFile(ActionEvent event) {
+        try {
+            String filePath = getFilePath();
+            logic.fillStorage(serialization.desirealizeStorage(filePath));
+            System.out.println("Успех!");
+        } catch (IOException e) {
+            System.out.println("Ошибка ввода/вывода");
+        } catch (NullPointerException e) {
+            System.out.println("Файл пуст! Нечего десериализоввывать.");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void saveFile(ActionEvent event) {
+        try {
+            Storage storageFull = new Storage(storage.getStones(), storage.getMetals(), storage.getAdornments(),
+                    storage.getRingBases(), storage.getNecklaceBases(), storage.getEarringBases());
+            String filePath = getFilePath();
+            serialization.serializeStorage(storageFull,filePath);
+        } catch (IOException e) {
+            System.out.println("Ошибка ввода/вывода");
+        } catch (NullPointerException e) {
+            System.out.println("Список пуст! Нечего сериализоввывать.");
+        }
+    }
+
+    private void setScene(String fileLocation) {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource(fileLocation));
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent root2 = fxmlLoader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root2));
+        stage.show();
+    }
 
     @FXML
     void AddEarringBase(ActionEvent event) throws NumberFormatException {
@@ -105,8 +198,10 @@ public class CreateEarringBaseController {
 
     @FXML
     void initialize() {
-        MainFX mainFX = new MainFX();
+        mainFX = new MainFX();
         storage = mainFX.getStorage();
+        logic = mainFX.getLogic();
+        serialization = mainFX.getSerialization();
         metalListField.setText(storage.getTitles(storage.getMetals()));
     }
 }

@@ -1,5 +1,6 @@
-package by.bsuir.german.entity;
+package by.bsuir.german.entity.tabled;
 
+import by.bsuir.german.entity.Adornment;
 import by.bsuir.german.service.Logic;
 import by.bsuir.german.service.Storage;
 

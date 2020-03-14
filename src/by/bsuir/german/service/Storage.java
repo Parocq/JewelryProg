@@ -1,6 +1,7 @@
 package by.bsuir.german.service;
 
 import by.bsuir.german.entity.*;
+import by.bsuir.german.entity.tabled.AdornmentExtended;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
