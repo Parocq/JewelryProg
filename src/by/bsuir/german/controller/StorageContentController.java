@@ -100,6 +100,16 @@ public class StorageContentController {
         setScene("/by/bsuir/german/FXML/CreateRingBase.fxml");
     }
 
+    public void goToStones(ActionEvent event) {
+        root.getScene().getWindow().hide();
+        setScene("/by/bsuir/german/FXML/StonesTable.fxml");
+    }
+
+    public void goToMetals(ActionEvent event) {
+        root.getScene().getWindow().hide();
+        setScene("/by/bsuir/german/FXML/MetalsTable.fxml");
+    }
+
     public String getFilePath (){
         final FileChooser fileChooser = new FileChooser();
         Stage stage = (Stage) root.getScene().getWindow();

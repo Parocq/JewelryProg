@@ -25,7 +25,6 @@ public class AdornmentExtended {
 
     public AdornmentExtended(Adornment adornment) {
         this.title = adornment.getTitle();
-//        this.type = adornment.getProduct().getType();
 
         if (adornment.getEarring() != null) {
             this.type = adornment.getEarring().getType();
@@ -36,7 +35,6 @@ public class AdornmentExtended {
         this.price = logic.calculatePrice(adornment);
         this.weight = logic.calculateWeight(adornment);
 
-//        this.baseTitle = adornment.getProduct().getTitle();
         if (adornment.getEarring() != null) {
             this.baseTitle = adornment.getEarring().getTitle();
         } else if (adornment.getNecklace() != null) {

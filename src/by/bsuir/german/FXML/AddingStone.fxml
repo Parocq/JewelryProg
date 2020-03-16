@@ -85,6 +85,8 @@
                             <items>
                                 <MenuItem fx:id="goToStorage" mnemonicParsing="false" onAction="#goToStorage"
                                           text="Check storage"/>
+                                <MenuItem fx:id="checkStones" mnemonicParsing="false" onAction="#goToStones" text="Check stones" />
+                                <MenuItem fx:id="checkMetals" mnemonicParsing="false" onAction="#goToMetals" text="Check metals" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Flle">

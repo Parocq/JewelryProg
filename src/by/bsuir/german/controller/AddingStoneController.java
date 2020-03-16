@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import by.bsuir.german.MainFX;
 import by.bsuir.german.entity.Metal;
 import by.bsuir.german.entity.Stone;
+import by.bsuir.german.entity.StoneType;
 import by.bsuir.german.exception.InvalidFieldValueException;
 import by.bsuir.german.service.Logic;
 import by.bsuir.german.service.Serialization;
@@ -71,13 +72,13 @@ public class AddingStoneController {
     @FXML
     void ItemAddMetal(ActionEvent event) throws IOException {
         root.getScene().getWindow().hide();
-        setScene( "/by/bsuir/german/FXML/AddingMetal.fxml");
+        setScene("/by/bsuir/german/FXML/AddingMetal.fxml");
     }
 
     @FXML
     void ItemCreateAdornment(ActionEvent event) throws IOException {
         root.getScene().getWindow().hide();
-        setScene( "/by/bsuir/german/FXML/CreateAdornment.fxml");
+        setScene("/by/bsuir/german/FXML/CreateAdornment.fxml");
     }
 
     @FXML
@@ -104,7 +105,17 @@ public class AddingStoneController {
         setScene("/by/bsuir/german/FXML/StorageContent.fxml");
     }
 
-    public String getFilePath (){
+    public void goToStones(ActionEvent event) {
+        root.getScene().getWindow().hide();
+        setScene("/by/bsuir/german/FXML/StonesTable.fxml");
+    }
+
+    public void goToMetals(ActionEvent event) {
+        root.getScene().getWindow().hide();
+        setScene("/by/bsuir/german/FXML/MetalsTable.fxml");
+    }
+
+    public String getFilePath() {
         final FileChooser fileChooser = new FileChooser();
         Stage stage = (Stage) root.getScene().getWindow();
         File file = fileChooser.showOpenDialog(stage);
@@ -133,7 +144,7 @@ public class AddingStoneController {
             Storage storageFull = new Storage(storage.getStones(), storage.getMetals(), storage.getAdornments(),
                     storage.getRingBases(), storage.getNecklaceBases(), storage.getEarringBases());
             String filePath = getFilePath();
-            serialization.serializeStorage(storageFull,filePath);
+            serialization.serializeStorage(storageFull, filePath);
         } catch (IOException e) {
             System.out.println("Ошибка ввода/вывода");
         } catch (NullPointerException e) {
@@ -165,9 +176,14 @@ public class AddingStoneController {
                 double transparence = Double.parseDouble(transparenceField.getText());
                 String color = colorField.getText();
                 checkValues(weight, price, transparence);
+                StoneType type = StoneType.Полудрагоценный;
 
-                boolean type = isPrecious.isSelected();
-                if (type) isHalfPrecious.setSelected(false);
+                boolean chb = isPrecious.isSelected();
+                if (chb) {
+                    isHalfPrecious.setSelected(false);
+                    type = StoneType.Драгоценный;
+                }
+
 
                 Stone stone = new Stone(title, weight, price, color, type, transparence);
                 storage.addStoneOnStock(stone);

@@ -1,36 +1,44 @@
 package by.bsuir.german.controller;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 
 import by.bsuir.german.MainFX;
 import by.bsuir.german.entity.Metal;
-import by.bsuir.german.exception.InvalidFieldValueException;
+import by.bsuir.german.entity.tabled.AdornmentExtended;
+//import by.bsuir.german.service.IO;
 import by.bsuir.german.service.Logic;
 import by.bsuir.german.service.Serialization;
 import by.bsuir.german.service.Storage;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class AddingMetalController {
 
+public class MetalsTableController {
+
+    //    private IO io;
     private Storage storage;
     private Logic logic;
     private MainFX mainFX;
     private Serialization serialization;
+
+    private ObservableList<Metal> observableList;
+
+    @FXML
+    private Label banner;
 
     @FXML
     private ResourceBundle resources;
@@ -42,19 +50,25 @@ public class AddingMetalController {
     private AnchorPane root;
 
     @FXML
-    private TextField nameField;
+    private TableView<Metal> tableMetals;
 
     @FXML
-    private TextField priceField;
+    private TableColumn<Metal, String> idTitle;
 
     @FXML
-    private TextField weightField;
+    private TableColumn<Metal, Double> idPrice;
 
     @FXML
-    private TextField sampleField;
+    private TableColumn<Metal, Double> idWeight;
 
     @FXML
-    private Button addMetal;
+    private TableColumn<Metal, Double> idSample;
+
+    @FXML
+    void ItemAddMetal(ActionEvent event) throws IOException {
+        root.getScene().getWindow().hide();
+        setScene( "/by/bsuir/german/FXML/AddingMetal.fxml");
+    }
 
     @FXML
     void ItemAddStone(ActionEvent event) throws IOException {
@@ -88,23 +102,24 @@ public class AddingMetalController {
 
     @FXML
     void goToStorage(ActionEvent event) throws IOException {
-        root.getScene().getWindow().hide();
+        banner.getScene().getWindow().hide();
         setScene("/by/bsuir/german/FXML/StorageContent.fxml");
     }
 
+
     public void goToStones(ActionEvent event) {
-        root.getScene().getWindow().hide();
+        banner.getScene().getWindow().hide();
         setScene("/by/bsuir/german/FXML/StonesTable.fxml");
     }
 
-    public void goToMetals(ActionEvent event) {
-        root.getScene().getWindow().hide();
-        setScene("/by/bsuir/german/FXML/MetalsTable.fxml");
+    public void goMain(ActionEvent event) throws IOException {
+        banner.getScene().getWindow().hide();
+        setScene("/by/bsuir/german/FXML/NewMainScreen.fxml");
     }
 
     public String getFilePath (){
         final FileChooser fileChooser = new FileChooser();
-        Stage stage = (Stage) root.getScene().getWindow();
+        Stage stage = (Stage) banner.getScene().getWindow();
         File file = fileChooser.showOpenDialog(stage);
         return file.getAbsolutePath();
     }
@@ -122,7 +137,9 @@ public class AddingMetalController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        setTableValues();
     }
+
 
     @FXML
     void saveFile(ActionEvent event) {
@@ -138,6 +155,39 @@ public class AddingMetalController {
         }
     }
 
+    @FXML
+    void update(ActionEvent event) {
+        setTableValues();
+    }
+
+    public void setTableValues (){
+        tableMetals.getItems().clear();
+
+        observableList = logic.convertArrayListToObservableListM();
+        idTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        idPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        idWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        idSample.setCellValueFactory(new PropertyValueFactory<>("sample"));
+
+        tableMetals.setItems(observableList);
+//        idTitle.getColumns().clear();
+    }
+
+    @FXML
+    void initialize() {
+        mainFX = new MainFX();
+        initializateVariables();
+
+        setTableValues();
+        setTableValues();
+    }
+
+    private void initializateVariables() {
+        storage = mainFX.getStorage();
+        logic = mainFX.getLogic();
+        serialization = mainFX.getSerialization();
+    }
+
     private void setScene(String fileLocation) {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource(fileLocation));
@@ -151,51 +201,4 @@ public class AddingMetalController {
         stage.setScene(new Scene(root2));
         stage.show();
     }
-
-    @FXML
-    void addMetal(ActionEvent event) throws InputMismatchException {
-        try {
-            String title = nameField.getText();
-            double price = Double.parseDouble(priceField.getText());
-            double weight = Double.parseDouble(weightField.getText());
-            double sample = Double.parseDouble(sampleField.getText());
-
-            checkValues(weight, price);
-
-            Metal metal = new Metal(title, weight, price, sample);
-            storage.addMetalOnStock(metal);
-        } catch (InvalidFieldValueException e) {
-            System.out.println("Ошибка вводимых значений!");
-        } catch (NumberFormatException ex) {
-            System.out.println("Ошибка форматов! / Не введены все значения!");
-        }
-
-    }
-
-    private void checkValues(double weight, double price) throws InvalidFieldValueException {
-        if (weight <= 0 || price < 0) {
-            throw new InvalidFieldValueException();
-        }
-    }
-
-    @FXML
-    void backToMenu(ActionEvent event) throws IOException {
-        addMetal.getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("/by/bsuir/german/FXML/NewMainScreen.fxml"));
-        Scene scene = new Scene(root);
-
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        window.setScene(scene);
-        window.show();
-    }
-
-    @FXML
-    void initialize() {
-        mainFX = new MainFX();
-        storage = mainFX.getStorage();
-        logic = mainFX.getLogic();
-        serialization = mainFX.getSerialization();
-    }
-
 }

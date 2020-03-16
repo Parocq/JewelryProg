@@ -10,4 +10,8 @@ public class Metal extends Material implements Serializable {
         super(title, weight, price);
         this.sample = sample;
     }
+
+    public double getSample() {
+        return sample;
+    }
 }

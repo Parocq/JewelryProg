@@ -89,6 +89,12 @@
                       </Menu>
                       <Menu mnemonicParsing="false" text="Flle">
                           <items>
+                              <MenuItem fx:id="checkStones" mnemonicParsing="false" onAction="#goToStones" text="Check stones" />
+                              <MenuItem fx:id="checkMetals" mnemonicParsing="false" onAction="#goToMetals" text="Check metals" />
+                          </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Flle">
+                          <items>
                               <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open..." />
                               <MenuItem mnemonicParsing="false" onAction="#saveFile" text="Save..." />
                           </items>

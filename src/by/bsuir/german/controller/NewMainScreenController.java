@@ -110,6 +110,17 @@ public class NewMainScreenController {
         setScene("/by/bsuir/german/FXML/StorageContent.fxml");
     }
 
+
+    public void goToStones(ActionEvent event) {
+        banner.getScene().getWindow().hide();
+        setScene("/by/bsuir/german/FXML/StonesTable.fxml");
+    }
+
+    public void goToMetals(ActionEvent event) {
+        banner.getScene().getWindow().hide();
+        setScene("/by/bsuir/german/FXML/MetalsTable.fxml");
+    }
+
     public String getFilePath (){
         final FileChooser fileChooser = new FileChooser();
         Stage stage = (Stage) banner.getScene().getWindow();

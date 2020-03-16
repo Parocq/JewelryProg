@@ -2,6 +2,9 @@ package by.bsuir.german.service;
 
 import by.bsuir.german.comporator.*;
 import by.bsuir.german.entity.*;
+import by.bsuir.german.entity.tabled.AdornmentExtended;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -145,13 +148,15 @@ public class Logic {
         return suit;
     }
 
-//    AdornmentExtended adornmentExtended;
-//
-//    public void convertToExtended (List<Adornment> adornmentList){
-//        for (Adornment adornment:adornmentList){
-//           adornmentExtended = new AdornmentExtended(adornment);
-//           storage.addAdormentExtendedOnStock(adornmentExtended);
-//        }
-//    }
+    public ObservableList<Stone> convertArrayListToObservableListS() {
+        ObservableList<Stone> observableList =  FXCollections.observableArrayList();
+        observableList.addAll(storage.getStones());
+        return observableList;
+    }
 
+    public ObservableList<Metal> convertArrayListToObservableListM() {
+        ObservableList<Metal> observableList =  FXCollections.observableArrayList();
+        observableList.addAll(storage.getMetals());
+        return observableList;
+    }
 }
