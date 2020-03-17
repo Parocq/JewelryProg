@@ -6,8 +6,6 @@ import java.util.ResourceBundle;
 
 import by.bsuir.german.MainFX;
 import by.bsuir.german.entity.Stone;
-import by.bsuir.german.entity.StoneType;
-import by.bsuir.german.entity.tabled.AdornmentExtended;
 //import by.bsuir.german.service.IO;
 import by.bsuir.german.service.Logic;
 import by.bsuir.german.service.Serialization;
@@ -16,7 +14,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;

@@ -1,6 +1,7 @@
 package by.bsuir.german;
 
 import by.bsuir.german.entity.*;
+import by.bsuir.german.entity.enumeration.StoneType;
 import by.bsuir.german.entity.tabled.AdornmentExtended;
 import by.bsuir.german.service.Logic;
 import by.bsuir.german.service.Serialization;
@@ -33,7 +34,7 @@ public class MainFX extends Application {
             serialization = new Serialization();
             adornmentExtended = new AdornmentExtended(logic,storage);
 
-            Stone stone = new Stone("Камень",22.3,12.3,"Красный",StoneType.Драгоценный,11.2);
+            Stone stone = new Stone("Камень",22.3,12.3,"Красный", StoneType.Драгоценный,11.2);
             storage.addStoneOnStock(stone);
             List<Stone> stoneList = new ArrayList<>();
             stoneList.add(stone);

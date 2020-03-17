@@ -1,5 +1,7 @@
 package by.bsuir.german.entity;
 
+import by.bsuir.german.entity.enumeration.StoneType;
+
 import java.io.Serializable;
 
 public class Stone extends Material implements Serializable {

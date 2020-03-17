@@ -9,9 +9,8 @@ import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 
 import by.bsuir.german.MainFX;
-import by.bsuir.german.entity.Metal;
 import by.bsuir.german.entity.Stone;
-import by.bsuir.german.entity.StoneType;
+import by.bsuir.german.entity.enumeration.StoneType;
 import by.bsuir.german.exception.InvalidFieldValueException;
 import by.bsuir.german.service.Logic;
 import by.bsuir.german.service.Serialization;
