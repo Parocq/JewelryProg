@@ -2,6 +2,7 @@ package by.bsuir.german.service;
 
 import by.bsuir.german.entity.*;
 import by.bsuir.german.entity.tabled.AdornmentExtended;
+import by.bsuir.german.interfaces.ITitle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -105,23 +106,14 @@ public class Storage implements Serializable {
     }
 
 
-    public String getTitles(List<?> objects) {
+    public String getTitles(List<? extends ITitle> objects) {
         StringBuilder stringBuilder = new StringBuilder();
         if (objects.isEmpty()) {
             return stringBuilder.toString();
         }
-        if (objects.get(0) instanceof Product) {
-            for (int i = 0; i < objects.size(); i++) {
-                stringBuilder.append(i + 1 + "." + ((Product) objects.get(i)).getTitle() + " ");
-            }
-        } else if (objects.get(0) instanceof Material) {
-            for (int i = 0; i < objects.size(); i++) {
-                stringBuilder.append(i + 1 + "." + ((Material) objects.get(i)).getTitle() + " ");
-            }
-        } else if (objects.get(0) instanceof Adornment) {
-            for (int i = 0; i < objects.size(); i++) {
-                stringBuilder.append(i + 1 + "." + ((Adornment) objects.get(i)).getTitle() + " ");
-            }
+
+        for (int i=0;i<objects.size();i++){
+            stringBuilder.append((objects.get(i).getTitle()+" | "));
         }
         return stringBuilder.toString();
     }

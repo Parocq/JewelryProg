@@ -1,8 +1,10 @@
 package by.bsuir.german.entity;
 
+import by.bsuir.german.interfaces.ITitle;
+
 import java.io.Serializable;
 
-public abstract class Product implements Serializable {
+public abstract class Product implements Serializable, ITitle {
     private String title;
     private double weight;
     private double price;

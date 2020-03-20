@@ -74,21 +74,6 @@ public class Logic {
         Collections.sort(list, new StonePriceComporator());
     }
 
-    public double calculateWeight(int number) {
-        double sum = 0;
-
-        double weight = 0;
-        if (storage.getAdornments().get(number).getEarring() != null) {
-            weight = storage.getAdornments().get(number).getEarring().getWeight();
-        } else if (storage.getAdornments().get(number).getNecklace() != null) {
-            weight = storage.getAdornments().get(number).getNecklace().getWeight();
-        } else weight += storage.getAdornments().get(number).getRing().getWeight();
-
-        for (int i = 0; i < storage.getAdornments().get(number).getUsedStones().size(); i++) {
-            sum += storage.getAdornments().get(number).getUsedStones().get(i).getWeight();
-        }
-        return sum + weight;
-    }
 
     public double calculateWeight(Adornment adornment) {
         double sum = 0;
@@ -104,22 +89,6 @@ public class Logic {
             sum += adornment.getUsedStones().get(i).getWeight();
         }
         return sum + weight;
-    }
-
-    public double calculatePrice(int number) {
-        double sum = 0;
-
-        double price = 0;
-        if (storage.getAdornments().get(number).getEarring() != null) {
-            price = storage.getAdornments().get(number).getEarring().getPrice();
-        } else if (storage.getAdornments().get(number).getNecklace() != null) {
-            price = storage.getAdornments().get(number).getNecklace().getPrice();
-        } else price += storage.getAdornments().get(number).getRing().getPrice();
-
-        for (int i = 0; i < storage.getAdornments().get(number).getUsedStones().size(); i++) {
-            sum += storage.getAdornments().get(number).getUsedStones().get(i).getPrice();
-        }
-        return sum + price;
     }
 
     public double calculatePrice(Adornment adornment) {

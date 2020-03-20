@@ -1,10 +1,11 @@
 package by.bsuir.german.entity;
 
+import by.bsuir.german.interfaces.ITitle;
+
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-public class Adornment implements  Serializable{
+public class Adornment implements  Serializable, ITitle {
 
     private String title;
     private RingBase ring;
