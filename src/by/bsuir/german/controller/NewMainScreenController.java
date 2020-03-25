@@ -177,7 +177,6 @@ public class NewMainScreenController {
         idUsedStones.setCellValueFactory(new PropertyValueFactory<>("usedStones"));
 
         tableAdornments.setItems(adornmentExtendedList);
-        idTitle.getColumns().clear();
     }
 
     @FXML
